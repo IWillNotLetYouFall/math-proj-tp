@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="Tp1.cpp" />
+    <ClCompile Include="Vector3D.cpp" />
+    <ClCompile Include="Fireball.cpp">
+      <Filter>Bullets</Filter>
+    </ClCompile>
+    <ClCompile Include="Laser.cpp">
+      <Filter>Bullets</Filter>
+    </ClCompile>
+    <ClCompile Include="Particule.cpp">
+      <Filter>Bullets</Filter>
+    </ClCompile>
+    <ClCompile Include="Bullet.cpp">
+      <Filter>Bullets</Filter>
+    </ClCompile>
+    <ClCompile Include="TestParent.cpp" />
+    <ClCompile Include="TestChild1.cpp" />
+    <ClCompile Include="Bomb.cpp">
+      <Filter>Bullets</Filter>
+    </ClCompile>
+    <ClCompile Include="Character.cpp">
+      <Filter>Shapes</Filter>
+    </ClCompile>
+    <ClCompile Include="Turret.cpp">
+      <Filter>Shapes</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObject.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Vector3D.h" />
+    <ClInclude Include="Fireball.h">
+      <Filter>Bullets</Filter>
+    </ClInclude>
+    <ClInclude Include="Laser.h">
+      <Filter>Bullets</Filter>
+    </ClInclude>
+    <ClInclude Include="Particule.h">
+      <Filter>Bullets</Filter>
+    </ClInclude>
+    <ClInclude Include="Bullet.h">
+      <Filter>Bullets</Filter>
+    </ClInclude>
+    <ClInclude Include="TestParent.h" />
+    <ClInclude Include="TestChild1.h" />
+    <ClInclude Include="Bomb.h">
+      <Filter>Bullets</Filter>
+    </ClInclude>
+    <ClInclude Include="Character.h">
+      <Filter>Shapes</Filter>
+    </ClInclude>
+    <ClInclude Include="Turret.h">
+      <Filter>Shapes</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Bullets">
+      <UniqueIdentifier>{748f7d48-bdd8-4eed-8e57-f599bdc1a550}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Shapes">
+      <UniqueIdentifier>{741ee4dd-1316-44fb-adf0-dad3dc3ebc80}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
