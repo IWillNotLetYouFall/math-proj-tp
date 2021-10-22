@@ -27,10 +27,10 @@
       <Filter>Shapes</Filter>
     </ClCompile>
     <ClCompile Include="GameObject.cpp" />
-    <ClCompile Include="Gravity.cpp">
+    <ClCompile Include="ParticleGravity.cpp">
       <Filter>TP2</Filter>
     </ClCompile>
-    <ClCompile Include="ForcesRegistry.cpp">
+    <ClCompile Include="ParticleForceRegistry.cpp">
       <Filter>TP2</Filter>
     </ClCompile>
     <ClCompile Include="Friction.cpp">
@@ -48,11 +48,23 @@
     <ClCompile Include="SpringBungee.cpp">
       <Filter>TP2</Filter>
     </ClCompile>
-	<ClCompile Include="Contact.cpp">
+    <ClCompile Include="Contact.cpp">
       <Filter>Collisions</Filter>
     </ClCompile>
     <ClCompile Include="Physics.cpp">
       <Filter>Collisions</Filter>
+    </ClCompile>
+    <ClCompile Include="ForceGenerator.cpp">
+      <Filter>TP2_Gab</Filter>
+    </ClCompile>
+    <ClCompile Include="ContactGenerator.cpp">
+      <Filter>TP2_Gab</Filter>
+    </ClCompile>
+    <ClCompile Include="ContactResolver.cpp">
+      <Filter>TP2_Gab</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysicWorld.cpp">
+      <Filter>TP2_Gab</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -81,16 +93,16 @@
       <Filter>Shapes</Filter>
     </ClInclude>
     <ClInclude Include="GameObject.h" />
-    <ClInclude Include="Forces.h">
+    <ClInclude Include="ParticleForceGenerator.h">
       <Filter>TP2</Filter>
     </ClInclude>
-    <ClInclude Include="ForcesRegistry.h">
+    <ClInclude Include="ParticleForceRegistry.h">
       <Filter>TP2</Filter>
     </ClInclude>
     <ClInclude Include="Friction.h">
       <Filter>TP2</Filter>
     </ClInclude>
-    <ClInclude Include="Gravity.h">
+    <ClInclude Include="ParticleGravity.h">
       <Filter>TP2</Filter>
     </ClInclude>
     <ClInclude Include="SpringFixed.h">
@@ -105,11 +117,23 @@
     <ClInclude Include="SpringBungee.h">
       <Filter>TP2</Filter>
     </ClInclude>
-	<ClInclude Include="Contact.h">
+    <ClInclude Include="Contact.h">
       <Filter>Collisions</Filter>
     </ClInclude>
     <ClInclude Include="Physics.h">
       <Filter>Collisions</Filter>
+    </ClInclude>
+    <ClInclude Include="ForceGenerator.h">
+      <Filter>TP2_Gab</Filter>
+    </ClInclude>
+    <ClInclude Include="ContactGenerator.h">
+      <Filter>TP2_Gab</Filter>
+    </ClInclude>
+    <ClInclude Include="ContactResolver.h">
+      <Filter>TP2_Gab</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicWorld.h">
+      <Filter>TP2_Gab</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -122,8 +146,11 @@
     <Filter Include="TP2">
       <UniqueIdentifier>{82c54d75-9792-47a6-b6ca-a411537b1c96}</UniqueIdentifier>
     </Filter>
-	<Filter Include="Collisions">
+    <Filter Include="Collisions">
       <UniqueIdentifier>{c5a25ccf-0019-4a39-bfbe-6bf2dda98581}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TP2_Gab">
+      <UniqueIdentifier>{e0cf4c91-38d3-47de-9abe-c89e7395e10b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

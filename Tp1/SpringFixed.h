@@ -1,11 +1,11 @@
 #pragma once
 
-#include "Forces.h"
+#include "ParticleForceGenerator.h"
 #include "Vector3D.h"
 
 //Spring between particle and fixed object
 
-class SpringFixed : public Forces
+class SpringFixed : public ParticleForceGenerator
 {
 	//other anchor
 	Vector3D m_anchor;

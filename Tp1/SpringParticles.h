@@ -1,10 +1,10 @@
 #pragma once
 
-#include "Forces.h"
+#include "ParticleForceGenerator.h"
 
 //Spring between two particles
 
-class SpringParticles : public Forces
+class SpringParticles : public ParticleForceGenerator
 {
 	//other anchor
 	Particule* m_other;
