@@ -10,5 +10,6 @@ private:
 public:
 	Fireball();
 	Fireball(const Fireball& base);
+	void Integrate(float delta) override;
 };
 

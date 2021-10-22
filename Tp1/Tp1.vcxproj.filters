@@ -27,6 +27,12 @@
       <Filter>Shapes</Filter>
     </ClCompile>
     <ClCompile Include="GameObject.cpp" />
+    <ClCompile Include="Contact.cpp">
+      <Filter>Collisions</Filter>
+    </ClCompile>
+    <ClCompile Include="Physics.cpp">
+      <Filter>Collisions</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Vector3D.h" />
@@ -54,6 +60,12 @@
       <Filter>Shapes</Filter>
     </ClInclude>
     <ClInclude Include="GameObject.h" />
+    <ClInclude Include="Contact.h">
+      <Filter>Collisions</Filter>
+    </ClInclude>
+    <ClInclude Include="Physics.h">
+      <Filter>Collisions</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Bullets">
@@ -61,6 +73,9 @@
     </Filter>
     <Filter Include="Shapes">
       <UniqueIdentifier>{741ee4dd-1316-44fb-adf0-dad3dc3ebc80}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Collisions">
+      <UniqueIdentifier>{c5a25ccf-0019-4a39-bfbe-6bf2dda98581}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
