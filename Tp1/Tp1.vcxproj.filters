@@ -48,6 +48,12 @@
     <ClCompile Include="SpringBungee.cpp">
       <Filter>TP2</Filter>
     </ClCompile>
+	<ClCompile Include="Contact.cpp">
+      <Filter>Collisions</Filter>
+    </ClCompile>
+    <ClCompile Include="Physics.cpp">
+      <Filter>Collisions</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Vector3D.h" />
@@ -99,6 +105,12 @@
     <ClInclude Include="SpringBungee.h">
       <Filter>TP2</Filter>
     </ClInclude>
+	<ClInclude Include="Contact.h">
+      <Filter>Collisions</Filter>
+    </ClInclude>
+    <ClInclude Include="Physics.h">
+      <Filter>Collisions</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Bullets">
@@ -109,6 +121,9 @@
     </Filter>
     <Filter Include="TP2">
       <UniqueIdentifier>{82c54d75-9792-47a6-b6ca-a411537b1c96}</UniqueIdentifier>
+    </Filter>
+	<Filter Include="Collisions">
+      <UniqueIdentifier>{c5a25ccf-0019-4a39-bfbe-6bf2dda98581}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
