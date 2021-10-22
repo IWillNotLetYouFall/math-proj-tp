@@ -6,6 +6,8 @@ Fireball::Fireball() : Particule()
 	shape = new CircleShape(radius, 6);
 	this->shape->setOrigin(radius / 2, radius / 2);
 	this->shape->setFillColor(Color::Red);
+
+	Physics::GetInstance()->AddCircle(dynamic_cast<CircleShape*>(shape));
 }
 
 Fireball::Fireball(const Fireball& base) : Particule(base)
@@ -19,17 +21,17 @@ Fireball::Fireball(const Fireball& base) : Particule(base)
 void Fireball::Integrate(float delta)
 {
 	//TODO: Ajout récursivité collision
-	Contact* contact = Physics::GetInstance().CollisionDetection(shape, masse, velocite, delta);
+	Contact* contact = Physics::GetInstance()->CollisionDetection(shape, masse, velocite, delta);
 	
 	//TODO : CONTACT RESOLUTION
-	//Vector3D ligneContact = contact->contactPos - position;
-	//float distContact = (radius - ligneContact.GetNorm());
-	//Vector3D normLine = ligneContact.Normalize();
-	//Vector3D ligneDecalage = normLine * distContact;
-	//
-	//position -= ligneDecalage;
-	//
+	if (contact != NULL) {
+		Vector3D ligneContact = contact->contactPos - position;
+		float distContact = (radius - ligneContact.GetNorm());
+		Vector3D normLine = ligneContact.Normalize();
+		Vector3D ligneDecalage = normLine * distContact;
 
+		position -= ligneDecalage;
+	}
 
 	Particule::Integrate(delta);
 }

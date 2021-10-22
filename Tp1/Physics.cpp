@@ -7,9 +7,9 @@ void Physics::NewInstance()
 	instance = new Physics();
 }
 
-Physics Physics::GetInstance()
+Physics* Physics::GetInstance()
 {
-	return *instance;
+	return instance;
 }
 
 void Physics::AddCircle(CircleShape* circle)

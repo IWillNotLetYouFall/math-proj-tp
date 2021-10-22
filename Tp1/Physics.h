@@ -20,7 +20,7 @@ public:
 
 public:
 	static void NewInstance();
-	static Physics GetInstance();
+	static Physics* GetInstance();
 	void AddCircle(CircleShape* circle);
 	void RemoveCircle(CircleShape* circle);
 	void AddRectangle(RectangleShape* rectangle);
