@@ -7,5 +7,5 @@ void Friction::UpdateForce(Particule* particle, float duration)
 	float p = vel.GetNorm();
 
 	Vector3D inc = vel.Normalize() * -1 * (m_k1 * p + m_k2 * (p * p));
-	particle->velocite += inc;
+	particle->velocite += inc * duration;
 }

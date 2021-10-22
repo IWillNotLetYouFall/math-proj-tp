@@ -9,11 +9,11 @@ void SpringFloating::UpdateForce(Particule* particle, float duration)
 	if (d >= 1)
 	{
 		inc = m_volume * m_liquidDensity;
-		particle->velocite += inc;
+		particle->velocite += inc * duration;
 	}
 	else if (d > 0)
 	{
 		inc = d * m_volume * m_liquidDensity;
-		particle->velocite += inc;
+		particle->velocite += inc * duration;
 	}
 }

@@ -22,7 +22,5 @@ public:
 	float ScalarProduct(Vector3D prod);
 	Vector3D VectorialProduct(Vector3D prod);
 	std::string ToString();
-
-
 };
 

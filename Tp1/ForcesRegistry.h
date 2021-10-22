@@ -12,10 +12,10 @@ private:
 		Forces* force;
 	};
 
-	using Registry = std::vector<Forces>;
+	using Registry = std::vector<ParticleForceEntry>;
 	Registry m_registry;
 public:
-	//...add registry accessors
+	void addEntry(Particule* particle, Forces* force);
 
 	void UpdateForce(float duration);
 };
