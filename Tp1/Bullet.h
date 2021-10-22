@@ -10,5 +10,6 @@ private:
 public:
 	Bullet();
 	Bullet(const Bullet& base);
+	void Integrate(float delta) override;
 };
 

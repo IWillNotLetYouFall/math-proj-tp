@@ -4,13 +4,15 @@
 #include<SFML\Graphics.hpp>
 #include<SFML\Window.hpp>
 #include<SFML\System.hpp>
+#include "Physics.h"
+#include "Contact.h"
 
 using namespace sf;
 
 class Particule
 {
 private:
-	float masse = 1;
+	float masse = 3;
 	Vector3D velInitiale = Vector3D(1, 1, 0);
 	float damping = 0.995f;
 
