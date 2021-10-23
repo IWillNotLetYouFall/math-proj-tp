@@ -66,6 +66,15 @@
     <ClCompile Include="PhysicWorld.cpp">
       <Filter>TP2_Gab</Filter>
     </ClCompile>
+    <ClCompile Include="ParticleContact.cpp">
+      <Filter>TP2_Gab</Filter>
+    </ClCompile>
+    <ClCompile Include="ParticleContactResolver.cpp">
+      <Filter>TP2_Gab</Filter>
+    </ClCompile>
+    <ClCompile Include="CircleParticleContactGenerator.cpp">
+      <Filter>ContactGenerator</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Vector3D.h" />
@@ -135,6 +144,15 @@
     <ClInclude Include="PhysicWorld.h">
       <Filter>TP2_Gab</Filter>
     </ClInclude>
+    <ClInclude Include="ParticleContact.h">
+      <Filter>TP2_Gab</Filter>
+    </ClInclude>
+    <ClInclude Include="ParticleContactResolver.h">
+      <Filter>TP2_Gab</Filter>
+    </ClInclude>
+    <ClInclude Include="CircleParticleContactGenerator.h">
+      <Filter>ContactGenerator</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Bullets">
@@ -151,6 +169,9 @@
     </Filter>
     <Filter Include="TP2_Gab">
       <UniqueIdentifier>{e0cf4c91-38d3-47de-9abe-c89e7395e10b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ContactGenerator">
+      <UniqueIdentifier>{1f62d1cf-4815-4212-b6ae-c1bdff701fad}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
