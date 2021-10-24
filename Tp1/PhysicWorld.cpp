@@ -5,16 +5,17 @@ void PhysicWorld::RunPhysics(float duration)
 	//TODO: Générer forces sur les particules
 
 
-	//TODO: Effectuer la tâche d’intégration sur chacune des particules
+	//Intégration sur chacune des particules
+	for (Particule* particule : particules)
+		particule->Integrate(duration);
 
-
-	//TODO: Détecter et faire la gestion des collisions
-	//vector<>
+	//Gestion des collisions
+	vector<ParticleContact*> contacts;
 	//Génération des Contacts
 
 
 	//Résolution des contacts
-
+	contactResolver->ResolveContacts(contacts, contacts.size(), duration);
 }
 
 void PhysicWorld::AddParticle(Particule* particle)

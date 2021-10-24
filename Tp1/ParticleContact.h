@@ -21,16 +21,16 @@ public:
 
 public:
 	//Résoud vélocité et interprénétration
-	void Resoudre(float duration);
+	void Resolve(float duration);
 
 	//Retourne la separationVelocity des particules
 	float CalculateSeparatingVelocity();
 
 private:
-	//Gérer l'impulsion pour cette collision
-	void ResolveVelocity();
+	//Gérer l'impulsion pour cette collision + Gestion repos
+	void ResolveVelocity(float duration);
 
 	//Gérer l'interprenetration pour cette collision
-	void ResolveInterprenetration();
+	void ResolveInterpenetration();
 };
 

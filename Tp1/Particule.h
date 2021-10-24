@@ -27,6 +27,7 @@ public:
 	Particule();
 	Particule(const Particule& base);
 	~Particule();
+
 	virtual void Integrate(float delta);
 	void SetMasse(float masse);
 	float InverseMasse();

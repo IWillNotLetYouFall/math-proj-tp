@@ -18,7 +18,7 @@ public:
 	vector<Particule*> particules;
 	vector<ParticleForceGenerator*> forcesGen;
 	vector<ParticleContactGenerator*> contactsGen;
-	vector<ParticleContactResolver*> contactsResolver;
+	ParticleContactResolver* contactResolver;
 
 public:
 	PhysicWorld();
