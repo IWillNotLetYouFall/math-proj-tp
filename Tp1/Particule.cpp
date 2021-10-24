@@ -48,3 +48,15 @@ void Particule::Draw(RenderWindow* window)
 	//TODO : POGGG
 	window->draw(*shape);
 }
+
+void Particule::clearForceAcc()
+{
+	forceAcc.x = 0;
+	forceAcc.y = 0;
+	forceAcc.z = 0;
+}
+
+void Particule::addForce(const Vector3D& force)
+{
+	forceAcc += force;
+}
