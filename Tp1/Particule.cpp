@@ -25,8 +25,8 @@ void Particule::Integrate(float delta)
 	position += (velocite * delta);
 
 	//MAJ velocité
-	acceleration.y = acceleration.y + 6 * masse * delta * damping;
-	velocite += acceleration;
+	acceleration.y = acceleration.y - 6.f * (damping * masse);
+	velocite -= acceleration * delta;
 
 	shape->setPosition(position.x, position.y);
 }

@@ -1,10 +1,10 @@
 #pragma once
 
-#include "Forces.h"
+#include "ParticleForceGenerator.h"
 
 //Spring between two elements only when distance is longer than restLenght
 
-class SpringBungee : public Forces
+class SpringBungee : public ParticleForceGenerator
 {
 	//other anchor
 	Particule* m_other;

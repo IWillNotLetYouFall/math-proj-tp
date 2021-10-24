@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClCompile Include="Tp1.cpp" />
@@ -27,10 +27,7 @@
       <Filter>Shapes</Filter>
     </ClCompile>
     <ClCompile Include="GameObject.cpp" />
-    <ClCompile Include="Gravity.cpp">
-      <Filter>TP2</Filter>
-    </ClCompile>
-    <ClCompile Include="ForcesRegistry.cpp">
+    <ClCompile Include="ParticleGravity.cpp">
       <Filter>TP2</Filter>
     </ClCompile>
     <ClCompile Include="Friction.cpp">
@@ -47,6 +44,30 @@
     </ClCompile>
     <ClCompile Include="SpringBungee.cpp">
       <Filter>TP2</Filter>
+    </ClCompile>
+    <ClCompile Include="Contact.cpp">
+      <Filter>Collisions</Filter>
+    </ClCompile>
+    <ClCompile Include="Physics.cpp">
+      <Filter>Collisions</Filter>
+    </ClCompile>
+    <ClCompile Include="ParticleContactGenerator.cpp">
+      <Filter>TP2_Gab</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysicWorld.cpp">
+      <Filter>TP2_Gab</Filter>
+    </ClCompile>
+    <ClCompile Include="ParticleContact.cpp">
+      <Filter>TP2_Gab</Filter>
+    </ClCompile>
+    <ClCompile Include="ParticleContactResolver.cpp">
+      <Filter>TP2_Gab</Filter>
+    </ClCompile>
+    <ClCompile Include="CircleParticleContactGenerator.cpp">
+      <Filter>ContactGenerator</Filter>
+    </ClCompile>
+    <ClCompile Include="ParticleForceRegistry.cpp">
+      <Filter>TP2_Gab</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -75,16 +96,10 @@
       <Filter>Shapes</Filter>
     </ClInclude>
     <ClInclude Include="GameObject.h" />
-    <ClInclude Include="Forces.h">
-      <Filter>TP2</Filter>
-    </ClInclude>
-    <ClInclude Include="ForcesRegistry.h">
-      <Filter>TP2</Filter>
-    </ClInclude>
     <ClInclude Include="Friction.h">
       <Filter>TP2</Filter>
     </ClInclude>
-    <ClInclude Include="Gravity.h">
+    <ClInclude Include="ParticleGravity.h">
       <Filter>TP2</Filter>
     </ClInclude>
     <ClInclude Include="SpringFixed.h">
@@ -99,6 +114,33 @@
     <ClInclude Include="SpringBungee.h">
       <Filter>TP2</Filter>
     </ClInclude>
+    <ClInclude Include="Contact.h">
+      <Filter>Collisions</Filter>
+    </ClInclude>
+    <ClInclude Include="Physics.h">
+      <Filter>Collisions</Filter>
+    </ClInclude>
+    <ClInclude Include="ParticleContactGenerator.h">
+      <Filter>TP2_Gab</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicWorld.h">
+      <Filter>TP2_Gab</Filter>
+    </ClInclude>
+    <ClInclude Include="ParticleContact.h">
+      <Filter>TP2_Gab</Filter>
+    </ClInclude>
+    <ClInclude Include="ParticleContactResolver.h">
+      <Filter>TP2_Gab</Filter>
+    </ClInclude>
+    <ClInclude Include="CircleParticleContactGenerator.h">
+      <Filter>ContactGenerator</Filter>
+    </ClInclude>
+    <ClInclude Include="ParticleForceRegistry.h">
+      <Filter>TP2_Gab</Filter>
+    </ClInclude>
+    <ClInclude Include="ParticleForceGenerator.h">
+      <Filter>TP2_Gab</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Bullets">
@@ -109,6 +151,15 @@
     </Filter>
     <Filter Include="TP2">
       <UniqueIdentifier>{82c54d75-9792-47a6-b6ca-a411537b1c96}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Collisions">
+      <UniqueIdentifier>{c5a25ccf-0019-4a39-bfbe-6bf2dda98581}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TP2_Gab">
+      <UniqueIdentifier>{e0cf4c91-38d3-47de-9abe-c89e7395e10b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ContactGenerator">
+      <UniqueIdentifier>{1f62d1cf-4815-4212-b6ae-c1bdff701fad}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
