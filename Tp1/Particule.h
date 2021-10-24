@@ -29,8 +29,8 @@ public:
 	~Particule();
 	virtual void Integrate(float delta);
 	void SetMasse(float masse);
-	float GetMasse() { return masse; };
 	float InverseMasse();
 	virtual void Draw(RenderWindow* window);
+	float GetMasse() { return masse; };
 };
 

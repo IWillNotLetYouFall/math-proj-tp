@@ -4,9 +4,9 @@
 #include<SFML\Graphics.hpp>
 #include<SFML\Window.hpp>
 #include<SFML\System.hpp>
-#include "ForceGenerator.h"
-#include "ContactGenerator.h"
-#include "ContactResolver.h"
+#include "ParticleForceGenerator.h"
+#include "ParticleContactGenerator.h"
+#include "ParticleContactResolver.h"
 #include "Particule.h"
 
 using namespace sf;
@@ -16,9 +16,9 @@ class PhysicWorld
 {
 public:
 	vector<Particule> particules;
-	vector<ForceGenerator> forcesGen;
-	vector<ContactGenerator> contactsGen;
-	vector<ContactResolver> contactsResolver;
+	vector<ParticleForceGenerator> forcesGen;
+	vector<ParticleContactGenerator> contactsGen;
+	vector<ParticleContactResolver> contactsResolver;
 
 public:
 	PhysicWorld();

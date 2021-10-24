@@ -30,9 +30,6 @@
     <ClCompile Include="ParticleGravity.cpp">
       <Filter>TP2</Filter>
     </ClCompile>
-    <ClCompile Include="ParticleForceRegistry.cpp">
-      <Filter>TP2</Filter>
-    </ClCompile>
     <ClCompile Include="Friction.cpp">
       <Filter>TP2</Filter>
     </ClCompile>
@@ -54,13 +51,7 @@
     <ClCompile Include="Physics.cpp">
       <Filter>Collisions</Filter>
     </ClCompile>
-    <ClCompile Include="ForceGenerator.cpp">
-      <Filter>TP2_Gab</Filter>
-    </ClCompile>
-    <ClCompile Include="ContactGenerator.cpp">
-      <Filter>TP2_Gab</Filter>
-    </ClCompile>
-    <ClCompile Include="ContactResolver.cpp">
+    <ClCompile Include="ParticleContactGenerator.cpp">
       <Filter>TP2_Gab</Filter>
     </ClCompile>
     <ClCompile Include="PhysicWorld.cpp">
@@ -74,6 +65,9 @@
     </ClCompile>
     <ClCompile Include="CircleParticleContactGenerator.cpp">
       <Filter>ContactGenerator</Filter>
+    </ClCompile>
+    <ClCompile Include="ParticleForceRegistry.cpp">
+      <Filter>TP2_Gab</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -102,12 +96,6 @@
       <Filter>Shapes</Filter>
     </ClInclude>
     <ClInclude Include="GameObject.h" />
-    <ClInclude Include="ParticleForceGenerator.h">
-      <Filter>TP2</Filter>
-    </ClInclude>
-    <ClInclude Include="ParticleForceRegistry.h">
-      <Filter>TP2</Filter>
-    </ClInclude>
     <ClInclude Include="Friction.h">
       <Filter>TP2</Filter>
     </ClInclude>
@@ -132,13 +120,7 @@
     <ClInclude Include="Physics.h">
       <Filter>Collisions</Filter>
     </ClInclude>
-    <ClInclude Include="ForceGenerator.h">
-      <Filter>TP2_Gab</Filter>
-    </ClInclude>
-    <ClInclude Include="ContactGenerator.h">
-      <Filter>TP2_Gab</Filter>
-    </ClInclude>
-    <ClInclude Include="ContactResolver.h">
+    <ClInclude Include="ParticleContactGenerator.h">
       <Filter>TP2_Gab</Filter>
     </ClInclude>
     <ClInclude Include="PhysicWorld.h">
@@ -152,6 +134,12 @@
     </ClInclude>
     <ClInclude Include="CircleParticleContactGenerator.h">
       <Filter>ContactGenerator</Filter>
+    </ClInclude>
+    <ClInclude Include="ParticleForceRegistry.h">
+      <Filter>TP2_Gab</Filter>
+    </ClInclude>
+    <ClInclude Include="ParticleForceGenerator.h">
+      <Filter>TP2_Gab</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
