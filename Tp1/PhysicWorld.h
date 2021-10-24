@@ -15,13 +15,15 @@ using namespace std;
 class PhysicWorld
 {
 public:
-	vector<Particule> particules;
-	vector<ParticleForceGenerator> forcesGen;
-	vector<ParticleContactGenerator> contactsGen;
-	vector<ParticleContactResolver> contactsResolver;
+	vector<Particule*> particules;
+	vector<ParticleForceGenerator*> forcesGen;
+	vector<ParticleContactGenerator*> contactsGen;
+	vector<ParticleContactResolver*> contactsResolver;
 
 public:
 	PhysicWorld();
 	void RunPhysics(float duration);
+	void AddParticle(Particule* particle);
+	void RemoveParticle(Particule* particle);
 };
 

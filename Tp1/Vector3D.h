@@ -18,6 +18,7 @@ public:
 	Vector3D operator+(Vector3D value);
 	Vector3D operator+=(Vector3D value);
 	float GetNorm();
+	Vector3D Inverse();
 	Vector3D Normalize();
 	float ScalarProduct(Vector3D prod);
 	Vector3D VectorialProduct(Vector3D prod);

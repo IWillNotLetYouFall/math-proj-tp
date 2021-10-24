@@ -1,5 +1,12 @@
 #pragma once
 #include "ParticleContact.h"
+#include "Vector3D.h"
+#include <cmath>
+#include <iostream>
+#include <SFML\Graphics.hpp>
+#include <SFML\Window.hpp>
+#include <SFML\System.hpp>
+#include "Particule.h"
 
 class ParticleContactGenerator
 {

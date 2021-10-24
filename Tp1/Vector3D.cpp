@@ -64,6 +64,11 @@ float Vector3D::GetNorm()
 	return sqrtf((x * x) + (y * y) + (z * z));
 }
 
+Vector3D Vector3D::Inverse()
+{
+	return Vector3D(-x, -y, -z);
+}
+
 Vector3D Vector3D::Normalize()
 {
 	float norm = GetNorm();
