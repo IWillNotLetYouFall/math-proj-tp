@@ -10,5 +10,6 @@ private:
 public:
 	Bomb();
 	Bomb(const Bomb& base);
+	void Integrate(float delta) override;
 };
 

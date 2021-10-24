@@ -18,6 +18,9 @@ using namespace sf;
 
 int main()
 {
+	//inline const Physics* Physics::instance = new Physics();
+	//Physics physic = Physics();
+	Physics::NewInstance();
 	//Tests
 	TestParent testParent = TestParent(5);
 	testParent.PrintMess();
@@ -80,7 +83,9 @@ int main()
 		reticle.setPosition(mousePosWindow);
 		reticleIn.setPosition(mousePosWindow);
 
+
 		player.Update(wall, deltaTime.asSeconds());
+
 
 		//Enemies
 		if (spawnCounter < 20)

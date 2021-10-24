@@ -1,10 +1,10 @@
 #pragma once
 
-#include "Forces.h"
+#include "ParticleForceGenerator.h"
 
 //Spring for floatability
 
-class SpringFloating : public Forces
+class SpringFloating : public ParticleForceGenerator
 {
 	//particle properties
 	float m_maxDepth; // s

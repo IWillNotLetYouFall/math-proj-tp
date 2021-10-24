@@ -23,12 +23,14 @@ void Particule::Integrate(float delta)
 {
 	//MAJ Position
 	position += (velocite * delta);
+	shape->setPosition(position.x, position.y);
+
+	//Update Collision (avant ou après modif gravity)(most likely avant)
 
 	//MAJ velocité
-	acceleration.y = acceleration.y + 6 * masse * delta * damping;
-	velocite += acceleration;
+	acceleration.y = acceleration.y - 6.f * (damping * masse);
+	velocite -= acceleration * delta;
 
-	shape->setPosition(position.x, position.y);
 }
 
 void Particule::SetMasse(float masse)
