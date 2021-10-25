@@ -16,6 +16,7 @@ private:
 	Vector3D velInitiale = Vector3D(1, 1, 0);
 	float damping = 0.995f;
 
+	int masseMax = 1000;
 	Vector3D forceAcc;
 
 public:
