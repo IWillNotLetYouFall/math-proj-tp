@@ -8,6 +8,28 @@ void ParticleForceRegistry::addEntry(Particule* particle, ParticleForceGenerator
 	m_registry.push_back(newEntry);
 }
 
+void ParticleForceRegistry::removeEntry(Particule* particle, ParticleForceGenerator* force)
+{
+	int i = 0;
+	for (ParticleForceEntry entry : m_registry)
+	{
+		if (entry.force == force)
+		{
+			if (entry.particle == particle)
+			{
+				m_registry.erase(m_registry.begin() + i);
+				break;
+			}
+		}
+		i++;
+	}
+}
+
+void ParticleForceRegistry::clearRegistry()
+{
+	m_registry.clear();
+}
+
 void ParticleForceRegistry::UpdateForce(float duration)
 {
 	for (ParticleForceEntry entry : m_registry)

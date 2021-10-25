@@ -16,6 +16,9 @@ private:
 	Vector3D velInitiale = Vector3D(1, 1, 0);
 	float damping = 0.995f;
 
+	int masseMax = 1000;
+	Vector3D forceAcc;
+
 public:
 	Shape* shape;
 	Vector3D position;
@@ -33,5 +36,7 @@ public:
 	float InverseMasse();
 	virtual void Draw(RenderWindow* window);
 	float GetMasse() { return masse; };
+	void clearForceAcc();
+	void addForce(const Vector3D& force);
 };
 

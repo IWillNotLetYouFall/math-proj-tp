@@ -16,6 +16,8 @@ public:
 	Registry m_registry;
 public:
 	void addEntry(Particule* particle, ParticleForceGenerator* force);
+	void removeEntry(Particule* particle, ParticleForceGenerator* force);
+	void clearRegistry();
 
 	void UpdateForce(float duration);
 };
