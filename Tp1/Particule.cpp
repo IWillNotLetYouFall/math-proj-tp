@@ -28,8 +28,15 @@ void Particule::Integrate(float delta)
 	//Update Collision (avant ou après modif gravity)(most likely avant)
 
 	//MAJ velocité
-	acceleration.y = acceleration.y - 6.f * (damping * masse);
-	velocite -= acceleration * delta;
+	/*acceleration.y = acceleration.y - 6.f * (damping * masse);
+	velocite -= acceleration * delta;*/
+
+	Vector3D resAcc = acceleration;
+	resAcc += forceAcc.Inverse();
+
+	velocite += resAcc * delta;
+
+	clearForceAcc();
 
 }
 
