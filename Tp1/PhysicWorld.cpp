@@ -1,10 +1,10 @@
 #include "PhysicWorld.h"
 
-void PhysicWorld::AddEntry(Particule* particleB, ParticleForceGenerator* force)
+void PhysicWorld::AddEntry(Particule* particleB, ParticleForceGenerator* force, ParticleContactGenerator* contactGen)
 {
 	registre.addEntry(particleB, force); //Main : Initialiser SpringParticle et fetch PA comme param constr
 
-
+	contactsGenerators.push_back(contactGen);
 }
 
 void PhysicWorld::StartFrame()
