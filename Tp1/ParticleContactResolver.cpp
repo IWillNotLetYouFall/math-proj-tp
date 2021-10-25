@@ -5,7 +5,7 @@ ParticleContactResolver::ParticleContactResolver(unsigned int iterations)
 	this->iterations = iterations;
 }
 
-void ParticleContactResolver::ResolveContacts(vector<ParticleContact*> contactArray, unsigned int numContact, float duration)
+void ParticleContactResolver::ResolveContacts(vector<ParticleContact*> &contactArray, unsigned int numContact, float duration)
 {
 	int nbMaxContacts = numContact * iterations;
 	for (int i = 0; i < nbMaxContacts; i++)

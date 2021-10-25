@@ -1,35 +1,30 @@
 #include "PhysicWorld.h"
 
+void PhysicWorld::StartFrame()
+{
+	//for (ParticleForceRegistry::ParticleForceEntry reg : registre.m_registry)
+		//reg.particle->clearAccumulator();
+}
+
+void PhysicWorld::GenerateContacts(int limit)
+{
+
+}
+
 void PhysicWorld::RunPhysics(float duration)
 {
 	//TODO: Générer forces sur les particules
-
+	registre.UpdateForce(duration);
 
 	//Intégration sur chacune des particules
-	for (Particule* particule : particules)
-		particule->Integrate(duration);
+	for (ParticleForceRegistry::ParticleForceEntry reg : registre.m_registry)
+		reg.particle->Integrate(duration);
 
 	//Gestion des collisions
 	vector<ParticleContact*> contacts;
 	//Génération des Contacts
-
+	GenerateContacts(10);
 
 	//Résolution des contacts
 	contactResolver->ResolveContacts(contacts, contacts.size(), duration);
-}
-
-void PhysicWorld::AddParticle(Particule* particle)
-{
-	particules.push_back(particle);
-}
-
-void PhysicWorld::RemoveParticle(Particule* particle)
-{
-	for (int i = 0; i < particules.size(); i++)
-	{
-		if (particules[i] == particle) {
-			particules.erase(particules.begin() + i);
-			return;
-		}
-	}
 }
