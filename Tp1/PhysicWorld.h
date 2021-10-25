@@ -23,7 +23,7 @@ public:
 	ParticleContactResolver* contactResolver;
 
 public:
-	void AddEntry(Particule* particleA, Particule* particleB, ParticleForceGenerator* force);
+	void AddEntry(Particule* particleB, ParticleForceGenerator* force);
 	//void RemoveEntry(Particule* particleA);
 	void StartFrame();
 	vector<ParticleContact*> GenerateContacts();
