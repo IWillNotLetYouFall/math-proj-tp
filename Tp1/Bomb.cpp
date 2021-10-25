@@ -23,17 +23,17 @@ Bomb::Bomb(const Bomb& base) : Particule(base)
 void Bomb::Integrate(float delta)
 {
 	//TODO: Ajout récursivité collision
-	Contact* contact = Physics::GetInstance()->CollisionDetection(shape, masse, velocite, delta);
-
-	//TODO : CONTACT RESOLUTION
-	if (contact != NULL) {
-		Vector3D ligneContact = contact->contactPos - position;
-		float distContact = (radius - ligneContact.GetNorm());
-		Vector3D normLine = ligneContact.Normalize();
-		Vector3D ligneDecalage = normLine * distContact;
-
-		position -= ligneDecalage;
-	}
+	//Contact* contact = Physics::GetInstance()->CollisionDetection(shape, masse, velocite, delta);
+	//
+	////TODO : CONTACT RESOLUTION
+	//if (contact != NULL) {
+	//	Vector3D ligneContact = contact->contactPos - position;
+	//	float distContact = (radius - ligneContact.GetNorm());
+	//	Vector3D normLine = ligneContact.Normalize();
+	//	Vector3D ligneDecalage = normLine * distContact;
+	//
+	//	position -= ligneDecalage;
+	//}
 
 	Particule::Integrate(delta);
 }

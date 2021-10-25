@@ -69,6 +69,15 @@
     <ClCompile Include="ParticleForceRegistry.cpp">
       <Filter>TP2_Gab</Filter>
     </ClCompile>
+    <ClCompile Include="ParticleCable.cpp">
+      <Filter>ContactGenerator</Filter>
+    </ClCompile>
+    <ClCompile Include="ParticleLink.cpp">
+      <Filter>ContactGenerator</Filter>
+    </ClCompile>
+    <ClCompile Include="ParticleRod.cpp">
+      <Filter>ContactGenerator</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Vector3D.h" />
@@ -140,6 +149,15 @@
     </ClInclude>
     <ClInclude Include="ParticleForceGenerator.h">
       <Filter>TP2_Gab</Filter>
+    </ClInclude>
+    <ClInclude Include="ParticleCable.h">
+      <Filter>ContactGenerator</Filter>
+    </ClInclude>
+    <ClInclude Include="ParticleLink.h">
+      <Filter>ContactGenerator</Filter>
+    </ClInclude>
+    <ClInclude Include="ParticleRod.h">
+      <Filter>ContactGenerator</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

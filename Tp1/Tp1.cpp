@@ -13,13 +13,16 @@
 #include <cstdlib>
 #include "TestChild1.h"
 #include "Character.h"
+#include "PhysicWorld.h"
 
 using namespace sf;
 
 int main()
 {
-	//inline const Physics* Physics::instance = new Physics();
-	//Physics physic = Physics();
+	PhysicWorld physicW;
+
+
+
 	Physics::NewInstance();
 	//Tests
 	TestParent testParent = TestParent(5);

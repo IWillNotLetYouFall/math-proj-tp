@@ -19,13 +19,14 @@ public:
 	ParticleForceRegistry registre;
 	vector<ParticleContact*> contacts;
 
-	//vector<ParticleContactGenerator*> contactsGen;
+	vector<ParticleContactGenerator*> contactsGenerators;
 	ParticleContactResolver* contactResolver;
 
 public:
-	PhysicWorld();
+	void AddEntry(Particule* particleA, Particule* particleB, ParticleForceGenerator* force);
+	//void RemoveEntry(Particule* particleA);
 	void StartFrame();
-	void GenerateContacts(int limit);
+	vector<ParticleContact*> GenerateContacts();
 	void RunPhysics(float duration);
 };
 
