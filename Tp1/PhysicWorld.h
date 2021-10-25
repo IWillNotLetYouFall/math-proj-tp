@@ -9,6 +9,7 @@
 #include "ParticleContactResolver.h"
 #include "Particule.h"
 #include "ParticleForceRegistry.h"
+#include "ParticleCable.h"
 
 using namespace sf;
 using namespace std;
@@ -19,11 +20,13 @@ public:
 	ParticleForceRegistry registre;
 	vector<ParticleContact*> contacts;
 
-	vector<ParticleContactGenerator*> contactsGenerators;
-	ParticleContactResolver* contactResolver;
+	vector<ParticleCable*> contactsGenerators;
+	ParticleContactResolver contactResolver;
 
 public:
-	void AddEntry(Particule* particleB, ParticleForceGenerator* force, ParticleContactGenerator* contactGen);
+	PhysicWorld(int iterations);
+
+	void AddEntry(Particule* particleB, ParticleForceGenerator* force, ParticleCable* contactGen);
 	//void RemoveEntry(Particule* particleA);
 	void StartFrame();
 	vector<ParticleContact*> GenerateContacts();

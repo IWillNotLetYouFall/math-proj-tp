@@ -1,4 +1,5 @@
 #include "ParticleForceRegistry.h"
+#include <iostream>
 
 void ParticleForceRegistry::addEntry(Particule* particle, ParticleForceGenerator* force)
 {

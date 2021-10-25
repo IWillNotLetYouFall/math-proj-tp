@@ -1,4 +1,6 @@
 #include "Particule.h"
+#include <iostream>
+
 
 Particule::Particule()
 {
@@ -6,6 +8,7 @@ Particule::Particule()
 	this->velocite = Vector3D();
 	this->position = Vector3D();
 	acceleration = Vector3D(0, 14);
+	forceAcc = Vector3D(0, 0, 0);
 }
 
 Particule::Particule(const Particule& base)
@@ -21,6 +24,7 @@ Particule::~Particule()
 
 void Particule::Integrate(float delta)
 {
+	std::cout << "A" << std::endl;
 	//MAJ Position
 	position += (velocite * delta);
 	shape->setPosition(position.x, position.y);

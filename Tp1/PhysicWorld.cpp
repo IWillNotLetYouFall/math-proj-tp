@@ -1,6 +1,11 @@
 #include "PhysicWorld.h"
 
-void PhysicWorld::AddEntry(Particule* particleB, ParticleForceGenerator* force, ParticleContactGenerator* contactGen)
+PhysicWorld::PhysicWorld(int iterations)
+{
+	contactResolver = ParticleContactResolver(iterations);
+}
+
+void PhysicWorld::AddEntry(Particule* particleB, ParticleForceGenerator* force, ParticleCable* contactGen)
 {
 	registre.addEntry(particleB, force); //Main : Initialiser SpringParticle et fetch PA comme param constr
 
@@ -17,7 +22,7 @@ vector<ParticleContact*> PhysicWorld::GenerateContacts()
 {
 	vector<ParticleContact*> usedContacts;
 	ParticleContact* used;
-	for (ParticleContactGenerator* gen : contactsGenerators) {
+	for (ParticleCable* gen : contactsGenerators) {
 		used = new ParticleContact();
 		if (gen->addContact(used, 1) == 1) {
 			usedContacts.push_back(used);
@@ -44,5 +49,5 @@ void PhysicWorld::RunPhysics(float duration)
 	contacts = GenerateContacts();
 
 	//Résolution des contacts
-	contactResolver->ResolveContacts(contacts, contacts.size(), duration);
+	contactResolver.ResolveContacts(contacts, contacts.size(), duration);
 }

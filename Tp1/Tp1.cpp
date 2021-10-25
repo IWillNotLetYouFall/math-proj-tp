@@ -14,12 +14,75 @@
 #include "TestChild1.h"
 #include "Character.h"
 #include "PhysicWorld.h"
+#include "SpringParticles.h"
+#include "ParticleCable.h"
 
 using namespace sf;
 
 int main()
 {
-	PhysicWorld physicW;
+	PhysicWorld physicW = PhysicWorld(2);
+
+	Particule body = Particule();
+	body.shape->setScale(5.f,5.f);
+	body.shape->setFillColor(Color::Blue);
+	body.shape->setPosition(100.0f, 100.0f);
+	body.shape->setOrigin(5.f, 5.f);
+	//body.position = Vector3D(10.0f,10.0f,10.0f);
+	Particule head = Particule();
+	head.shape->setScale(3.f, 3.f);
+	head.shape->setFillColor(Color::White);
+	head.shape->setPosition(100.0f, 50.0f);
+	head.shape->setOrigin(3.f, 3.f);
+	Particule lArm = Particule();
+	lArm.shape->setScale(2.f, 2.f);
+	lArm.shape->setFillColor(Color::Cyan);
+	lArm.shape->setPosition(60.0f, 70.0f);
+	lArm.shape->setOrigin(2.f, 2.f);
+	Particule rArm = Particule();
+	rArm.shape->setScale(2.f, 2.f);
+	rArm.shape->setFillColor(Color::Cyan);
+	rArm.shape->setPosition(140.0f, 70.0f);
+	rArm.shape->setOrigin(2.f, 2.f);
+	Particule lLeg = Particule();
+	lLeg.shape->setScale(2.f, 2.f);
+	lLeg.shape->setFillColor(Color::Cyan);
+	lLeg.shape->setPosition(60.0f, 130.0f);
+	lLeg.shape->setOrigin(2.f, 2.f);
+	Particule rLeg = Particule();
+	rLeg.shape->setScale(2.f, 2.f);
+	rLeg.shape->setFillColor(Color::Cyan);
+	rLeg.shape->setPosition(140.0f, 130.0f);
+	rLeg.shape->setOrigin(2.f, 2.f);
+
+
+	SpringParticles HEAD = SpringParticles(&head,5.f,10.f);
+	SpringParticles LARM = SpringParticles(&lArm,5.f,10.f);
+	SpringParticles RARM = SpringParticles(&rArm,5.f,10.f);
+	SpringParticles LLEG = SpringParticles(&lLeg,5.f,10.f);
+	SpringParticles RLEG = SpringParticles(&rLeg,5.f,10.f);
+
+	ParticleCable cableHead = ParticleCable();
+	cableHead.setParticle1(&body);
+	cableHead.setParticle2(&head);
+	ParticleCable cableLarm = ParticleCable();
+	cableLarm.setParticle1(&body);
+	cableLarm.setParticle2(&lArm);
+	ParticleCable cableRarm = ParticleCable();
+	cableRarm.setParticle1(&body);
+	cableRarm.setParticle2(&lArm);
+	ParticleCable cableLleg = ParticleCable();
+	cableLleg.setParticle1(&body);
+	cableLleg.setParticle2(&lArm);
+	ParticleCable cableRleg = ParticleCable();
+	cableRleg.setParticle1(&body);
+	cableRleg.setParticle2(&lArm);
+
+	physicW.AddEntry(&body, &HEAD, &cableHead);
+	physicW.AddEntry(&body, &LARM, &cableLarm);
+	physicW.AddEntry(&body, &RARM, &cableRarm);
+	physicW.AddEntry(&body, &LLEG, &cableLleg);
+	physicW.AddEntry(&body, &RLEG, &cableRleg);
 
 
 
@@ -80,12 +143,12 @@ int main()
 			if (event.type == Event::Closed)
 				window.close();
 
+		physicW.StartFrame();
 		//Update
 		//Vectors
 		mousePosWindow = Vector2f(Mouse::getPosition(window));
 		reticle.setPosition(mousePosWindow);
 		reticleIn.setPosition(mousePosWindow);
-
 
 		player.Update(wall, deltaTime.asSeconds());
 
@@ -102,6 +165,7 @@ int main()
 			spawnCounter = 0;
 		}
 
+		physicW.RunPhysics(deltaTime.asSeconds());
 		//Draw
 		window.clear();
 
@@ -111,6 +175,12 @@ int main()
 		window.draw(wall);
 		window.draw(reticle);
 		window.draw(reticleIn);
+		window.draw(*body.shape);
+		window.draw(*head.shape);
+		window.draw(*lArm.shape);
+		window.draw(*rArm.shape);
+		window.draw(*lLeg.shape);
+		window.draw(*rLeg.shape);
 
 		player.Draw();
 

@@ -9,6 +9,7 @@ protected:
 
 public:
 	ParticleContactResolver(unsigned int iterations);
+	ParticleContactResolver() : iterations(2) {};
 	//Prend en param un array de contacts,
 	//Itération de chaque contact en fonction de leur separationVelocity
 	//Arrêt lorsque tous les contacts sont résolus ou le max d'itérations est atteint.
