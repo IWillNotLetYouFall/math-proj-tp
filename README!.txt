@@ -5,3 +5,4 @@ Mikael Heck HECM20089605
 
 Pour utiliser notre programme, soit le partir dans Visual Studio par le .sln OU
 double-cliquer le raccourci tp2.exe à la racine.
+oui
