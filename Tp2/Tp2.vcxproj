@@ -24,7 +24,11 @@
     <ProjectGuid>{a35055fc-a06b-46d6-9f5b-471231d3aa41}</ProjectGuid>
     <RootNamespace>Test1</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+<<<<<<< HEAD:Tp1/Tp1.vcxproj
     <ProjectName>Tp1</ProjectName>
+=======
+    <ProjectName>Tp2</ProjectName>
+>>>>>>> GettingRevert:Tp2/Tp2.vcxproj
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -145,6 +149,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+<<<<<<< HEAD:Tp1/Tp1.vcxproj
     <ClCompile Include="Bomb.cpp" />
     <ClCompile Include="Bullet.cpp" />
     <ClCompile Include="Character.cpp" />
@@ -159,6 +164,20 @@
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="ParticleGravity.cpp" />
     <ClCompile Include="Laser.cpp" />
+=======
+    <ClCompile Include="CircleParticleContactGenerator.cpp" />
+    <ClCompile Include="Contact.cpp" />
+    <ClCompile Include="Friction.cpp" />
+    <ClCompile Include="Laser.cpp" />
+    <ClCompile Include="ParticleCable.cpp" />
+    <ClCompile Include="ParticleContact.cpp" />
+    <ClCompile Include="ParticleContactGenerator.cpp" />
+    <ClCompile Include="ParticleContactResolver.cpp" />
+    <ClCompile Include="ParticleForceRegistry.cpp" />
+    <ClCompile Include="ParticleGravity.cpp" />
+    <ClCompile Include="ParticleLink.cpp" />
+    <ClCompile Include="ParticleRod.cpp" />
+>>>>>>> GettingRevert:Tp2/Tp2.vcxproj
     <ClCompile Include="Particule.cpp" />
     <ClCompile Include="Physics.cpp" />
     <ClCompile Include="PhysicWorld.cpp" />
@@ -166,6 +185,7 @@
     <ClCompile Include="SpringFixed.cpp" />
     <ClCompile Include="SpringFloating.cpp" />
     <ClCompile Include="SpringParticles.cpp" />
+<<<<<<< HEAD:Tp1/Tp1.vcxproj
     <ClCompile Include="TestChild1.cpp" />
     <ClCompile Include="TestParent.cpp" />
     <ClCompile Include="Tp1.cpp" />
@@ -188,6 +208,25 @@
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="ParticleGravity.h" />
     <ClInclude Include="Laser.h" />
+=======
+    <ClCompile Include="Tp2.cpp" />
+    <ClCompile Include="Vector3D.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="CircleParticleContactGenerator.h" />
+    <ClInclude Include="Contact.h" />
+    <ClInclude Include="Friction.h" />
+    <ClInclude Include="Laser.h" />
+    <ClInclude Include="ParticleCable.h" />
+    <ClInclude Include="ParticleContact.h" />
+    <ClInclude Include="ParticleContactGenerator.h" />
+    <ClInclude Include="ParticleContactResolver.h" />
+    <ClInclude Include="ParticleForceGenerator.h" />
+    <ClInclude Include="ParticleForceRegistry.h" />
+    <ClInclude Include="ParticleGravity.h" />
+    <ClInclude Include="ParticleLink.h" />
+    <ClInclude Include="ParticleRod.h" />
+>>>>>>> GettingRevert:Tp2/Tp2.vcxproj
     <ClInclude Include="Particule.h" />
     <ClInclude Include="Physics.h" />
     <ClInclude Include="PhysicWorld.h" />
@@ -195,9 +234,12 @@
     <ClInclude Include="SpringFixed.h" />
     <ClInclude Include="SpringFloating.h" />
     <ClInclude Include="SpringParticles.h" />
+<<<<<<< HEAD:Tp1/Tp1.vcxproj
     <ClInclude Include="TestChild1.h" />
     <ClInclude Include="TestParent.h" />
     <ClInclude Include="Turret.h" />
+=======
+>>>>>>> GettingRevert:Tp2/Tp2.vcxproj
     <ClInclude Include="Vector3D.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
