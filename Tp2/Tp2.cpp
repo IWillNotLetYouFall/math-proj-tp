@@ -13,11 +13,31 @@
 #include <math.h>
 #include <vector>
 #include <cstdlib>
+#include "PhysicWorld.h"
+#include "SpringParticles.h"
+#include "ParticleGravity.h"
 
 using namespace sf;
 
 int main()
 {
+	//TP2 Tests
+	PhysicWorld physicW = PhysicWorld(2);
+
+	Particule body = Particule();
+	body.shape.setScale(5.f, 5.f);
+	body.shape.setFillColor(Color::Blue);
+	body.shape.setOrigin(5.f, 5.f);
+	body.position = Vector3D(100.0f,100.0f);
+
+	ParticleForceGenerator* BODY = new ParticleGravity(Vector3D(0,115.f));
+
+	physicW.AddEntry(&body, BODY, NULL);
+
+
+
+
+
 	srand(time(NULL));
 
 	bool grounded = true;
@@ -183,8 +203,19 @@ int main()
 			}
 		}
 
+		//TP2
+		physicW.StartFrame();
+		//body.Integrate(deltaTime.asSeconds());
+		physicW.RunPhysics(deltaTime.asSeconds());
+
+
+
+
 		//Draw
 		window.clear();
+
+
+		window.draw(body.shape);
 
 		window.draw(reticle);
 		window.draw(reticleIn);

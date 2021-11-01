@@ -26,7 +26,7 @@ public:
 public:
 	PhysicWorld(int iterations);
 
-	void AddEntry(Particule* particleB, ParticleForceGenerator* force, ParticleCable* contactGen);
+	void AddEntry(Particule* particleA, ParticleForceGenerator* force, ParticleCable* contactGen);
 	//void RemoveEntry(Particule* particleA);
 	void StartFrame();
 	vector<ParticleContact*> GenerateContacts();

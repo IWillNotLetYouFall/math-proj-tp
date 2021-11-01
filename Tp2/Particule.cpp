@@ -22,11 +22,13 @@ Particule::~Particule()
 
 void Particule::Integrate(float delta)
 {
+	//acceleration.y += 10;
+
 	//MAJ Position
 	position += (velocite * delta);
 
 	//MAJ velocité
-	velocite = (velocite * damping) + acceleration * delta;
+	velocite = (velocite * damping) + forceAcc * delta;
 
 	shape.setPosition(position.x, position.y);
 }

@@ -38,5 +38,5 @@ void ParticleForceRegistry::UpdateForce(float duration)
 		entry.force->UpdateForce(entry.particle, duration);
 	}
 
-	m_registry.clear();
+	//m_registry.clear();
 }

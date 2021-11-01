@@ -5,11 +5,12 @@ PhysicWorld::PhysicWorld(int iterations)
 	contactResolver = ParticleContactResolver(iterations);
 }
 
-void PhysicWorld::AddEntry(Particule* particleB, ParticleForceGenerator* force, ParticleCable* contactGen)
+void PhysicWorld::AddEntry(Particule* particleA, ParticleForceGenerator* force, ParticleCable* contactGen)
 {
-	registre.addEntry(particleB, force); //Main : Initialiser SpringParticle et fetch PA comme param constr
+	registre.addEntry(particleA, force); //Main : Initialiser SpringParticle et fetch PA comme param constr
 
-	contactsGenerators.push_back(contactGen);
+	if (contactGen != NULL)
+		contactsGenerators.push_back(contactGen);
 }
 
 void PhysicWorld::StartFrame()
@@ -34,7 +35,7 @@ vector<ParticleContact*> PhysicWorld::GenerateContacts()
 
 void PhysicWorld::RunPhysics(float duration)
 {
-	contacts.clear();
+	//contacts.clear();
 
 	//TODO: Générer forces sur les particules
 	registre.UpdateForce(duration);
@@ -44,10 +45,10 @@ void PhysicWorld::RunPhysics(float duration)
 		reg.particle->Integrate(duration);
 
 	//Gestion des collisions
-	vector<ParticleContact*> usedContacts;
+	//vector<ParticleContact*> usedContacts;
 	//Génération des Contacts
-	contacts = GenerateContacts();
+	//contacts = GenerateContacts();
 
 	//Résolution des contacts
-	contactResolver.ResolveContacts(contacts, contacts.size(), duration);
+	//contactResolver.ResolveContacts(contacts, contacts.size(), duration);
 }
