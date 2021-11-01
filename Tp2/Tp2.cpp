@@ -39,8 +39,8 @@ int main()
 	leg.position = Vector3D(100.0f, 120.0f);
 
 	ParticleForceGenerator* BODY = new ParticleGravity(Vector3D(0, 0.f));
-	ParticleForceGenerator* LEG = new ParticleGravity(Vector3D(0, 45.f));
-	ParticleForceGenerator* LEGSPRING = new SpringBungee(&body, 1.1f, 100.1f);
+	ParticleForceGenerator* LEG = new ParticleGravity(Vector3D(0, 100.f));
+	ParticleForceGenerator* LEGSPRING = new SpringBungee(&body, 3.f, 100.f);
 
 	physicW.AddEntry(&body, BODY);
 
