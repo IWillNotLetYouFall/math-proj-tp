@@ -5,10 +5,13 @@ PhysicWorld::PhysicWorld(int iterations)
 	contactResolver = ParticleContactResolver(iterations);
 }
 
-void PhysicWorld::AddEntry(Particule* particleA, ParticleForceGenerator* force, ParticleCable* contactGen)
+void PhysicWorld::AddEntry(Particule* particleA, ParticleForceGenerator* force)
 {
 	registre.addEntry(particleA, force); //Main : Initialiser SpringParticle et fetch PA comme param constr
+}
 
+void PhysicWorld::AddContactGenerator(ParticleCable* contactGen)
+{
 	if (contactGen != NULL)
 		contactsGenerators.push_back(contactGen);
 }

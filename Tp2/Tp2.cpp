@@ -30,12 +30,9 @@ int main()
 	body.shape.setOrigin(5.f, 5.f);
 	body.position = Vector3D(100.0f,100.0f);
 
-	ParticleForceGenerator* BODY = new ParticleGravity(Vector3D(0,115.f));
+	ParticleForceGenerator* BODY = new ParticleGravity(Vector3D(0,500.f));
 
-	physicW.AddEntry(&body, BODY, NULL);
-
-
-
+	physicW.AddEntry(&body, BODY);
 
 
 	srand(time(NULL));
