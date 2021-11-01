@@ -30,6 +30,7 @@ int main()
 	body.shape.setFillColor(Color::Blue);
 	body.shape.setOrigin(5.f, 5.f);
 	body.position = Vector3D(100.0f, 100.0f);
+	body.SetMasse(100000);
 
 	Particule leg = Particule();
 	leg.shape.setScale(5.f, 5.f);
@@ -43,7 +44,7 @@ int main()
 
 	physicW.AddEntry(&body, BODY);
 
-	ParticleCable* cableLeg = new ParticleCable(100.f, 1.f);
+	ParticleCable* cableLeg = new ParticleCable(100.f, 0.0f);
 	cableLeg->setParticle1(&leg);
 	cableLeg->setParticle2(&body);
 	physicW.AddContactGenerator(cableLeg);
@@ -221,7 +222,6 @@ int main()
 		physicW.AddEntry(&body, BODY);
 		physicW.AddEntry(&leg, LEG);
 		//physicW.AddEntry(&leg, LEGSPRING);
-
 
 
 		//body.Integrate(deltaTime.asSeconds());

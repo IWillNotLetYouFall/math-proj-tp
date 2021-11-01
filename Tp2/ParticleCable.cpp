@@ -13,7 +13,7 @@ unsigned int ParticleCable::addContact(ParticleContact* contact, unsigned int li
         contact->particle[0] = particle[0];
         contact->particle[1] = particle[1];
 
-        Vector3D normalDir = particle[1]->position - particle[0]->position;
+        Vector3D normalDir = (particle[1]->position - particle[0]->position).Normalize();
         contact->contactNormal = normalDir;
         contact->restitution = restitution;
         return 1;

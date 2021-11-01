@@ -38,7 +38,7 @@ vector<ParticleContact*> PhysicWorld::GenerateContacts()
 
 void PhysicWorld::RunPhysics(float duration)
 {
-	//contacts.clear();
+	contacts.clear();
 
 	//TODO: Générer forces sur les particules
 	registre.UpdateForce(duration);

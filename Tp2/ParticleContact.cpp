@@ -23,9 +23,9 @@ void ParticleContact::ResolveVelocity(float duration)
     if (separationVel > 0) return;
 
     float restiSepVelocity = restitution * -separationVel;
-    Vector3D accelerationVel = particle[0]->acceleration;
+    Vector3D accelerationVel = particle[0]->GetAcceleration();
     if (particle[1])
-        accelerationVel -= particle[1]->acceleration;
+        accelerationVel -= particle[1]->GetAcceleration();
 
     float accVelSeparation = accelerationVel.ScalarProduct(contactNormal) * duration;
 

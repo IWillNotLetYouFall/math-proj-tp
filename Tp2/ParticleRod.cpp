@@ -5,8 +5,9 @@ unsigned int ParticleRod::addContact(ParticleContact* contact, unsigned int limi
     if (currentLength() != length) {
         contact->particle[0] = particle[0];
         contact->particle[1] = particle[1];
-        Vector3D normalDir = particle[1]->position - particle[0]->position;
-        float penetration = normalDir.GetNorm() - length;
+        Vector3D dir = particle[1]->position - particle[0]->position;
+        Vector3D normalDir = dir.Normalize();
+        float penetration = dir.GetNorm() - length;
         if (penetration < 0) {
             normalDir = normalDir.Inverse();
             penetration = -(penetration);
