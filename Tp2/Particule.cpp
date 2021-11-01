@@ -22,7 +22,6 @@ Particule::~Particule()
 
 void Particule::Integrate(float delta)
 {
-	//acceleration.y += 10;
 
 	//MAJ Position
 	position += (velocite * delta);
