@@ -18,7 +18,7 @@ public:
 	CircleShape shape;
 	Vector3D position;
 	Vector3D velocite;
-	Vector3D acceleration = 0;
+	//Vector3D acceleration = 0;
 	float maxSpeed = 600.f;
 	float inverseMasse = 0;
 	float damping = 1;
@@ -33,5 +33,6 @@ public:
 	float GetMasse() { return masse; };
 	void clearForceAcc();
 	void addForce(const Vector3D& force);
+	Vector3D getAcceleration() { return forceAcc; };
 };
 

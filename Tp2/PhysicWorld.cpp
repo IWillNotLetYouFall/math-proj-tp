@@ -20,6 +20,7 @@ void PhysicWorld::StartFrame()
 {
 	for (ParticleForceRegistry::ParticleForceEntry reg : registre.m_registry)
 		reg.particle->clearForceAcc();
+	registre.clearRegistry();
 }
 
 vector<ParticleContact*> PhysicWorld::GenerateContacts()
@@ -38,7 +39,7 @@ vector<ParticleContact*> PhysicWorld::GenerateContacts()
 
 void PhysicWorld::RunPhysics(float duration)
 {
-	//contacts.clear();
+	contacts.clear();
 
 	//TODO: Générer forces sur les particules
 	registre.UpdateForce(duration);
@@ -54,6 +55,4 @@ void PhysicWorld::RunPhysics(float duration)
 
 	//Résolution des contacts
 	contactResolver.ResolveContacts(contacts, contacts.size(), duration);
-
-	registre.clearRegistry();
 }
