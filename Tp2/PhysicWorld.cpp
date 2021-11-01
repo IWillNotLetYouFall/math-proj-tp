@@ -47,8 +47,10 @@ void PhysicWorld::RunPhysics(float duration)
 	//Gestion des collisions
 	//vector<ParticleContact*> usedContacts;
 	//Génération des Contacts
-	//contacts = GenerateContacts();
+	contacts = GenerateContacts();
 
 	//Résolution des contacts
 	//contactResolver.ResolveContacts(contacts, contacts.size(), duration);
+
+	registre.clearRegistry();
 }

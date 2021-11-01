@@ -16,6 +16,7 @@
 #include "PhysicWorld.h"
 #include "SpringParticles.h"
 #include "ParticleGravity.h"
+#include "SpringBungee.h"
 
 using namespace sf;
 
@@ -28,11 +29,17 @@ int main()
 	body.shape.setScale(5.f, 5.f);
 	body.shape.setFillColor(Color::Blue);
 	body.shape.setOrigin(5.f, 5.f);
-	body.position = Vector3D(100.0f,100.0f);
+	body.position = Vector3D(100.0f, 100.0f);
 
-	ParticleForceGenerator* BODY = new ParticleGravity(Vector3D(0,115.f));
+	Particule leg = Particule();
+	leg.shape.setScale(5.f, 5.f);
+	leg.shape.setFillColor(Color::White);
+	leg.shape.setOrigin(5.f, 5.f);
+	leg.position = Vector3D(100.0f, 120.0f);
 
-	physicW.AddEntry(&body, BODY, NULL);
+	ParticleForceGenerator* BODY = new ParticleGravity(Vector3D(0, 0.f));
+	ParticleForceGenerator* LEG = new ParticleGravity(Vector3D(0, 15.f));
+	ParticleForceGenerator* LEGSPRING = new SpringBungee(&body, 1.1f, 100.1f);
 
 
 
@@ -205,6 +212,13 @@ int main()
 
 		//TP2
 		physicW.StartFrame();
+
+		physicW.AddEntry(&body, BODY, NULL);
+		physicW.AddEntry(&leg, LEG, NULL);
+		physicW.AddEntry(&leg, LEGSPRING, NULL);
+
+
+
 		//body.Integrate(deltaTime.asSeconds());
 		physicW.RunPhysics(deltaTime.asSeconds());
 
@@ -214,8 +228,9 @@ int main()
 		//Draw
 		window.clear();
 
-
+		//TP2
 		window.draw(body.shape);
+		window.draw(leg.shape);
 
 		window.draw(reticle);
 		window.draw(reticleIn);
