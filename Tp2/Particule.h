@@ -33,6 +33,6 @@ public:
 	float GetMasse() { return masse; };
 	void clearForceAcc();
 	void addForce(const Vector3D& force);
-	Vector3D GetAcceleration() { return forceAcc; };
+	Vector3D getAcceleration() { return forceAcc; };
 };
 
