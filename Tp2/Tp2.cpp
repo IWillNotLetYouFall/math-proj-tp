@@ -41,8 +41,7 @@ int main()
 	ParticleForceGenerator* LEG = new ParticleGravity(Vector3D(0, 15.f));
 	ParticleForceGenerator* LEGSPRING = new SpringBungee(&body, 1.1f, 100.1f);
 
-
-
+	physicW.AddEntry(&body, BODY);
 
 
 	srand(time(NULL));
