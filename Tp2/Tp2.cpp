@@ -43,7 +43,13 @@ int main()
 
 	physicW.AddEntry(&body, BODY);
 
+	ParticleCable* cableLeg = new ParticleCable(100.f, 1.f);
+	cableLeg->setParticle1(&leg);
+	cableLeg->setParticle2(&body);
+	physicW.AddContactGenerator(cableLeg);
 
+
+	//TP1 Part
 	srand(time(NULL));
 
 	bool grounded = true;
@@ -212,9 +218,9 @@ int main()
 		//TP2
 		physicW.StartFrame();
 
-		physicW.AddEntry(&body, BODY, NULL);
-		physicW.AddEntry(&leg, LEG, NULL);
-		physicW.AddEntry(&leg, LEGSPRING, NULL);
+		physicW.AddEntry(&body, BODY);
+		physicW.AddEntry(&leg, LEG);
+		//physicW.AddEntry(&leg, LEGSPRING);
 
 
 

@@ -53,7 +53,7 @@ void PhysicWorld::RunPhysics(float duration)
 	contacts = GenerateContacts();
 
 	//Résolution des contacts
-	//contactResolver.ResolveContacts(contacts, contacts.size(), duration);
+	contactResolver.ResolveContacts(contacts, contacts.size(), duration);
 
 	registre.clearRegistry();
 }

@@ -8,6 +8,8 @@ class ParticleCable : ParticleLink
 	float restitution;
 
 public:
+	ParticleCable(float maxLength, float restitution);
+
 	unsigned int addContact(ParticleContact* contact, unsigned int limit) const;
 
 	void setParticle1(Particule* p) { particle[0] = p; };

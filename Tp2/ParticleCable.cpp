@@ -1,8 +1,15 @@
 #include "ParticleCable.h"
 
+ParticleCable::ParticleCable(float maxLength, float restitution)
+{
+    this->maxLength = maxLength;
+    this->restitution = restitution;
+}
+
 unsigned int ParticleCable::addContact(ParticleContact* contact, unsigned int limit) const
 {
-    if (currentLength() > maxLength) {
+    float currLength = currentLength();
+    if (currLength > maxLength) {
         contact->particle[0] = particle[0];
         contact->particle[1] = particle[1];
 
