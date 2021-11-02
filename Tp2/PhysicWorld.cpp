@@ -10,7 +10,7 @@ void PhysicWorld::AddEntry(Particule* particleA, ParticleForceGenerator* force)
 	registre.addEntry(particleA, force); //Main : Initialiser SpringParticle et fetch PA comme param constr
 }
 
-void PhysicWorld::AddContactGenerator(ParticleCable* contactGen)
+void PhysicWorld::AddContactGenerator(ParticleContactGenerator* contactGen)
 {
 	if (contactGen != NULL)
 		contactsGenerators.push_back(contactGen);
@@ -27,7 +27,7 @@ vector<ParticleContact*> PhysicWorld::GenerateContacts()
 {
 	vector<ParticleContact*> usedContacts;
 	ParticleContact* used;
-	for (ParticleCable* gen : contactsGenerators) {
+	for (ParticleContactGenerator* gen : contactsGenerators) {
 		used = new ParticleContact();
 		if (gen->addContact(used, 1) == 1) {
 			usedContacts.push_back(used);

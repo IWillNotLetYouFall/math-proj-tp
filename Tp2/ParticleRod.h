@@ -1,7 +1,7 @@
 #pragma once
 #include "ParticleLink.h"
 
-class ParticleRod : ParticleLink
+class ParticleRod : public ParticleLink
 {
 	float length;
 

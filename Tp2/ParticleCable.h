@@ -1,7 +1,7 @@
 #pragma once
 #include "ParticleLink.h"
 
-class ParticleCable : ParticleLink
+class ParticleCable : public ParticleLink
 {
 	float maxLength;
 
