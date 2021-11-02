@@ -40,15 +40,15 @@ int main()
 	leg.shape.setOrigin(5.f, 5.f);
 	leg.position = Vector3D(100.0f, 120.0f);
 
-	ParticleForceGenerator* BODY = new ParticleGravity(Vector3D(0, 100.f));
+	ParticleForceGenerator* BODY = new ParticleGravity(Vector3D(0, 0.f));
 	ParticleForceGenerator* LEG = new ParticleGravity(Vector3D(0, 100.f));
 
 	//Particles
-	ParticleForceGenerator* LEGSPRING = new SpringParticles(&body, 3.f, 100.f);
+	//ParticleForceGenerator* LEGSPRING = new SpringParticles(&body, 3.f, 100.f);
 	//Fixed
 	//ParticleForceGenerator* LEGSPRING = new SpringFixed(body.position, 3.f, 100.f);
 	//Bungee
-	//ParticleForceGenerator* LEGSPRING = new SpringBungee(&body, 3.f, 100.f);
+	ParticleForceGenerator* LEGSPRING = new SpringBungee(&body, 3.f, 100.f);
 
 	physicW.AddEntry(&body, BODY);
 
@@ -219,7 +219,7 @@ int main()
 
 		physicW.AddEntry(&body, BODY);
 		physicW.AddEntry(&leg, LEG);
-		//physicW.AddEntry(&leg, LEGSPRING);
+		physicW.AddEntry(&leg, LEGSPRING);
 
 
 		physicW.RunPhysics(deltaTime.asSeconds());
