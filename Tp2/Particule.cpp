@@ -1,4 +1,5 @@
 #include "Particule.h"
+#include <iostream>
 
 Particule::Particule()
 {
@@ -22,7 +23,6 @@ Particule::~Particule()
 
 void Particule::Integrate(float delta)
 {
-
 	//MAJ Position
 	position += (velocite * delta);
 

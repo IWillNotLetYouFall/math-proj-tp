@@ -219,7 +219,7 @@ int main()
 
 		physicW.AddEntry(&body, BODY);
 		physicW.AddEntry(&leg, LEG);
-		physicW.AddEntry(&leg, LEGSPRING);
+		//physicW.AddEntry(&leg, LEGSPRING);
 
 
 		physicW.RunPhysics(deltaTime.asSeconds());
