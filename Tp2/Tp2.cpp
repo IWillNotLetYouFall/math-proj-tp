@@ -17,6 +17,8 @@
 #include "SpringParticles.h"
 #include "ParticleGravity.h"
 #include "SpringBungee.h"
+#include "SpringFixed.h"
+#include "SpringParticles.h"
 
 using namespace sf;
 
@@ -39,8 +41,14 @@ int main()
 	leg.position = Vector3D(100.0f, 120.0f);
 
 	ParticleForceGenerator* BODY = new ParticleGravity(Vector3D(0, 0.f));
-	ParticleForceGenerator* LEG = new ParticleGravity(Vector3D(0, 15.f));
-	ParticleForceGenerator* LEGSPRING = new SpringBungee(&body, 1.1f, 100.1f);
+	ParticleForceGenerator* LEG = new ParticleGravity(Vector3D(0, 100.f));
+
+	//Particles
+	//ParticleForceGenerator* LEGSPRING = new SpringParticles(&body, 3.f, 100.f);
+	//Fixed
+	//ParticleForceGenerator* LEGSPRING = new SpringFixed(body.position, 3.f, 100.f);
+	//Bungee
+	ParticleForceGenerator* LEGSPRING = new SpringBungee(&body, 3.f, 100.f);
 
 	physicW.AddEntry(&body, BODY);
 
@@ -160,16 +168,6 @@ int main()
 			vsp = 0.f;
 		}
 
-		//Switch ammo
-		if (Keyboard::isKeyPressed(Keyboard::Num1))
-			currentWeaponId = 1;
-		else if (Keyboard::isKeyPressed(Keyboard::Num2))
-			currentWeaponId = 2;
-		else if (Keyboard::isKeyPressed(Keyboard::Num3))
-			currentWeaponId = 3;
-		else if (Keyboard::isKeyPressed(Keyboard::Num4))
-			currentWeaponId = 4;
-
 		//Shooting
 		if (Mouse::isButtonPressed(Mouse::Left))
 		{
@@ -221,10 +219,9 @@ int main()
 
 		physicW.AddEntry(&body, BODY);
 		physicW.AddEntry(&leg, LEG);
-		//physicW.AddEntry(&leg, LEGSPRING);
+		physicW.AddEntry(&leg, LEGSPRING);
 
 
-		//body.Integrate(deltaTime.asSeconds());
 		physicW.RunPhysics(deltaTime.asSeconds());
 
 
