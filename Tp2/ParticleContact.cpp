@@ -57,16 +57,14 @@ void ParticleContact::ResolveInterpenetration()
 {
     if (penetration <= 0) return;
 
-    float invMasseA = particle[0]->InverseMasse();
-    float invMasseB = particle[1]->InverseMasse();
-    float masseInverseTotale = invMasseA;
+    float masseInverseTotale = particle[0]->InverseMasse();
     if (particle[1])
-        masseInverseTotale += invMasseB;
+        masseInverseTotale += particle[1]->InverseMasse();
     if (masseInverseTotale <= 0) return; //Gère collisions entre masses infinies
 
     Vector3D deltaMouvementIMass = contactNormal * (-penetration / masseInverseTotale);
 
-    particle[0]->position += deltaMouvementIMass * invMasseA;
+    particle[0]->position += deltaMouvementIMass * particle[0]->InverseMasse();
     if (particle[1])
-        particle[1]->position += deltaMouvementIMass * invMasseB;
+        particle[1]->position += deltaMouvementIMass * particle[1]->InverseMasse();
 }

@@ -15,6 +15,7 @@
 #include <cstdlib>
 #include "PhysicWorld.h"
 #include "SpringParticles.h"
+#include "ParticleRod.h"
 #include "ParticleGravity.h"
 #include "SpringBungee.h"
 #include "SpringFixed.h"
@@ -26,22 +27,19 @@ int main()
 {
 	//TP2 Tests
 	PhysicWorld physicW = PhysicWorld(2);
+	vector<ParticleForceGenerator*> forceGens;
 
-	Particule body = Particule();
-	body.shape.setScale(5.f, 5.f);
-	body.shape.setFillColor(Color::Blue);
-	body.shape.setOrigin(5.f, 5.f);
+	Particule body = Particule(Color::Blue, 25);
 	body.position = Vector3D(100.0f, 100.0f);
 	body.SetMasse(100000);
 
-	Particule leg = Particule();
-	leg.shape.setScale(5.f, 5.f);
-	leg.shape.setFillColor(Color::White);
-	leg.shape.setOrigin(5.f, 5.f);
-	leg.position = Vector3D(100.0f, 120.0f);
+	Particule legR = Particule(Color::White, 15);
+	legR.position = Vector3D(100.0f, 120.0f);
 
+	//forceGens.push_back();
 	ParticleForceGenerator* BODY = new ParticleGravity(Vector3D(0, 0.f));
-	ParticleForceGenerator* LEG = new ParticleGravity(Vector3D(0, 100.f));
+	ParticleForceGenerator* RLEG = new ParticleGravity(Vector3D(0, 100));
+	ParticleForceGenerator* RLEGSIDE = new ParticleGravity(Vector3D(50, 50));
 
 	//Particles
 	//ParticleForceGenerator* LEGSPRING = new SpringParticles(&body, 3.f, 100.f);
@@ -50,12 +48,17 @@ int main()
 	//Bungee
 	ParticleForceGenerator* LEGSPRING = new SpringBungee(&body, 3.f, 100.f);
 
-	physicW.AddEntry(&body, BODY);
+	//Cable Collision
+	ParticleCable* cableLegR = new ParticleCable(65, 0.6f);
+	cableLegR->setParticle1(&legR);
+	cableLegR->setParticle2(&body);
+	physicW.AddContactGenerator(cableLegR);
 
-	ParticleCable* cableLeg = new ParticleCable(100.f, 0.0f);
-	cableLeg->setParticle1(&leg);
-	cableLeg->setParticle2(&body);
-	physicW.AddContactGenerator(cableLeg);
+	//Rod Collision
+	//ParticleRod* rodLeg = new ParticleRod(200.f);
+	//rodLeg->setParticle1(&leg);
+	//rodLeg->setParticle2(&body);
+	//physicW.AddContactGenerator(rodLeg);
 
 
 	//TP1 Part
@@ -218,8 +221,9 @@ int main()
 		physicW.StartFrame();
 
 		physicW.AddEntry(&body, BODY);
-		physicW.AddEntry(&leg, LEG);
-		physicW.AddEntry(&leg, LEGSPRING);
+		physicW.AddEntry(&legR, RLEGSIDE);
+		physicW.AddEntry(&legR, RLEG);
+		//physicW.AddEntry(&leg, LEGSPRING);
 
 
 		physicW.RunPhysics(deltaTime.asSeconds());
@@ -232,7 +236,7 @@ int main()
 
 		//TP2
 		window.draw(body.shape);
-		window.draw(leg.shape);
+		window.draw(legR.shape);
 
 		window.draw(reticle);
 		window.draw(reticleIn);

@@ -16,6 +16,8 @@ using namespace std;
 
 class PhysicWorld
 {
+private:
+	vector<Particule*> integratedParts;
 public:
 	ParticleForceRegistry registre;
 	vector<ParticleContact*> contacts;

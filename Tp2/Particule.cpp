@@ -8,13 +8,11 @@ Particule::Particule()
 	this->shape.setOrigin(2.5f, 2.5f);
 }
 
-Particule::Particule(const Particule& base)
+Particule::Particule(Color color, float radius)
 {
-	this->velocite = base.velocite;
-	this->position = base.position;
-	this->shape.setRadius(5);
-	this->shape.setFillColor(Color::White);
-	this->shape.setOrigin(2.5f, 2.5f);
+	this->shape.setRadius(radius);
+	this->shape.setFillColor(color);
+	this->shape.setOrigin(radius, radius);
 }
 
 Particule::~Particule()

@@ -45,13 +45,26 @@ void PhysicWorld::RunPhysics(float duration)
 	registre.UpdateForce(duration);
 
 	//Intégration sur chacune des particules
-	for (ParticleForceRegistry::ParticleForceEntry reg : registre.m_registry)
-		reg.particle->Integrate(duration);
+	integratedParts.clear();
+	bool integrated;
+	for (ParticleForceRegistry::ParticleForceEntry reg : registre.m_registry) {
+		integrated = false;
+		for (Particule* intPart : integratedParts) {
+			if (intPart == reg.particle) {
+				integrated = true;
+				break;
+			}
+		}
+		if (!integrated) {
+			reg.particle->Integrate(duration);
+			integratedParts.push_back(reg.particle);
+		}
+	}
 
 	//Gestion des collisions
 	//Génération des Contacts
-	//contacts = GenerateContacts();
+	contacts = GenerateContacts();
 
 	//Résolution des contacts
-	//contactResolver.ResolveContacts(contacts, contacts.size(), duration);
+	contactResolver.ResolveContacts(contacts, contacts.size(), duration);
 }

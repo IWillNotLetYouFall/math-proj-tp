@@ -25,7 +25,7 @@ public:
 
 public:
 	Particule();
-	Particule(const Particule& base);
+	Particule(Color color, float radius);
 	~Particule();
 	void Integrate(float delta);
 	void SetMasse(float masse);
