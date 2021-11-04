@@ -25,31 +25,73 @@ using namespace sf;
 
 int main()
 {
+	class BodyPart {
+	public:
+		BodyPart(ParticleForceGenerator* forceGen, Particule* particule) {
+			this->forceGen = forceGen;
+			this->particule = particule;
+		}
+		ParticleForceGenerator* forceGen;
+		Particule* particule;
+	};
+	vector<BodyPart*> bodyParts;
+
 	//TP2 Tests
 	PhysicWorld physicW = PhysicWorld(2);
-	vector<ParticleForceGenerator*> forceGens;
 
 	Particule body = Particule(Color::Blue, 25);
 	body.position = Vector3D(100.0f, 100.0f);
 	body.SetMasse(100000);
 
+	Particule head = Particule(Color::White, 20);
+	head.position = Vector3D(100.0f, 100.0f);
 	Particule legR = Particule(Color::White, 15);
-	legR.position = Vector3D(100.0f, 120.0f);
+	legR.position = Vector3D(110.0f, 120.0f);
+	Particule legL = Particule(Color::White, 15);
+	legL.position = Vector3D(90.0f, 120.0f);
+	Particule armR = Particule(Color::Red, 15);
+	armR.position = Vector3D(110.0f, 120.0f);
+	Particule armL = Particule(Color::Red, 15);
+	armL.position = Vector3D(90.0f, 120.0f);
 
 	//forceGens.push_back();
-	ParticleForceGenerator* BODY = new ParticleGravity(Vector3D(0, 0.f));
-	ParticleForceGenerator* RLEG = new ParticleGravity(Vector3D(0, 100));
-	ParticleForceGenerator* RLEGSIDE = new ParticleGravity(Vector3D(50, 50));
+	bodyParts.push_back(new BodyPart(new ParticleGravity(Vector3D(0, 0.f)), &body)); //Body
+	bodyParts.push_back(new BodyPart(new ParticleGravity(Vector3D(0, -100.f)), &head)); //Body
+	bodyParts.push_back(new BodyPart(new ParticleGravity(Vector3D(100, 100.f)), &legR)); //Right Leg (side-gravity)
+	bodyParts.push_back(new BodyPart(new ParticleGravity(Vector3D(-100, 100.f)), &legL)); //Left Leg (side-gravity)
+	bodyParts.push_back(new BodyPart(new ParticleGravity(Vector3D(100, -15.f)), &armR)); //Right Arm (side-gravity)
+	bodyParts.push_back(new BodyPart(new ParticleGravity(Vector3D(-100, -15.f)), &armL)); //Left Arm (side-gravity)
+
 
 	//Particles
 	//ParticleForceGenerator* LEGSPRING = new SpringParticles(&body, 3.f, 100.f);
 	//Fixed
 	//ParticleForceGenerator* LEGSPRING = new SpringFixed(body.position, 3.f, 100.f);
 	//Bungee
-	ParticleForceGenerator* LEGSPRING = new SpringBungee(&body, 3.f, 100.f);
+	//ParticleForceGenerator* LEGSPRING = new SpringBungee(&body, 3.f, 100.f);
 
 	//Cable Collision
-	ParticleCable* cableLegR = new ParticleCable(65, 0.6f);
+	ParticleCable* cableHead = new ParticleCable(45, 0.2f);
+	cableHead->setParticle1(&head);
+	cableHead->setParticle2(&body);
+	physicW.AddContactGenerator(cableHead);
+
+	ParticleCable* cableArmL = new ParticleCable(35, 0.6f);
+	cableArmL->setParticle1(&armL);
+	cableArmL->setParticle2(&body);
+	physicW.AddContactGenerator(cableArmL);
+
+	ParticleCable* cableArmR = new ParticleCable(35, 0.6f);
+	cableArmR->setParticle1(&armR);
+	cableArmR->setParticle2(&body);
+	physicW.AddContactGenerator(cableArmR);
+	
+	ParticleCable* cableLegL = new ParticleCable(45, 0.6f);
+	cableLegL->setParticle1(&legL);
+	cableLegL->setParticle2(&body);
+	physicW.AddContactGenerator(cableLegL);
+	
+	ParticleCable* cableLegR = new ParticleCable(45, 0.6f);
 	cableLegR->setParticle1(&legR);
 	cableLegR->setParticle2(&body);
 	physicW.AddContactGenerator(cableLegR);
@@ -106,7 +148,6 @@ int main()
 	Vector2f mousePosWindow;
 	Vector2f aimDir;
 	Vector2f aimDirNorm;
-
 
 
 
@@ -220,9 +261,14 @@ int main()
 		//TP2
 		physicW.StartFrame();
 
-		physicW.AddEntry(&body, BODY);
-		physicW.AddEntry(&legR, RLEGSIDE);
-		physicW.AddEntry(&legR, RLEG);
+		for (BodyPart* part : bodyParts)
+		{
+			physicW.AddEntry(part->particule, part->forceGen);
+		}
+
+		//physicW.AddEntry(&body, BODY);
+		//physicW.AddEntry(&legR, RLEGSIDE);
+		//physicW.AddEntry(&legR, RLEG);
 		//physicW.AddEntry(&leg, LEGSPRING);
 
 
@@ -235,8 +281,10 @@ int main()
 		window.clear();
 
 		//TP2
-		window.draw(body.shape);
-		window.draw(legR.shape);
+		for (BodyPart* part : bodyParts)
+		{
+			window.draw(part->particule->shape);
+		}
 
 		window.draw(reticle);
 		window.draw(reticleIn);
