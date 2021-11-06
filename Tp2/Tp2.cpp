@@ -25,6 +25,7 @@ using namespace sf;
 
 int main()
 {
+	//Regroupe les forces pour forloop l'addEntry
 	class BodyPart {
 	public:
 		BodyPart(ParticleForceGenerator* forceGen, Particule* particule) {
@@ -39,6 +40,7 @@ int main()
 	//TP2 Tests
 	PhysicWorld physicW = PhysicWorld(2);
 
+	//Particule Corps du blob
 	Particule body = Particule(Color::Blue, 25);
 	body.position = Vector3D(100.0f, 100.0f);
 	body.SetMasse(50);
@@ -80,23 +82,22 @@ int main()
 	bodyParts.push_back(new BodyPart(new ParticleGravity(Vector3D(-200, -15.f)), &armL)); //Left Arm (side-gravity)
 
 	//Springs
-	bodyParts.push_back(new BodyPart(new SpringParticles(&body, 5.f, -10.f), &armL)); //Left Leg (Particles Spring)
-	bodyParts.push_back(new BodyPart(new SpringParticles(&body, 5.f, -10.f), &armR)); //Right Leg (Particles Spring)
-	bodyParts.push_back(new BodyPart(new SpringBungee(&body, 10.f, 20.f), &legL)); //Left Leg (Particles Spring)
-	bodyParts.push_back(new BodyPart(new SpringBungee(&body, 10.f, 20.f), &legR)); //Right Leg (Particles Spring)
+	bodyParts.push_back(new BodyPart(new SpringParticles(&body, 5.f, -10.f), &armL)); //Left Arm (Particles Spring)
+	bodyParts.push_back(new BodyPart(new SpringParticles(&body, 5.f, -10.f), &armR)); //Right Arm (Particles Spring)
+	bodyParts.push_back(new BodyPart(new SpringBungee(&body, 10.f, 20.f), &legL)); //Left Leg (Particles Bungee)
+	bodyParts.push_back(new BodyPart(new SpringBungee(&body, 10.f, 20.f), &legR)); //Right Leg (Particles Bungee)
 
 	//Body suit la souris
-	bodyParts.push_back(new BodyPart(new SpringParticles(&reticle, 40.4f, 1), &body)); //Left Leg (Particles Spring)
+	bodyParts.push_back(new BodyPart(new SpringParticles(&reticle, 40.4f, 1), &body)); //Corps suit souris (Particles Spring)
 
+	//Spring Fixed
+	Particule fixedPart = Particule(Color::Yellow, 13);
+	fixedPart.position = Vector3D(300.0f, 200.0f);
+	Vector3D sFixedPos = fixedPart.position + Vector3D(0, -80.0f);
+	bodyParts.push_back(new BodyPart(new SpringFixed(sFixedPos, 3.f, 100.f), &fixedPart)); //Fixed Particles (Fixed Spring)
+	physicW.AddParticle(&fixedPart);
 
-	//Particles
-	//ParticleForceGenerator* LEGSPRING = new SpringParticles(&body, 3.f, 100.f);
-	//Fixed
-	//ParticleForceGenerator* LEGSPRING = new SpringFixed(body.position, 3.f, 100.f);
-	//Bungee
-	//ParticleForceGenerator* LEGSPRING = new SpringBungee(&body, 3.f, 100.f);
-
-	//Cable Collision
+	//Rod Collision
 	ParticleRod* cableHead = new ParticleRod(35);
 	cableHead->setParticle1(&head);
 	cableHead->setParticle2(&body);
@@ -291,6 +292,8 @@ int main()
 		window.draw(armR.shape);
 		window.draw(legL.shape);
 		window.draw(legR.shape);
+		window.draw(fixedPart.shape);
+		
 
 		window.draw(reticle.shape);
 		window.draw(reticleIn);
