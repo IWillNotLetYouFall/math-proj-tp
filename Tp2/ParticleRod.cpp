@@ -7,18 +7,20 @@ ParticleRod::ParticleRod(float length)
 
 unsigned int ParticleRod::addContact(ParticleContact* contact, unsigned int limit) const
 {
-    if (currentLength() != length) {
+    float currLen = currentLength();
+    if (currLen != length) {
         contact->particle[0] = particle[0];
         contact->particle[1] = particle[1];
-        Vector3D dir = particle[0]->position - particle[1]->position;
+        Vector3D dir = particle[1]->position - particle[0]->position;
         dir = dir.Normalize();
-        float penetration = currentLength() - length;
-        if (penetration < 0) {
-            dir = dir * -1;
-            penetration = -(penetration);
+        if (currLen > length) {
+            contact->contactNormal = dir;
+            contact->penetration = currLen - length;
         }
-        contact->contactNormal = dir;
-        contact->penetration = penetration / 2;
+        else {
+            contact->contactNormal = dir * -1;
+            contact->penetration = length - currLen;
+        }
         contact->restitution = 0;
 
         return 1;

@@ -37,7 +37,7 @@ void Particule::SetMasse(float masse)
 
 float Particule::InverseMasse()
 {
-	if (masse >= masseMax) return 0;
+	//if (masse >= masseMax) return 0;
 	return 1 / masse;
 }
 

@@ -10,6 +10,11 @@ void PhysicWorld::AddEntry(Particule* particleA, ParticleForceGenerator* force)
 	registre.addEntry(particleA, force); //Main : Initialiser SpringParticle et fetch PA comme param constr
 }
 
+void PhysicWorld::AddParticle(Particule* particle)
+{
+	particuleReg.push_back(particle);
+}
+
 void PhysicWorld::AddContactGenerator(ParticleContactGenerator* contactGen)
 {
 	if (contactGen != NULL)
@@ -45,20 +50,9 @@ void PhysicWorld::RunPhysics(float duration)
 	registre.UpdateForce(duration);
 
 	//Intégration sur chacune des particules
-	integratedParts.clear();
-	bool integrated;
-	for (ParticleForceRegistry::ParticleForceEntry reg : registre.m_registry) {
-		integrated = false;
-		for (Particule* intPart : integratedParts) {
-			if (intPart == reg.particle) {
-				integrated = true;
-				break;
-			}
-		}
-		if (!integrated) {
-			reg.particle->Integrate(duration);
-			integratedParts.push_back(reg.particle);
-		}
+	for (Particule* part : particuleReg)
+	{
+		part->Integrate(duration);
 	}
 
 	//Gestion des collisions

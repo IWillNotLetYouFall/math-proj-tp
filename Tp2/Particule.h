@@ -11,7 +11,7 @@ class Particule
 private:
 	float masse = 1;
 	Vector3D velInitiale = Vector3D(1, 1, 0);
-	int masseMax = 1000;
+	int masseMax = 10000000;
 	Vector3D forceAcc;
 
 public:

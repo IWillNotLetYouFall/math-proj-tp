@@ -21,6 +21,7 @@ private:
 public:
 	ParticleForceRegistry registre;
 	vector<ParticleContact*> contacts;
+	vector<Particule*> particuleReg;
 
 	vector<ParticleContactGenerator*> contactsGenerators;
 	ParticleContactResolver contactResolver;
@@ -29,6 +30,7 @@ public:
 	PhysicWorld(int iterations);
 
 	void AddEntry(Particule* particleA, ParticleForceGenerator* force);
+	void AddParticle(Particule* particleA);
 	void AddContactGenerator(ParticleContactGenerator* contactGen);
 	//void RemoveEntry(Particule* particleA);
 	void StartFrame();

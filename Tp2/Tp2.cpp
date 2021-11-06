@@ -41,18 +41,24 @@ int main()
 
 	Particule body = Particule(Color::Blue, 25);
 	body.position = Vector3D(100.0f, 100.0f);
-	body.SetMasse(100000);
+	body.SetMasse(1000000);
+	physicW.AddParticle(&body);
 
 	Particule head = Particule(Color::White, 20);
 	head.position = Vector3D(100.0f, 100.0f);
-	Particule legR = Particule(Color::White, 15);
+	physicW.AddParticle(&head);
+	Particule legR = Particule(Color::White, 16);
 	legR.position = Vector3D(110.0f, 120.0f);
+	physicW.AddParticle(&legR);
 	Particule legL = Particule(Color::White, 15);
 	legL.position = Vector3D(90.0f, 120.0f);
+	physicW.AddParticle(&legL);
 	Particule armR = Particule(Color::Red, 15);
 	armR.position = Vector3D(110.0f, 120.0f);
+	physicW.AddParticle(&armR);
 	Particule armL = Particule(Color::Red, 15);
 	armL.position = Vector3D(90.0f, 120.0f);
+	physicW.AddParticle(&armL);
 
 	//forceGens.push_back();
 	bodyParts.push_back(new BodyPart(new ParticleGravity(Vector3D(0, 0.f)), &body)); //Body
@@ -66,7 +72,8 @@ int main()
 	//Particles
 	//ParticleForceGenerator* LEGSPRING = new SpringParticles(&body, 3.f, 100.f);
 	//Fixed
-	//ParticleForceGenerator* LEGSPRING = new SpringFixed(body.position, 3.f, 100.f);
+	//ParticleForceGenerator* LEGSPRING = new SpringFix
+	// ed(body.position, 3.f, 100.f);
 	//Bungee
 	//ParticleForceGenerator* LEGSPRING = new SpringBungee(&body, 3.f, 100.f);
 
@@ -91,16 +98,16 @@ int main()
 	cableLegL->setParticle2(&body);
 	physicW.AddContactGenerator(cableLegL);
 	
-	ParticleCable* cableLegR = new ParticleCable(45, 0.6f);
+	//ParticleRod* cableLegR = new ParticleRod(145);
+	//cableLegR->setParticle1(&legR);
+	//cableLegR->setParticle2(&body);
+	//physicW.AddContactGenerator(cableLegR);
+
+	//Rod Collision
+	ParticleCable* cableLegR = new ParticleCable(145, 0.3f);
 	cableLegR->setParticle1(&legR);
 	cableLegR->setParticle2(&body);
 	physicW.AddContactGenerator(cableLegR);
-
-	//Rod Collision
-	//ParticleRod* rodLeg = new ParticleRod(200.f);
-	//rodLeg->setParticle1(&leg);
-	//rodLeg->setParticle2(&body);
-	//physicW.AddContactGenerator(rodLeg);
 
 
 	//TP1 Part
