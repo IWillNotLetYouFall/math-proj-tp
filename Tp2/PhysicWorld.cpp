@@ -23,9 +23,11 @@ void PhysicWorld::AddContactGenerator(ParticleContactGenerator* contactGen)
 
 void PhysicWorld::StartFrame()
 {
-	for (ParticleForceRegistry::ParticleForceEntry reg : registre.m_registry)
-		reg.particle->clearForceAcc();
-	registre.clearRegistry();
+	//for (ParticleForceRegistry::ParticleForceEntry reg : registre.m_registry)
+	//	reg.particle->clearForceAcc();
+	for (Particule* part : particuleReg)
+		part->clearForceAcc();
+	//registre.clearRegistry();
 }
 
 vector<ParticleContact*> PhysicWorld::GenerateContacts()
@@ -51,9 +53,7 @@ void PhysicWorld::RunPhysics(float duration)
 
 	//Intégration sur chacune des particules
 	for (Particule* part : particuleReg)
-	{
 		part->Integrate(duration);
-	}
 
 	//Gestion des collisions
 	//Génération des Contacts

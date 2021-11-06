@@ -1,6 +1,8 @@
 #pragma once
 #include <math.h>
 #include <string>
+#include <iomanip>
+#include <sstream>
 
 class Vector3D
 {

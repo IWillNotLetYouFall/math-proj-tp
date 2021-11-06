@@ -86,7 +86,9 @@ Vector3D Vector3D::VectorialProduct(Vector3D prod)
 
 std::string Vector3D::ToString()
 {
-	return "V(" + std::to_string(x) + "," + std::to_string(y) + "," + std::to_string(z) + ")";
+	std::stringstream stream;
+	stream << std::fixed << std::setprecision(2) << x << "," << y << "," << z;
+	return "V(" + stream.str() + ")";
 }
 
 Vector3D Vector3D::Inverse()

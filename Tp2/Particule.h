@@ -13,21 +13,22 @@ private:
 	Vector3D velInitiale = Vector3D(1, 1, 0);
 	int masseMax = 10000000;
 	Vector3D forceAcc;
+	float maxSpeed = 320.f;
 
 public:
 	CircleShape shape;
 	Vector3D position;
 	Vector3D velocite;
 	//Vector3D acceleration = 0;
-	float maxSpeed = 600.f;
 	float inverseMasse = 0;
-	float damping = 1;
+	float damping = 0.2f;
 
 public:
 	Particule();
 	Particule(Color color, float radius);
 	~Particule();
 	void Integrate(float delta);
+	void SetMaxSpeed(float speed);
 	void SetMasse(float masse);
 	float InverseMasse();
 	float GetMasse() { return masse; };

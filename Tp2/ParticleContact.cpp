@@ -13,7 +13,7 @@ float ParticleContact::CalculateSeparatingVelocity()
 {
     Vector3D distRel = particle[0]->velocite;
     if (particle[1])
-        distRel += particle[1]->velocite;
+        distRel -= particle[1]->velocite;
     return distRel.ScalarProduct(contactNormal);
 }
 
@@ -62,9 +62,9 @@ void ParticleContact::ResolveInterpenetration()
         masseInverseTotale += particle[1]->InverseMasse();
     if (masseInverseTotale <= 0) return; //Gère collisions entre masses infinies
 
-    Vector3D deltaMouvementIMass = contactNormal * (-penetration / masseInverseTotale);
+    Vector3D deltaMouvementIMass = (contactNormal) * (penetration / masseInverseTotale);
 
     particle[0]->position += deltaMouvementIMass * particle[0]->InverseMasse();
     if (particle[1])
-        particle[1]->position += deltaMouvementIMass * particle[1]->InverseMasse();
+        particle[1]->position += deltaMouvementIMass * -particle[1]->InverseMasse();
 }

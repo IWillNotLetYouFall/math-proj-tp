@@ -21,13 +21,22 @@ Particule::~Particule()
 
 void Particule::Integrate(float delta)
 {
+	//Apply max mouv
+	if (velocite.GetNorm() > maxSpeed) 
+		velocite = velocite.Normalize() * maxSpeed;
+
 	//MAJ Position
 	position += (velocite * delta);
+	shape.setPosition(position.x, position.y);
 
 	//MAJ velocité
-	velocite = (velocite * damping) + forceAcc * delta;
+	velocite += forceAcc * delta;
+	velocite *= powf(damping, delta);
+}
 
-	shape.setPosition(position.x, position.y);
+void Particule::SetMaxSpeed(float speed)
+{
+	this->maxSpeed = speed;
 }
 
 void Particule::SetMasse(float masse)

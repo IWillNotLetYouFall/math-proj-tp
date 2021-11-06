@@ -41,73 +41,91 @@ int main()
 
 	Particule body = Particule(Color::Blue, 25);
 	body.position = Vector3D(100.0f, 100.0f);
-	body.SetMasse(1000000);
+	body.SetMasse(50);
+	body.SetMaxSpeed(3000);
+	body.damping = 0.01f;
 	physicW.AddParticle(&body);
 
-	Particule head = Particule(Color::White, 20);
-	head.position = Vector3D(100.0f, 100.0f);
+	//Reticules qui suit la souris
+	Particule reticle = Particule(Color::Red, 10);
+	body.SetMasse(500000);
+	CircleShape reticleIn(4.f);
+	reticleIn.setFillColor(Color::White);
+	reticleIn.setPointCount(30);
+	reticleIn.setOrigin(4.f, 4.f);
+
+	//Particules du blob
+	Particule head = Particule(Color::White, 18);
+	head.position = Vector3D(100.0f, 80.0f);
 	physicW.AddParticle(&head);
 	Particule legR = Particule(Color::White, 16);
 	legR.position = Vector3D(110.0f, 120.0f);
 	physicW.AddParticle(&legR);
-	Particule legL = Particule(Color::White, 15);
+	Particule legL = Particule(Color::White, 16);
 	legL.position = Vector3D(90.0f, 120.0f);
 	physicW.AddParticle(&legL);
 	Particule armR = Particule(Color::Red, 15);
-	armR.position = Vector3D(110.0f, 120.0f);
+	armR.position = Vector3D(120.0f, 100.0f);
 	physicW.AddParticle(&armR);
 	Particule armL = Particule(Color::Red, 15);
-	armL.position = Vector3D(90.0f, 120.0f);
+	armL.position = Vector3D(80.0f, 100.0f);
 	physicW.AddParticle(&armL);
 
 	//forceGens.push_back();
 	bodyParts.push_back(new BodyPart(new ParticleGravity(Vector3D(0, 0.f)), &body)); //Body
-	bodyParts.push_back(new BodyPart(new ParticleGravity(Vector3D(0, -100.f)), &head)); //Body
-	bodyParts.push_back(new BodyPart(new ParticleGravity(Vector3D(100, 100.f)), &legR)); //Right Leg (side-gravity)
-	bodyParts.push_back(new BodyPart(new ParticleGravity(Vector3D(-100, 100.f)), &legL)); //Left Leg (side-gravity)
-	bodyParts.push_back(new BodyPart(new ParticleGravity(Vector3D(100, -15.f)), &armR)); //Right Arm (side-gravity)
-	bodyParts.push_back(new BodyPart(new ParticleGravity(Vector3D(-100, -15.f)), &armL)); //Left Arm (side-gravity)
+	bodyParts.push_back(new BodyPart(new ParticleGravity(Vector3D(0, -200.f)), &head)); //Body
+	bodyParts.push_back(new BodyPart(new ParticleGravity(Vector3D(200, 200.f)), &legR)); //Right Leg (side-gravity)
+	bodyParts.push_back(new BodyPart(new ParticleGravity(Vector3D(-200, 200.f)), &legL)); //Left Leg (side-gravity)
+	bodyParts.push_back(new BodyPart(new ParticleGravity(Vector3D(200, -15.f)), &armR)); //Right Arm (side-gravity)
+	bodyParts.push_back(new BodyPart(new ParticleGravity(Vector3D(-200, -15.f)), &armL)); //Left Arm (side-gravity)
+
+	//Springs
+	bodyParts.push_back(new BodyPart(new SpringParticles(&body, 5.f, -10.f), &armL)); //Left Leg (Particles Spring)
+	bodyParts.push_back(new BodyPart(new SpringParticles(&body, 5.f, -10.f), &armR)); //Right Leg (Particles Spring)
+	bodyParts.push_back(new BodyPart(new SpringBungee(&body, 10.f, 20.f), &legL)); //Left Leg (Particles Spring)
+	bodyParts.push_back(new BodyPart(new SpringBungee(&body, 10.f, 20.f), &legR)); //Right Leg (Particles Spring)
+
+	//Body suit la souris
+	bodyParts.push_back(new BodyPart(new SpringParticles(&reticle, 40.4f, 1), &body)); //Left Leg (Particles Spring)
 
 
 	//Particles
 	//ParticleForceGenerator* LEGSPRING = new SpringParticles(&body, 3.f, 100.f);
 	//Fixed
-	//ParticleForceGenerator* LEGSPRING = new SpringFix
-	// ed(body.position, 3.f, 100.f);
+	//ParticleForceGenerator* LEGSPRING = new SpringFixed(body.position, 3.f, 100.f);
 	//Bungee
 	//ParticleForceGenerator* LEGSPRING = new SpringBungee(&body, 3.f, 100.f);
 
 	//Cable Collision
-	ParticleCable* cableHead = new ParticleCable(45, 0.2f);
+	ParticleRod* cableHead = new ParticleRod(35);
 	cableHead->setParticle1(&head);
 	cableHead->setParticle2(&body);
 	physicW.AddContactGenerator(cableHead);
 
-	ParticleCable* cableArmL = new ParticleCable(35, 0.6f);
+	//Cable Collision
+	ParticleCable* cableArmL = new ParticleCable(55, 0.6f);
 	cableArmL->setParticle1(&armL);
 	cableArmL->setParticle2(&body);
 	physicW.AddContactGenerator(cableArmL);
-
-	ParticleCable* cableArmR = new ParticleCable(35, 0.6f);
+	
+	ParticleCable* cableArmR = new ParticleCable(55, 0.6f);
 	cableArmR->setParticle1(&armR);
 	cableArmR->setParticle2(&body);
 	physicW.AddContactGenerator(cableArmR);
 	
-	ParticleCable* cableLegL = new ParticleCable(45, 0.6f);
+	ParticleCable* cableLegL = new ParticleCable(65, 0.6f);
 	cableLegL->setParticle1(&legL);
 	cableLegL->setParticle2(&body);
 	physicW.AddContactGenerator(cableLegL);
 	
-	//ParticleRod* cableLegR = new ParticleRod(145);
-	//cableLegR->setParticle1(&legR);
-	//cableLegR->setParticle2(&body);
-	//physicW.AddContactGenerator(cableLegR);
-
-	//Rod Collision
-	ParticleCable* cableLegR = new ParticleCable(145, 0.3f);
+	ParticleCable* cableLegR = new ParticleCable(65, 0.3f);
 	cableLegR->setParticle1(&legR);
 	cableLegR->setParticle2(&body);
 	physicW.AddContactGenerator(cableLegR);
+
+	//Ajout des forces dans le gestionnaire de physiques
+	for (BodyPart* part : bodyParts)
+		physicW.AddEntry(part->particule, part->forceGen);
 
 
 	//TP1 Part
@@ -134,16 +152,6 @@ int main()
 	turret.setSize(Vector2f(30.f, 50.f));
 	turret.setOrigin(15.f, 25.f);
 	turret.setPosition(100, window.getSize().y - 35.f);
-
-	//Reticle
-	CircleShape reticle(10.f);
-	reticle.setFillColor(Color::Red);
-	reticle.setPointCount(30);
-	reticle.setOrigin(10.f, 10.f);
-	CircleShape reticleIn(4.f);
-	reticleIn.setFillColor(Color::White);
-	reticleIn.setPointCount(30);
-	reticleIn.setOrigin(4.f, 4.f);
 
 	//Bullets
 	int currentWeaponId = 1;
@@ -180,7 +188,8 @@ int main()
 		float deg = atan2(aimDirNorm.y, aimDirNorm.x) * 180 / PI;
 		turret.setRotation(deg + 90);
 
-		reticle.setPosition(mousePosWindow);
+		reticle.position = Vector3D(mousePosWindow.x, mousePosWindow.y);
+		reticle.Integrate(0);
 		reticleIn.setPosition(mousePosWindow);
 
 		//Set Final Rotation of Ship
@@ -268,32 +277,22 @@ int main()
 		//TP2
 		physicW.StartFrame();
 
-		for (BodyPart* part : bodyParts)
-		{
-			physicW.AddEntry(part->particule, part->forceGen);
-		}
-
-		//physicW.AddEntry(&body, BODY);
-		//physicW.AddEntry(&legR, RLEGSIDE);
-		//physicW.AddEntry(&legR, RLEG);
-		//physicW.AddEntry(&leg, LEGSPRING);
-
-
 		physicW.RunPhysics(deltaTime.asSeconds());
-
-
-
 
 		//Draw
 		window.clear();
 
 		//TP2
-		for (BodyPart* part : bodyParts)
-		{
-			window.draw(part->particule->shape);
-		}
+		//for (BodyPart* part : bodyParts)
+			//window.draw(part->particule->shape);
+		window.draw(body.shape);
+		window.draw(head.shape);
+		window.draw(armL.shape);
+		window.draw(armR.shape);
+		window.draw(legL.shape);
+		window.draw(legR.shape);
 
-		window.draw(reticle);
+		window.draw(reticle.shape);
 		window.draw(reticleIn);
 
 		for (size_t i = 0; i < bullets.size(); i++)
