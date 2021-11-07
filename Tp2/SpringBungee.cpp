@@ -4,7 +4,9 @@
 void SpringBungee::UpdateForce(Particule* particle, float duration)
 {
 	Vector3D dist = particle->position - m_other->position;
-	Vector3D dist2 = particle->position+particle->velocite - m_other->position;
+	if (dist.GetNorm() == 0) return;
+
+	Vector3D dist2 = particle->position + particle->velocite - m_other->position;
 
 	if (dist.GetNorm() > m_restLenght)
 	{

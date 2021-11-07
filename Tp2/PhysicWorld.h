@@ -10,6 +10,7 @@
 #include "Particule.h"
 #include "ParticleForceRegistry.h"
 #include "ParticleCable.h"
+#include <algorithm>
 
 using namespace sf;
 using namespace std;
@@ -30,8 +31,11 @@ public:
 	PhysicWorld(int iterations);
 
 	void AddEntry(Particule* particleA, ParticleForceGenerator* force);
+	void RemoveEntries(Particule* particle);
 	void AddParticle(Particule* particleA);
+	void RemoveParticle(Particule* particle);
 	void AddContactGenerator(ParticleContactGenerator* contactGen);
+
 	//void RemoveEntry(Particule* particleA);
 	void StartFrame();
 	vector<ParticleContact*> GenerateContacts();

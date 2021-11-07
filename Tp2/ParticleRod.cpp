@@ -22,8 +22,6 @@ unsigned int ParticleRod::addContact(ParticleContact* contact, unsigned int limi
             contact->penetration = length - currLen;
         }
         contact->restitution = 0;
-        std::cout << "N:" << contact->contactNormal.ToString() << 
-            "----P:" << contact->penetration << std::endl;
 
         return 1;
     }

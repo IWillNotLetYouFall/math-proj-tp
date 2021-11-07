@@ -36,9 +36,12 @@ int main()
 		Particule* particule;
 	};
 	vector<BodyPart*> bodyParts;
+	vector<Particule*> fuseParticles;
 
 	//TP2 Tests
 	PhysicWorld physicW = PhysicWorld(2);
+	bool peutSplit = true;
+	bool peutFuse = true;
 
 	//Particule Corps du blob
 	Particule body = Particule(Color::Blue, 25);
@@ -73,8 +76,7 @@ int main()
 	armL.position = Vector3D(80.0f, 100.0f);
 	physicW.AddParticle(&armL);
 
-	//forceGens.push_back();
-	bodyParts.push_back(new BodyPart(new ParticleGravity(Vector3D(0, 0.f)), &body)); //Body
+	//Ajout de la gravité
 	bodyParts.push_back(new BodyPart(new ParticleGravity(Vector3D(0, -200.f)), &head)); //Body
 	bodyParts.push_back(new BodyPart(new ParticleGravity(Vector3D(200, 200.f)), &legR)); //Right Leg (side-gravity)
 	bodyParts.push_back(new BodyPart(new ParticleGravity(Vector3D(-200, 200.f)), &legL)); //Left Leg (side-gravity)
@@ -91,11 +93,13 @@ int main()
 	bodyParts.push_back(new BodyPart(new SpringParticles(&reticle, 40.4f, 1), &body)); //Corps suit souris (Particles Spring)
 
 	//Spring Fixed
-	Particule fixedPart = Particule(Color::Yellow, 13);
+	Particule fixedPart = Particule(Color::Yellow, 30);
 	fixedPart.position = Vector3D(300.0f, 200.0f);
 	Vector3D sFixedPos = fixedPart.position + Vector3D(0, -80.0f);
+	bodyParts.push_back(new BodyPart(new ParticleGravity(Vector3D(0, -100.f)), &fixedPart)); //Gravite
 	bodyParts.push_back(new BodyPart(new SpringFixed(sFixedPos, 3.f, 100.f), &fixedPart)); //Fixed Particles (Fixed Spring)
 	physicW.AddParticle(&fixedPart);
+	fuseParticles.push_back(&fixedPart);
 
 	//Rod Collision
 	ParticleRod* cableHead = new ParticleRod(35);
@@ -132,38 +136,12 @@ int main()
 	//TP1 Part
 	srand(time(NULL));
 
-	bool grounded = true;
-	bool canShoot = true;
-	float vsp = 0.f;
-
 	RenderWindow window(VideoMode(800, 600), "TP2", Style::Default);
 	window.setFramerateLimit(60);
 	window.setMouseCursorVisible(false);
 
-	//player
-	RectangleShape player;
-	player.setFillColor(Color::White);
-	player.setSize(Vector2f(50.f, 50.f));
-	player.setOrigin(25.f, 25.f);
-	player.setPosition(100, window.getSize().y - 25.f);
-
-	//turret
-	RectangleShape turret;
-	turret.setFillColor(Color::Blue);
-	turret.setSize(Vector2f(30.f, 50.f));
-	turret.setOrigin(15.f, 25.f);
-	turret.setPosition(100, window.getSize().y - 35.f);
-
-	//Bullets
-	int currentWeaponId = 1;
-	Laser baseLaser = Laser();
-	std::vector<Particule> bullets;
-
 	//Vectors
-	Vector2f turretCenter;
 	Vector2f mousePosWindow;
-	Vector2f aimDir;
-	Vector2f aimDirNorm;
 
 
 
@@ -177,103 +155,60 @@ int main()
 			if (event.type == Event::Closed)
 				window.close();
 		}
+		//Split Blob jaune
+		if (Keyboard::isKeyPressed(Keyboard::O))
+		{
+			Particule* lastPart = fuseParticles[fuseParticles.size() - 1];
+			float lastRadius = lastPart->GetRadius();
 
-		//Update
-		//Vectors
-		turretCenter = Vector2f(turret.getPosition());
+			//Ne pas split lorsque dimensions trop petites
+			if (lastRadius > 1 && peutSplit) {
+				Particule* newBlob = new Particule(Color::Yellow, lastRadius / 2);
+				newBlob->position = Vector3D(lastPart->position);
+				newBlob->test = true;
+
+				Vector3D sFixedPos = newBlob->position;
+				ParticleGravity* partiGravity = new ParticleGravity(Vector3D(0, 300.f)); //Gravite
+				SpringBungee* partiSpring = new SpringBungee(lastPart, 10.f, 5.f); //Fixed Particles (Fixed Spring)
+				physicW.AddEntry(newBlob, partiGravity);
+				physicW.AddEntry(newBlob, partiSpring);
+				physicW.AddParticle(newBlob);
+				fuseParticles.push_back(newBlob);
+
+				lastPart->SetRadius(lastRadius / 2);
+
+				peutSplit = false;
+			}
+		}
+		else
+			peutSplit = true;
+
+		//Fuse Blob Jaunes
+		if (Keyboard::isKeyPressed(Keyboard::P) && fuseParticles.size() > 1)
+		{
+			Particule* lastPart = fuseParticles[fuseParticles.size() - 1];
+			Particule* prevPart = fuseParticles[fuseParticles.size() - 2];
+			float lastRadius = lastPart->GetRadius();
+
+			if (peutFuse) {
+				physicW.RemoveParticle(lastPart);
+				physicW.RemoveEntries(lastPart);
+				fuseParticles.erase(fuseParticles.end() - 1);
+
+				prevPart->SetRadius(lastPart->GetRadius() * 2);
+
+				peutFuse = false;
+			}
+		}
+		else
+			peutFuse = true;
+
+
 		mousePosWindow = Vector2f(Mouse::getPosition(window));
-		aimDir = mousePosWindow - turretCenter;
-		aimDirNorm = aimDir / (float)sqrt(pow(aimDir.x, 2) + (float)pow(aimDir.y, 2));
-
-		float PI = 3.14159265f;
-		float deg = atan2(aimDirNorm.y, aimDirNorm.x) * 180 / PI;
-		turret.setRotation(deg + 90);
 
 		reticle.position = Vector3D(mousePosWindow.x, mousePosWindow.y);
 		reticle.Integrate(0);
 		reticleIn.setPosition(mousePosWindow);
-
-		//Set Final Rotation of Ship
-		//std::cout << deg << "\n";
-
-		//turret
-		if (Keyboard::isKeyPressed(Keyboard::A))
-		{
-			turret.move(-8.f, 0.f);
-			player.move(-8.f, 0.f);
-		}
-		if (Keyboard::isKeyPressed(Keyboard::D))
-		{
-			turret.move(8.f, 0.f);
-			player.move(8.f, 0.f);
-		}
-		if (grounded)
-		{
-			if (Keyboard::isKeyPressed(Keyboard::W))
-			{
-				grounded = false;
-				vsp = -15.f;
-			}
-		}
-		else
-			vsp += 0.8f;
-
-		turret.move(0.f, vsp);
-		player.move(0.f, vsp);
-
-		if (player.getPosition().y > window.getSize().y - 25.f)
-		{
-			player.setPosition(player.getPosition().x, window.getSize().y - 25.f);
-			turret.setPosition(turret.getPosition().x, window.getSize().y - 35.f);
-			grounded = true;
-			vsp = 0.f;
-		}
-
-		//Shooting
-		if (Mouse::isButtonPressed(Mouse::Left))
-		{
-			if (canShoot) {
-				switch (currentWeaponId)
-				{
-				case 1:
-					baseLaser.position = Vector3D(turretCenter.x, turretCenter.y);
-					baseLaser.velocite = Vector3D(aimDirNorm.x, aimDirNorm.y) * baseLaser.maxSpeed;
-					bullets.push_back(Laser(baseLaser));
-					break;
-				default:
-					break;
-				}
-				canShoot = false;
-			}
-		}
-		else if (!canShoot)
-			canShoot = true;
-
-
-		for (size_t i = 0; i < bullets.size(); i++)
-		{
-			bullets[i].Integrate(deltaTime.asSeconds());
-
-			//Collisions Écran
-			if (bullets[i].position.x < 0 || bullets[i].position.x > window.getSize().x
-				|| bullets[i].position.y < 0 || bullets[i].position.y > window.getSize().y)
-			{
-				bullets.erase(bullets.begin() + i);
-			}
-			else
-			{
-				//Collisions with enemies.
-				/*for (size_t k = 0; k < enemies.size(); k++)
-				{
-					if (bullets[i].shape.getGlobalBounds().intersects(enemies[k].getGlobalBounds()))
-					{
-						bullets.erase(bullets.begin() + i);
-						enemies.erase(enemies.begin() + k);
-						break;
-					}
-				}*/
-			}
-		}
 
 		//TP2
 		physicW.StartFrame();
@@ -292,19 +227,20 @@ int main()
 		window.draw(armR.shape);
 		window.draw(legL.shape);
 		window.draw(legR.shape);
-		window.draw(fixedPart.shape);
+
+		//Draw Lignes Fusion
+		if (fuseParticles.size() >= 2) {
+			//fuseParticles[1]->shape.setPosition(100, 100);
+			float a = 0.1f;
+		}
+
+		for (Particule* part : fuseParticles) {
+			window.draw(part->shape);
+		}
 		
 
 		window.draw(reticle.shape);
 		window.draw(reticleIn);
-
-		for (size_t i = 0; i < bullets.size(); i++)
-		{
-
-			window.draw(bullets[i].shape);
-		}
-		window.draw(player);
-		window.draw(turret);
 
 		window.display();
 

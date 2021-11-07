@@ -10,9 +10,25 @@ void PhysicWorld::AddEntry(Particule* particleA, ParticleForceGenerator* force)
 	registre.addEntry(particleA, force); //Main : Initialiser SpringParticle et fetch PA comme param constr
 }
 
+void PhysicWorld::RemoveEntries(Particule* particle)
+{
+	registre.removeEntries(particle);
+}
+
 void PhysicWorld::AddParticle(Particule* particle)
 {
 	particuleReg.push_back(particle);
+}
+
+void PhysicWorld::RemoveParticle(Particule* particle)
+{
+	for (int i = 0; i < particuleReg.size(); i++)
+	{
+		if (particuleReg[i] == particle) {
+			particuleReg.erase(particuleReg.begin() + i);
+			return;
+		}
+	}
 }
 
 void PhysicWorld::AddContactGenerator(ParticleContactGenerator* contactGen)

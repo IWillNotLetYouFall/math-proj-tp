@@ -22,6 +22,7 @@ public:
 	//Vector3D acceleration = 0;
 	float inverseMasse = 0;
 	float damping = 0.2f;
+	bool test = false;
 
 public:
 	Particule();
@@ -34,6 +35,8 @@ public:
 	float GetMasse() { return masse; };
 	void clearForceAcc();
 	void addForce(const Vector3D& force);
+	float GetRadius();
+	void SetRadius(float radius);
 	Vector3D getAcceleration() { return forceAcc; };
 };
 

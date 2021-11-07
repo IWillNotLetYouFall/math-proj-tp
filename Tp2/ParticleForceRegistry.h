@@ -17,6 +17,7 @@ public:
 public:
 	void addEntry(Particule* particle, ParticleForceGenerator* force);
 	void removeEntry(Particule* particle, ParticleForceGenerator* force);
+	void removeEntries(Particule* particle);
 	void clearRegistry();
 
 	void UpdateForce(float duration);

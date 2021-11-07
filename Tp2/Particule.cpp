@@ -21,6 +21,9 @@ Particule::~Particule()
 
 void Particule::Integrate(float delta)
 {
+	if (test)
+		std::cout << "OK" << std::endl;
+
 	//Apply max mouv
 	if (velocite.GetNorm() > maxSpeed) 
 		velocite = velocite.Normalize() * maxSpeed;
@@ -53,6 +56,17 @@ float Particule::InverseMasse()
 void Particule::addForce(const Vector3D& force)
 {
 	forceAcc += force;
+}
+
+float Particule::GetRadius()
+{
+	return shape.getRadius();
+}
+
+void Particule::SetRadius(float radius)
+{
+	shape.setRadius(radius);
+	this->shape.setOrigin(radius, radius);
 }
 
 void Particule::clearForceAcc()

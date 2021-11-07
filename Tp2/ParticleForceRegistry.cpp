@@ -26,6 +26,18 @@ void ParticleForceRegistry::removeEntry(Particule* particle, ParticleForceGenera
 	}
 }
 
+void ParticleForceRegistry::removeEntries(Particule* particle)
+{
+	int i = 0;
+	for (ParticleForceEntry entry : m_registry)
+	{
+		if (entry.particle == particle)
+			m_registry.erase(m_registry.begin() + i);
+		else
+			i++;
+	}
+}
+
 void ParticleForceRegistry::clearRegistry()
 {
 	m_registry.clear();
