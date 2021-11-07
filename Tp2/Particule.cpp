@@ -21,8 +21,6 @@ Particule::~Particule()
 
 void Particule::Integrate(float delta)
 {
-	if (test)
-		std::cout << "OK" << std::endl;
 
 	//Apply max mouv
 	if (velocite.GetNorm() > maxSpeed) 
