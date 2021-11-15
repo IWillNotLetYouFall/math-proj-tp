@@ -7,7 +7,11 @@ Matrix4 Matrix4::operator*(const Matrix4& other) const
 
 Vector3D Matrix4::operator*(const Vector3D& vector) const
 {
-    return Vector3D();
+    return Vector3D(
+        vector.x * values[0] +  vector.y * values[1] + vector.z * values[2] + values[3],
+        vector.x * values[4] + vector.y * values[5] + vector.z * values[6] + values[7],
+        vector.x * values[8] + vector.y * values[9] + vector.z * values[10] + values[11]
+    );
 }
 
 Matrix4 Matrix4::Inverse()
