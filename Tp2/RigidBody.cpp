@@ -1,5 +1,13 @@
 #include "RigidBody.h"
 
+void RigidBody::CalculateDerivedData()
+{
+}
+
+void RigidBody::Integrate(float duration)
+{
+}
+
 void RigidBody::AddForce(const Vector3D& force)
 {
 }
