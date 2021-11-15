@@ -1,5 +1,7 @@
 #pragma once
 #include "Vector3D.h"
+#include "Quaternion.h"
+#include "Matrix4.h"
 
 class RigidBody
 {
@@ -7,6 +9,14 @@ class RigidBody
 
 private:
 
+	float inverseMasse;
+	float linearDamping;
+	Vector3D position;
+	Vector3D velocity;
+
+	Quaternion orientation;
+	Vector3D rotation;
+	Matrix4 transformMatrix;
 	//same as linear damping
 	//but for rotation
 	float m_angularDamping;
@@ -19,7 +29,10 @@ private:
 	//added by ForceGenerator
 	Vector3D m_torqueAccum;
 
+	void CalculateDerivedData();
+
 public:
+	void Integrate(float duration);
 
 	//Add force on the Center of mass (no torque generated)
 	void AddForce(const Vector3D& force);
