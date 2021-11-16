@@ -60,6 +60,27 @@
     <ClCompile Include="Physics.cpp">
       <Filter>Collisions</Filter>
     </ClCompile>
+    <ClCompile Include="ForceGeneratorBody.cpp">
+      <Filter>RIgidbody</Filter>
+    </ClCompile>
+    <ClCompile Include="GravityForceGeneratorBody.cpp">
+      <Filter>RIgidbody</Filter>
+    </ClCompile>
+    <ClCompile Include="Matrix3.cpp">
+      <Filter>RIgidbody</Filter>
+    </ClCompile>
+    <ClCompile Include="Matrix4.cpp">
+      <Filter>RIgidbody</Filter>
+    </ClCompile>
+    <ClCompile Include="Quaternion.cpp">
+      <Filter>RIgidbody</Filter>
+    </ClCompile>
+    <ClCompile Include="RigidBody.cpp">
+      <Filter>RIgidbody</Filter>
+    </ClCompile>
+    <ClCompile Include="SpringForceGenerator.cpp">
+      <Filter>RIgidbody</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Vector3D.h" />
@@ -123,6 +144,27 @@
     <ClInclude Include="Physics.h">
       <Filter>Collisions</Filter>
     </ClInclude>
+    <ClInclude Include="ForceGeneratorBody.h">
+      <Filter>RIgidbody</Filter>
+    </ClInclude>
+    <ClInclude Include="GravityForceGeneratorBody.h">
+      <Filter>RIgidbody</Filter>
+    </ClInclude>
+    <ClInclude Include="Matrix3.h">
+      <Filter>RIgidbody</Filter>
+    </ClInclude>
+    <ClInclude Include="Matrix4.h">
+      <Filter>RIgidbody</Filter>
+    </ClInclude>
+    <ClInclude Include="Quaternion.h">
+      <Filter>RIgidbody</Filter>
+    </ClInclude>
+    <ClInclude Include="RigidBody.h">
+      <Filter>RIgidbody</Filter>
+    </ClInclude>
+    <ClInclude Include="SpringForceGenerator.h">
+      <Filter>RIgidbody</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Tp1">
@@ -139,6 +181,9 @@
     </Filter>
     <Filter Include="Collisions">
       <UniqueIdentifier>{1dfc6966-68c2-4b08-9732-47e141578c99}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="RIgidbody">
+      <UniqueIdentifier>{7e114e63-8d20-4027-9359-538cb138f7cd}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
