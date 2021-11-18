@@ -58,36 +58,36 @@ Matrix4 Matrix4::Inverse()
         return Matrix4();
     }
 
-    Matrix4 m;
+    Matrix4 m = Matrix4();
     det = 1.0f / det;
 
-    values[0] = (-m.values[9] * m.values[6] + m.values[5] * m.values[10]) * det;
-    values[4] = (m.values[8] * m.values[6] - m.values[4] * m.values[10]) * det;
-    values[8] = (-m.values[8] * m.values[5] + m.values[4] * m.values[9]) * det;
-    values[1] = (m.values[9] * m.values[2] - m.values[1] * m.values[10]) * det;
-    values[5] = (-m.values[8] * m.values[2] + m.values[0] * m.values[10]) * det;
-    values[9] = (m.values[8] * m.values[1] - m.values[0] * m.values[9]) * det;
-    values[2] = (-m.values[5] * m.values[2] + m.values[1] * m.values[6]) * det;
-    values[6] = (+m.values[4] * m.values[2] - m.values[0] * m.values[6]) * det;
-    values[10] = (-m.values[4] * m.values[1] + m.values[0] * m.values[5]) * det;
-    values[3] = (m.values[9] * m.values[6] * m.values[3]
-        - m.values[5] * m.values[10] * m.values[3]
-        - m.values[9] * m.values[2] * m.values[7]
-        + m.values[1] * m.values[10] * m.values[7]
-        + m.values[5] * m.values[2] * m.values[11]
-        - m.values[1] * m.values[6] * m.values[11]) * det;
-    values[7] = (-m.values[8] * m.values[6] * m.values[3]
-        + m.values[4] * m.values[10] * m.values[3]
-        + m.values[8] * m.values[2] * m.values[7]
-        - m.values[0] * m.values[10] * m.values[7]
-        - m.values[4] * m.values[2] * m.values[11]
-        + m.values[0] * m.values[6] * m.values[11]) * det;
-    values[11] = (m.values[8] * m.values[5] * m.values[3]
-        - m.values[4] * m.values[9] * m.values[3]
-        - m.values[8] * m.values[1] * m.values[7]
-        + m.values[0] * m.values[9] * m.values[7]
-        + m.values[4] * m.values[1] * m.values[11]
-        - m.values[0] * m.values[5] * m.values[11]) * det;
+    m.values[0] = (-values[9] * values[6] + values[5] * values[10]) * det;
+    m.values[4] = (values[8] * values[6] - values[4] * values[10]) * det;
+    m.values[8] = (-values[8] * values[5] + values[4] * values[9]) * det;
+    m.values[1] = (values[9] * values[2] - values[1] * values[10]) * det;
+    m.values[5] = (-values[8] * values[2] + values[0] * values[10]) * det;
+    m.values[9] = (values[8] * values[1] - values[0] * values[9]) * det;
+    m.values[2] = (-values[5] * values[2] + values[1] * values[6]) * det;
+    m.values[6] = (+values[4] * values[2] - values[0] * values[6]) * det;
+    m.values[10] = (-values[4] * values[1] + values[0] * values[5]) * det;
+    m.values[3] = (values[9] * values[6] * values[3]
+        - values[5] * values[10] * values[3]
+        - values[9] * values[2] * values[7]
+        + values[1] * values[10] * values[7]
+        + values[5] * values[2] * values[11]
+        - values[1] * values[6] * values[11]) * det;
+    m.values[7] = (-values[8] * values[6] * values[3]
+        + values[4] * values[10] * values[3]
+        + values[8] * values[2] * values[7]
+        - values[0] * values[10] * values[7]
+        - values[4] * values[2] * values[11]
+        + values[0] * values[6] * values[11]) * det;
+    m.values[11] = (values[8] * values[5] * values[3]
+        - values[4] * values[9] * values[3]
+        - values[8] * values[1] * values[7]
+        + values[0] * values[9] * values[7]
+        + values[4] * values[1] * values[11]
+        - values[0] * values[5] * values[11]) * det;
     return m;
 }
 

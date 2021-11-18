@@ -55,6 +55,7 @@ public:
 
 	//Add force on the Center of mass (no torque generated)
 	void AddForce(const Vector3D& force);
+	void AddTorque(const Vector3D& torque);
 
 	//Add force at a point in world coordinate.
 	//Generate force and torque
