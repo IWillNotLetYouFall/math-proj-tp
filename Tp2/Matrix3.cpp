@@ -53,7 +53,10 @@ Matrix3 Matrix3::Inverse()
     float t16 = (t4 * m.values[8] - t6 * m.values[7] - t8 * m.values[8] +
         t10 * m.values[7] + t12 * m.values[5] - t14 * m.values[4]);
     // Make sure the determinant is non-zero.
-    if (t16 == 0.0f) return;
+    if (t16 == 0.0f)
+    {
+        return Matrix3(values[0], values[1], values[2], values[3], values[4], values[5], values[6], values[7], + values[8]);
+    }
     float t17 = 1 / t16;
     values[0] = (m.values[4] * m.values[8] - m.values[5] * m.values[7]) * t17;
     values[1] = -(m.values[1] * m.values[8] - m.values[2] * m.values[7]) * t17;

@@ -13,13 +13,13 @@ public:
 	Quaternion(float a, float b, float c, float d) 
 	{ 
 		value[0] = a; value[1] = b; value[2] = c; value[3] = d; 
-		float d = 0;
+		float e = 0;
 		for (int i = 0; i < 4; i++)
 		{
-			d += value[i] * value[i];
+			e += value[i] * value[i];
 		}
 
-		if (d == 0) 
+		if (e == 0)
 		{
 			value[0] = 1; value[1] = 0; value[2] = 0; value[3] = 0;
 		}

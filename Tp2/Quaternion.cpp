@@ -33,6 +33,7 @@ Quaternion Quaternion::operator*(const Quaternion& other)
 		q.value[3] * other.value[1] - q.value[1] * other.value[3];
 	value[3] = q.value[0] * other.value[3] + q.value[3] * other.value[0] +
 		q.value[1] * other.value[2] - q.value[2] * other.value[1];
+	return Quaternion(value[0], value[1], value[2], value[3]);
 }
 
 void Quaternion::RotateByVector(const Vector3D& vector, float duration)
