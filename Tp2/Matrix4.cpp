@@ -53,20 +53,23 @@ float Matrix4::GetDeterminant() const
 Matrix4 Matrix4::Inverse()
 {
     float det = GetDeterminant();
-    if (det == 0) return;
+    if (det == 0)
+    {
+        return Matrix4();
+    }
 
     Matrix4 m;
     det = 1.0f / det;
 
     values[0] = (-m.values[9] * m.values[6] + m.values[5] * m.values[10]) * det;
     values[4] = (m.values[8] * m.values[6] - m.values[4] * m.values[10]) * det;
-    values[8] = (-m.values[8] * m.values[5] + m.values[4] * m.values[9] * m.values[15]) * det;
+    values[8] = (-m.values[8] * m.values[5] + m.values[4] * m.values[9]) * det;
     values[1] = (m.values[9] * m.values[2] - m.values[1] * m.values[10]) * det;
     values[5] = (-m.values[8] * m.values[2] + m.values[0] * m.values[10]) * det;
-    values[9] = (m.values[8] * m.values[1] - m.values[0] * m.values[9] * m.values[15]) * det;
-    values[2] = (-m.values[5] * m.values[2] + m.values[1] * m.values[6] * m.values[15]) * det;
-    values[6] = (+m.values[4] * m.values[2] - m.values[0] * m.values[6] * m.values[15]) * det;
-    values[10] = (-m.values[4] * m.values[1] + m.values[0] * m.values[5] * m.values[15]) * det;
+    values[9] = (m.values[8] * m.values[1] - m.values[0] * m.values[9]) * det;
+    values[2] = (-m.values[5] * m.values[2] + m.values[1] * m.values[6]) * det;
+    values[6] = (+m.values[4] * m.values[2] - m.values[0] * m.values[6]) * det;
+    values[10] = (-m.values[4] * m.values[1] + m.values[0] * m.values[5]) * det;
     values[3] = (m.values[9] * m.values[6] * m.values[3]
         - m.values[5] * m.values[10] * m.values[3]
         - m.values[9] * m.values[2] * m.values[7]
