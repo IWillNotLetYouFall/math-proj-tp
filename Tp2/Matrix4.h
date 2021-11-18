@@ -11,6 +11,14 @@ private:
 
 public:
 
+	Matrix4()
+	{
+		for (int i = 0; i < 12; i++)
+		{
+			values[i] = 0;
+		}
+	}
+
 	//combination of linear transformation
 	Matrix4 operator*(const Matrix4& other) const;
 

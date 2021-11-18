@@ -32,11 +32,23 @@ void RigidBody::AddForce(const Vector3D& force)
 	m_forceAccum += force;
 }
 
+void RigidBody::AddTorque(const Vector3D& torque)
+{
+	m_torqueAccum += torque;
+}
+
 void RigidBody::AddForceAtPoint(const Vector3D& force, const Vector3D& LocalPoint)
 {
+	m_forceAccum += force;
+
 	Vector3D f = force;
-	f += LocalPoint;
-	m_forceAccum += f;
+	m_torqueAccum += f.VectorialProduct(LocalPoint);
+}
+
+void RigidBody::AddForceAtBodyPoint(const Vector3D& force, const Vector3D& LocalPoint)
+{
+
+	AddForceAtPoint(force, LocalPoint);
 }
 
 void RigidBody::ClearAccumulator()
