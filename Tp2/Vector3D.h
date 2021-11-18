@@ -19,6 +19,9 @@ public:
 	Vector3D operator-=(Vector3D value);
 	Vector3D operator+(Vector3D value);
 	Vector3D operator+=(Vector3D value);
+	void setX(float xx) { x = xx; }
+	void setY(float yy) { x = yy; }
+	void setZ(float zz) { x = zz; }
 	float GetNorm();
 	Vector3D Normalize();
 	float ScalarProduct(Vector3D prod);

@@ -147,8 +147,12 @@
   <ItemGroup>
     <ClCompile Include="CircleParticleContactGenerator.cpp" />
     <ClCompile Include="Contact.cpp" />
+    <ClCompile Include="ForceGeneratorBody.cpp" />
     <ClCompile Include="Friction.cpp" />
+    <ClCompile Include="GravityForceGeneratorBody.cpp" />
     <ClCompile Include="Laser.cpp" />
+    <ClCompile Include="Matrix3.cpp" />
+    <ClCompile Include="Matrix4.cpp" />
     <ClCompile Include="ParticleCable.cpp" />
     <ClCompile Include="ParticleContact.cpp" />
     <ClCompile Include="ParticleContactGenerator.cpp" />
@@ -160,9 +164,12 @@
     <ClCompile Include="Particule.cpp" />
     <ClCompile Include="Physics.cpp" />
     <ClCompile Include="PhysicWorld.cpp" />
+    <ClCompile Include="Quaternion.cpp" />
+    <ClCompile Include="RigidBody.cpp" />
     <ClCompile Include="SpringBungee.cpp" />
     <ClCompile Include="SpringFixed.cpp" />
     <ClCompile Include="SpringFloating.cpp" />
+    <ClCompile Include="SpringForceGenerator.cpp" />
     <ClCompile Include="SpringParticles.cpp" />
     <ClCompile Include="Tp2.cpp" />
     <ClCompile Include="Tp2Old.cpp" />
@@ -171,9 +178,13 @@
   <ItemGroup>
     <ClInclude Include="CircleParticleContactGenerator.h" />
     <ClInclude Include="Contact.h" />
+    <ClInclude Include="ForceGeneratorBody.h" />
     <ClInclude Include="Friction.h" />
+    <ClInclude Include="GravityForceGeneratorBody.h" />
     <ClInclude Include="Laser.h" />
     <ClInclude Include="olcConsoleGameEngine.h" />
+    <ClInclude Include="Matrix3.h" />
+    <ClInclude Include="Matrix4.h" />
     <ClInclude Include="ParticleCable.h" />
     <ClInclude Include="ParticleContact.h" />
     <ClInclude Include="ParticleContactGenerator.h" />
@@ -186,9 +197,12 @@
     <ClInclude Include="Particule.h" />
     <ClInclude Include="Physics.h" />
     <ClInclude Include="PhysicWorld.h" />
+    <ClInclude Include="Quaternion.h" />
+    <ClInclude Include="RigidBody.h" />
     <ClInclude Include="SpringBungee.h" />
     <ClInclude Include="SpringFixed.h" />
     <ClInclude Include="SpringFloating.h" />
+    <ClInclude Include="SpringForceGenerator.h" />
     <ClInclude Include="SpringParticles.h" />
     <ClInclude Include="Vector3D.h" />
   </ItemGroup>

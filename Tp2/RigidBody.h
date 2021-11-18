@@ -34,11 +34,30 @@ private:
 public:
 	void Integrate(float duration);
 
+	bool hasInfiniteMass() 
+	{ 
+		if (inverseMasse == 0) 
+			return true; 
+		return false; 
+	};
+
+	float getMass() 
+	{ 
+		if (inverseMasse == 0)
+			return 100000;
+		return 1 / inverseMasse; 
+	};
+
+	Vector3D TransformPoint(Vector3D pos)
+	{
+		return pos.Inverse();
+	}
+
 	//Add force on the Center of mass (no torque generated)
 	void AddForce(const Vector3D& force);
 
-	//Add force at a point in world coordiante.
-	//Geneerate force and torque
+	//Add force at a point in world coordinate.
+	//Generate force and torque
 	void AddForceAtPoint(const Vector3D& force, const Vector3D& LocalPoint);
 
 	//called each frame to reset m_forceAccum and m_torqueAccum
