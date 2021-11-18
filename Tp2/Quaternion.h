@@ -36,6 +36,8 @@ public:
 	//Quternion multiplication
 	Quaternion operator*(const Quaternion& other);
 
+	Vector3D operator*(const Vector3D& vec);
+
 	//Rotate the quaternion by a vector - multiply this by q = (0, dx, dy, dz)
 	void RotateByVector(const Vector3D& vector, float duration = 2);
 

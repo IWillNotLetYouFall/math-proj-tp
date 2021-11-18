@@ -31,6 +31,8 @@ private:
 
 	void CalculateDerivedData();
 
+	Vector3D getPointInWorldSpace(const Vector3D& point);
+
 public:
 	void Integrate(float duration);
 
@@ -60,6 +62,8 @@ public:
 	//Add force at a point in world coordinate.
 	//Generate force and torque
 	void AddForceAtPoint(const Vector3D& force, const Vector3D& LocalPoint);
+
+	void AddForceAtBodyPoint(const Vector3D& force, const Vector3D& point);
 
 	//called each frame to reset m_forceAccum and m_torqueAccum
 	void ClearAccumulator();
