@@ -60,6 +60,7 @@
     <ClCompile Include="Physics.cpp">
       <Filter>Collisions</Filter>
     </ClCompile>
+    <ClCompile Include="Tp2Old.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Vector3D.h" />
@@ -123,6 +124,9 @@
     <ClInclude Include="Physics.h">
       <Filter>Collisions</Filter>
     </ClInclude>
+    <ClInclude Include="olcConsoleGameEngine.h">
+      <Filter>TP3Gab</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Tp1">
@@ -139,6 +143,9 @@
     </Filter>
     <Filter Include="Collisions">
       <UniqueIdentifier>{1dfc6966-68c2-4b08-9732-47e141578c99}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TP3Gab">
+      <UniqueIdentifier>{e130f3d7-17ae-4ceb-bb28-9395bfccceab}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

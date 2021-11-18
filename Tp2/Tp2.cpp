@@ -1,4 +1,4 @@
-// Test1.cpp : Ce fichier contient la fonction 'main'. L'exÃ©cution du programme commence et se termine Ã  cet endroit.
+// Test1.cpp : Ce fichier contient la fonction 'main'. L'exécution du programme commence et se termine à cet endroit.
 //
 
 #include <iostream>
@@ -76,7 +76,7 @@ int main()
 	armL.position = Vector3D(80.0f, 100.0f);
 	physicW.AddParticle(&armL);
 
-	//Ajout de la gravitÃ©
+	//Ajout de la gravité
 	bodyParts.push_back(new BodyPart(new ParticleGravity(Vector3D(0, -200.f)), &head)); //Body
 	bodyParts.push_back(new BodyPart(new ParticleGravity(Vector3D(200, 200.f)), &legR)); //Right Leg (side-gravity)
 	bodyParts.push_back(new BodyPart(new ParticleGravity(Vector3D(-200, 200.f)), &legL)); //Left Leg (side-gravity)
@@ -112,17 +112,17 @@ int main()
 	cableArmL->setParticle1(&armL);
 	cableArmL->setParticle2(&body);
 	physicW.AddContactGenerator(cableArmL);
-	
+
 	ParticleCable* cableArmR = new ParticleCable(55, 0.6f);
 	cableArmR->setParticle1(&armR);
 	cableArmR->setParticle2(&body);
 	physicW.AddContactGenerator(cableArmR);
-	
+
 	ParticleCable* cableLegL = new ParticleCable(65, 0.6f);
 	cableLegL->setParticle1(&legL);
 	cableLegL->setParticle2(&body);
 	physicW.AddContactGenerator(cableLegL);
-	
+
 	ParticleCable* cableLegR = new ParticleCable(65, 0.3f);
 	cableLegR->setParticle1(&legR);
 	cableLegR->setParticle2(&body);
@@ -237,7 +237,7 @@ int main()
 		for (Particule* part : fuseParticles) {
 			window.draw(part->shape);
 		}
-		
+
 
 		window.draw(reticle.shape);
 		window.draw(reticleIn);

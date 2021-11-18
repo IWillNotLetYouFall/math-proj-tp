@@ -75,6 +75,14 @@ float Vector3D::ScalarProduct(Vector3D prod)
 	return (x * prod.x) + (y * prod.y) + (z * prod.z);
 }
 
+Vector3D Vector3D::Product(Vector3D prod)
+{
+	x *= prod.x;
+	y *= prod.y;
+	z *= prod.z;
+	return Vector3D(x, y, z);
+}
+
 Vector3D Vector3D::VectorialProduct(Vector3D prod)
 {
 	return Vector3D(
