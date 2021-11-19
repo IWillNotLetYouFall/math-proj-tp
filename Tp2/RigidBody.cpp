@@ -111,10 +111,6 @@ void RigidBody::Integrate(float duration)
 	//Calcul Acc. angulaire
 	auto angularAcceleration = inverseInertiaTensorWorld * m_torqueAccum;
 
-	//Ancien Acc.
-	//inverseInertiaTensorWorld = inverseInertiaTensor * position;
-	//Vector3D angularAcceleration = invInertiaTensorWorld.VectorialProduct(m_torqueAccum); //Si bug, revoir Si VectProduct est la bonne solution
-
 	// / MAJ vélocité linéaire
 	velocity += m_lastFrameAcceleration * duration;
 
@@ -127,11 +123,10 @@ void RigidBody::Integrate(float duration)
 	rotation *= powf(m_angularDamping, duration);
 
 	//MAJ position
-	position += velocity * duration;
+	SetPosition(position + (velocity * duration));
 
 	//MAJ rotation
 	orientation.UpdateByAngularVelocity(rotation, duration); //????????
-	//position += velocity * duration;
 
 	CalculateDerivedData();
 

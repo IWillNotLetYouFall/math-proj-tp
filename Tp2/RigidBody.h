@@ -18,7 +18,7 @@ private:
 	float inverseMasse = 1;
 
 	//Linear Values
-	float linearDamping;
+	float linearDamping = 0.2f;
 	Vector3D acceleration;
 	Vector3D position;
 	Vector3D velocity;
@@ -34,7 +34,7 @@ private:
 	Matrix3 inverseInertiaTensorWorld;
 	//same as linear damping
 	//but for rotation
-	float m_angularDamping;
+	float m_angularDamping = 0.2f;
 
 	//Accumulated force
 	//added by ForceGenerator
@@ -74,6 +74,7 @@ public:
 	void SetPosition(Vector3D pos)
 	{
 		this->position = pos;
+		shape.setPosition(pos.x, pos.y);
 	};
 
 	Vector3D GetPosition()

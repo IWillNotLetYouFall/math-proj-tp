@@ -87,22 +87,22 @@ int main()
 	bodyParts.push_back(new BodyPart(new GravityForceGeneratorBody(Vector3D(-200, -15.f)), &armL)); //Left Arm (side-gravity)
 
 	//Springs
-	bodyParts.push_back(new BodyPart(new SpringForceGenerator(body.GetPosition(), &armL, armL.GetPosition(), 5.f, -10.f), &armL)); //Left Arm (Particles Spring)
+	bodyParts.push_back(new BodyPart(new SpringForceGenerator(body.GetPosition(), &body, armL.GetPosition(), 5.f, -10.f), &armL)); //Left Arm (Particles Spring)
 	bodyParts.push_back(new BodyPart(new SpringForceGenerator(body.GetPosition(), &armR, armR.GetPosition(), 5.f, -10.f), &armR)); //Right Arm (Particles Spring)
 	bodyParts.push_back(new BodyPart(new SpringForceGenerator(body.GetPosition(), &legL, legL.GetPosition(), 10.f, 20.f), &legL)); //Left Leg (Particles Bungee)
 	bodyParts.push_back(new BodyPart(new SpringForceGenerator(body.GetPosition(), &legR, legR.GetPosition(), 10.f, 20.f), &legR)); //Right Leg (Particles Bungee)
 
 	//Body suit la souris
-	bodyParts.push_back(new BodyPart(new SpringForceGenerator(reticle.GetPosition(), &body, body.GetPosition(), 40.4f, 1), &body)); //Corps suit souris (Particles Spring)
-
-	//Spring Fixed
-	RigidBody fixedPart = RigidBody(Color::Yellow, 30);
-	fixedPart.SetPosition(Vector3D(300.0f, 200.0f));
-	Vector3D sFixedPos = fixedPart.GetPosition() + Vector3D(0, -80.0f);
-	bodyParts.push_back(new BodyPart(new GravityForceGeneratorBody(Vector3D(0, -100.f)), &fixedPart)); //Gravite
-	bodyParts.push_back(new BodyPart(new SpringForceGenerator(sFixedPos, &fixedPart, fixedPart.GetPosition(), 3.f, 100.f), &fixedPart)); //Fixed Particles (Fixed Spring)
-	physicW.AddRigidBody(&fixedPart);
-	fuseParticles.push_back(&fixedPart);
+	//bodyParts.push_back(new BodyPart(new SpringForceGenerator(reticle.GetPosition(), &body, body.GetPosition(), 40.4f, 1), &body)); //Corps suit souris (Particles Spring)
+	//
+	////Spring Fixed
+	//RigidBody fixedPart = RigidBody(Color::Yellow, 30);
+	//fixedPart.SetPosition(Vector3D(300.0f, 200.0f));
+	//Vector3D sFixedPos = fixedPart.GetPosition() + Vector3D(0, -80.0f);
+	//bodyParts.push_back(new BodyPart(new GravityForceGeneratorBody(Vector3D(0, -100.f)), &fixedPart)); //Gravite
+	//bodyParts.push_back(new BodyPart(new SpringForceGenerator(sFixedPos, &fixedPart, fixedPart.GetPosition(), 3.f, 100.f), &fixedPart)); //Fixed Particles (Fixed Spring)
+	//physicW.AddRigidBody(&fixedPart);
+	//fuseParticles.push_back(&fixedPart);
 
 	////Rod Collision
 	//ParticleRod* cableHead = new ParticleRod(35);
@@ -159,7 +159,7 @@ int main()
 				window.close();
 		}
 		//Split Blob jaune
-		if (Keyboard::isKeyPressed(Keyboard::O))
+		/*if (Keyboard::isKeyPressed(Keyboard::O))
 		{
 			RigidBody* lastPart = fuseParticles[fuseParticles.size() - 1];
 			float lastRadius = lastPart->GetRadius();
@@ -206,13 +206,13 @@ int main()
 			}
 		}
 		else
-			peutFuse = true;
+			peutFuse = true;*/
 
 
 		mousePosWindow = Vector2f(Mouse::getPosition(window));
 
 		reticle.SetPosition(Vector3D(mousePosWindow.x, mousePosWindow.y));
-		reticle.Integrate(0);
+		//reticle.Integrate(0);
 		reticleIn.setPosition(mousePosWindow);
 
 		//TP2
