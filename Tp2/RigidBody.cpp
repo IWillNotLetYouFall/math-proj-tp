@@ -45,12 +45,6 @@ void RigidBody::AddForceAtPoint(const Vector3D& force, const Vector3D& LocalPoin
 	m_torqueAccum += f.VectorialProduct(LocalPoint);
 }
 
-void RigidBody::AddForceAtBodyPoint(const Vector3D& force, const Vector3D& LocalPoint)
-{
-
-	AddForceAtPoint(force, LocalPoint);
-}
-
 void RigidBody::ClearAccumulator()
 {
 	m_forceAccum.x = 0;
