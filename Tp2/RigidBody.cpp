@@ -1,5 +1,21 @@
 #include "RigidBody.h"
 
+RigidBody::RigidBody(float masse)
+{
+	this->shape.setRadius(5);
+	this->shape.setFillColor(Color::White);
+	this->shape.setOrigin(2.5f, 2.5f);
+	setMass(masse);
+}
+
+RigidBody::RigidBody(Color color, float radius)
+{
+	this->shape.setRadius(radius);
+	this->shape.setFillColor(color);
+	this->shape.setOrigin(radius, radius);
+	setMass(1);
+}
+
 void RigidBody::CalculateDerivedData()
 {
 	transformMatrix.setValue(0, 1 - 2 * orientation.getJ() * orientation.getJ() - 2 * orientation.getK() * orientation.getK());

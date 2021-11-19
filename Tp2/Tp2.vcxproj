@@ -166,6 +166,7 @@
     <ClCompile Include="PhysicWorld.cpp" />
     <ClCompile Include="Quaternion.cpp" />
     <ClCompile Include="RigidBody.cpp" />
+    <ClCompile Include="RigidForceReistry.cpp" />
     <ClCompile Include="SpringBungee.cpp" />
     <ClCompile Include="SpringFixed.cpp" />
     <ClCompile Include="SpringFloating.cpp" />
@@ -199,6 +200,7 @@
     <ClInclude Include="PhysicWorld.h" />
     <ClInclude Include="Quaternion.h" />
     <ClInclude Include="RigidBody.h" />
+    <ClInclude Include="RigidForceReistry.h" />
     <ClInclude Include="SpringBungee.h" />
     <ClInclude Include="SpringFixed.h" />
     <ClInclude Include="SpringFloating.h" />
