@@ -5,7 +5,7 @@ PhysicWorld::PhysicWorld(int iterations)
 	contactResolver = ParticleContactResolver(iterations);
 }
 
-void PhysicWorld::AddEntry(RigidBody* rigid, ParticleForceGenerator* force)
+void PhysicWorld::AddEntry(RigidBody* rigid, ForceGeneratorBody* force)
 {
 	registre.addEntry(rigid, force); //Main : Initialiser SpringParticle et fetch PA comme param constr
 }

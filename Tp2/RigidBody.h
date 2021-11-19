@@ -55,8 +55,6 @@ public:
 	RigidBody(Color color, float radius);
 
 public:
-	RigidBody(Color color, float radius, float masse);
-
 	void Integrate(float duration);
 
 	Vector3D getPointInWorldSpace(const Vector3D& point);

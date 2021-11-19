@@ -21,6 +21,8 @@
 #include "SpringFixed.h"
 #include "SpringParticles.h"
 #include "RigidBody.h"
+#include "GravityForceGeneratorBody.h"
+#include "SpringForceGenerator.h"
 
 using namespace sf;
 
@@ -29,12 +31,12 @@ int main()
 	//Regroupe les forces pour forloop l'addEntry
 	class BodyPart {
 	public:
-		BodyPart(ParticleForceGenerator* forceGen, RigidBody* particule) {
+		BodyPart(ForceGeneratorBody* forceGen, RigidBody* particule) {
 			this->forceGen = forceGen;
-			this->particule = particule;
+			this->rigid = particule;
 		}
-		ParticleForceGenerator* forceGen;
-		RigidBody* particule;
+		ForceGeneratorBody* forceGen;
+		RigidBody* rigid;
 	};
 	vector<BodyPart*> bodyParts;
 	vector<RigidBody*> fuseParticles;
@@ -63,53 +65,53 @@ int main()
 	//Particules du blob
 	RigidBody head = RigidBody(Color::White, 18);
 	head.SetPosition(Vector3D(100.0f, 80.0f));
-	physicW.AddParticle(&head);
+	physicW.AddRigidBody(&head);
 	RigidBody legR = RigidBody(Color::White, 16);
 	legR.SetPosition(Vector3D(110.0f, 120.0f));
-	physicW.AddParticle(&legR);
+	physicW.AddRigidBody(&legR);
 	RigidBody legL = RigidBody(Color::White, 16);
 	legL.SetPosition(Vector3D(90.0f, 120.0f));
-	physicW.AddParticle(&legL);
+	physicW.AddRigidBody(&legL);
 	RigidBody armR = RigidBody(Color::Red, 15);
 	armR.SetPosition(Vector3D(120.0f, 100.0f));
-	physicW.AddParticle(&armR);
+	physicW.AddRigidBody(&armR);
 	RigidBody armL = RigidBody(Color::Red, 15);
 	armL.SetPosition(Vector3D(80.0f, 100.0f));
-	physicW.AddParticle(&armL);
+	physicW.AddRigidBody(&armL);
 
 	//Ajout de la gravit�
-	bodyParts.push_back(new BodyPart(new ParticleGravity(Vector3D(0, -200.f)), &head)); //Body
-	bodyParts.push_back(new BodyPart(new ParticleGravity(Vector3D(200, 200.f)), &legR)); //Right Leg (side-gravity)
-	bodyParts.push_back(new BodyPart(new ParticleGravity(Vector3D(-200, 200.f)), &legL)); //Left Leg (side-gravity)
-	bodyParts.push_back(new BodyPart(new ParticleGravity(Vector3D(200, -15.f)), &armR)); //Right Arm (side-gravity)
-	bodyParts.push_back(new BodyPart(new ParticleGravity(Vector3D(-200, -15.f)), &armL)); //Left Arm (side-gravity)
+	bodyParts.push_back(new BodyPart(new GravityForceGeneratorBody(Vector3D(0, -200.f)), &head)); //Body
+	bodyParts.push_back(new BodyPart(new GravityForceGeneratorBody(Vector3D(200, 200.f)), &legR)); //Right Leg (side-gravity)
+	bodyParts.push_back(new BodyPart(new GravityForceGeneratorBody(Vector3D(-200, 200.f)), &legL)); //Left Leg (side-gravity)
+	bodyParts.push_back(new BodyPart(new GravityForceGeneratorBody(Vector3D(200, -15.f)), &armR)); //Right Arm (side-gravity)
+	bodyParts.push_back(new BodyPart(new GravityForceGeneratorBody(Vector3D(-200, -15.f)), &armL)); //Left Arm (side-gravity)
 
 	//Springs
-	bodyParts.push_back(new BodyPart(new SpringParticles(&body, 5.f, -10.f), &armL)); //Left Arm (Particles Spring)
-	bodyParts.push_back(new BodyPart(new SpringParticles(&body, 5.f, -10.f), &armR)); //Right Arm (Particles Spring)
-	bodyParts.push_back(new BodyPart(new SpringBungee(&body, 10.f, 20.f), &legL)); //Left Leg (Particles Bungee)
-	bodyParts.push_back(new BodyPart(new SpringBungee(&body, 10.f, 20.f), &legR)); //Right Leg (Particles Bungee)
+	bodyParts.push_back(new BodyPart(new SpringForceGenerator(*(&body.GetPosition()), armL, *(&armL.GetPosition()), 5.f, -10.f)), &armL); //Left Arm (Particles Spring)
+	bodyParts.push_back(new BodyPart(new SpringForceGenerator(&body, 5.f, -10.f), &armR)); //Right Arm (Particles Spring)
+	//bodyParts.push_back(new BodyPart(new SpringBungee(&body, 10.f, 20.f), &legL)); //Left Leg (Particles Bungee)
+	//bodyParts.push_back(new BodyPart(new SpringBungee(&body, 10.f, 20.f), &legR)); //Right Leg (Particles Bungee)
 
 	//Body suit la souris
-	bodyParts.push_back(new BodyPart(new SpringParticles(&reticle, 40.4f, 1), &body)); //Corps suit souris (Particles Spring)
+	//bodyParts.push_back(new BodyPart(new SpringParticles(&reticle, 40.4f, 1), &body)); //Corps suit souris (Particles Spring)
 
 	//Spring Fixed
-	RigidBody fixedPart = RigidBody(Color::Yellow, 30);
-	fixedPart.SetPosition(Vector3D(300.0f, 200.0f));
-	Vector3D sFixedPos = fixedPart.GetPosition() + Vector3D(0, -80.0f);
-	bodyParts.push_back(new BodyPart(new ParticleGravity(Vector3D(0, -100.f)), &fixedPart)); //Gravite
-	bodyParts.push_back(new BodyPart(new SpringFixed(sFixedPos, 3.f, 100.f), &fixedPart)); //Fixed Particles (Fixed Spring)
-	physicW.AddRigidBody(&fixedPart);
-	fuseParticles.push_back(&fixedPart);
+	//RigidBody fixedPart = RigidBody(Color::Yellow, 30);
+	//fixedPart.SetPosition(Vector3D(300.0f, 200.0f));
+	//Vector3D sFixedPos = fixedPart.GetPosition() + Vector3D(0, -80.0f);
+	//bodyParts.push_back(new BodyPart(new ParticleGravity(Vector3D(0, -100.f)), &fixedPart)); //Gravite
+	//bodyParts.push_back(new BodyPart(new SpringFixed(sFixedPos, 3.f, 100.f), &fixedPart)); //Fixed Particles (Fixed Spring)
+	//physicW.AddRigidBody(&fixedPart);
+	//fuseParticles.push_back(&fixedPart);
 
 	//Rod Collision
-	ParticleRod* cableHead = new ParticleRod(35);
+	/*ParticleRod* cableHead = new ParticleRod(35);
 	cableHead->setParticle1(&head);
 	cableHead->setParticle2(&body);
-	physicW.AddContactGenerator(cableHead);
+	physicW.AddContactGenerator(cableHead);*/
 
 	//Cable Collision
-	ParticleCable* cableArmL = new ParticleCable(55, 0.6f);
+	/*ParticleCable* cableArmL = new ParticleCable(55, 0.6f);
 	cableArmL->setParticle1(&armL);
 	cableArmL->setParticle2(&body);
 	physicW.AddContactGenerator(cableArmL);
@@ -127,11 +129,11 @@ int main()
 	ParticleCable* cableLegR = new ParticleCable(65, 0.3f);
 	cableLegR->setParticle1(&legR);
 	cableLegR->setParticle2(&body);
-	physicW.AddContactGenerator(cableLegR);
+	physicW.AddContactGenerator(cableLegR);*/
 
 	//Ajout des forces dans le gestionnaire de physiques
 	for (BodyPart* part : bodyParts)
-		physicW.AddEntry(part->particule, part->forceGen);
+		physicW.AddEntry(part->rigid, part->forceGen);
 
 
 	//TP1 Part

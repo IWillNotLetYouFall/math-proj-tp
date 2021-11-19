@@ -12,6 +12,7 @@
 #include "ParticleCable.h"
 #include <algorithm>
 #include "RigidBody.h"
+#include "RigidForceRegistry.h"
 
 using namespace sf;
 using namespace std;
@@ -21,7 +22,9 @@ class PhysicWorld
 private:
 	vector<RigidBody*> integratedParts;
 public:
-	ParticleForceRegistry registre;
+	//ParticleForceRegistry registre;
+	RigidForceRegistry registre;
+
 	vector<ParticleContact*> contacts;
 	vector<RigidBody*> rigidReg;
 
@@ -31,7 +34,7 @@ public:
 public:
 	PhysicWorld(int iterations);
 
-	void AddEntry(RigidBody* rigid, ParticleForceGenerator* force);
+	void AddEntry(RigidBody* rigid, ForceGeneratorBody* force);
 	void RemoveEntries(RigidBody* rigid);
 	void AddRigidBody(RigidBody* rigid);
 	void RemoveRigidBody(RigidBody* rigid);
