@@ -60,6 +60,9 @@
     <ClCompile Include="Physics.cpp">
       <Filter>Collisions</Filter>
     </ClCompile>
+<<<<<<< HEAD
+    <ClCompile Include="Tp2Old.cpp" />
+=======
     <ClCompile Include="ForceGeneratorBody.cpp">
       <Filter>RIgidbody</Filter>
     </ClCompile>
@@ -81,6 +84,7 @@
     <ClCompile Include="SpringForceGenerator.cpp">
       <Filter>RIgidbody</Filter>
     </ClCompile>
+>>>>>>> origin/MikeTP3
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Vector3D.h" />
@@ -144,6 +148,10 @@
     <ClInclude Include="Physics.h">
       <Filter>Collisions</Filter>
     </ClInclude>
+<<<<<<< HEAD
+    <ClInclude Include="olcConsoleGameEngine.h">
+      <Filter>TP3Gab</Filter>
+=======
     <ClInclude Include="ForceGeneratorBody.h">
       <Filter>RIgidbody</Filter>
     </ClInclude>
@@ -164,6 +172,7 @@
     </ClInclude>
     <ClInclude Include="SpringForceGenerator.h">
       <Filter>RIgidbody</Filter>
+>>>>>>> origin/MikeTP3
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -182,8 +191,13 @@
     <Filter Include="Collisions">
       <UniqueIdentifier>{1dfc6966-68c2-4b08-9732-47e141578c99}</UniqueIdentifier>
     </Filter>
+<<<<<<< HEAD
+    <Filter Include="TP3Gab">
+      <UniqueIdentifier>{e130f3d7-17ae-4ceb-bb28-9395bfccceab}</UniqueIdentifier>
+=======
     <Filter Include="RIgidbody">
       <UniqueIdentifier>{7e114e63-8d20-4027-9359-538cb138f7cd}</UniqueIdentifier>
+>>>>>>> origin/MikeTP3
     </Filter>
   </ItemGroup>
 </Project>

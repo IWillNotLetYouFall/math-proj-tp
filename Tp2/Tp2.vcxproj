@@ -172,6 +172,7 @@
     <ClCompile Include="SpringForceGenerator.cpp" />
     <ClCompile Include="SpringParticles.cpp" />
     <ClCompile Include="Tp2.cpp" />
+    <ClCompile Include="Tp2Old.cpp" />
     <ClCompile Include="Vector3D.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -181,6 +182,7 @@
     <ClInclude Include="Friction.h" />
     <ClInclude Include="GravityForceGeneratorBody.h" />
     <ClInclude Include="Laser.h" />
+    <ClInclude Include="olcConsoleGameEngine.h" />
     <ClInclude Include="Matrix3.h" />
     <ClInclude Include="Matrix4.h" />
     <ClInclude Include="ParticleCable.h" />

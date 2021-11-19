@@ -16,6 +16,12 @@ void RigidBody::CalculateDerivedData()
 	transformMatrix.setValue(11, position.z);
 }
 
+Vector3D RigidBody::getPointInWorldSpace(const Vector3D& point)
+{
+	Vector3D p = point;
+	return orientation * p + position;
+}
+
 void RigidBody::Integrate(float duration)
 {
 
@@ -43,6 +49,12 @@ void RigidBody::AddForceAtPoint(const Vector3D& force, const Vector3D& LocalPoin
 
 	Vector3D f = force;
 	m_torqueAccum += f.VectorialProduct(LocalPoint);
+}
+
+void RigidBody::AddForceAtBodyPoint(const Vector3D& force, const Vector3D& point)
+{
+	Vector3D worldP = getPointInWorldSpace(point);
+	AddForceAtPoint(force, point);
 }
 
 void RigidBody::ClearAccumulator()

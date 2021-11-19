@@ -25,6 +25,7 @@ public:
 	float GetNorm();
 	Vector3D Normalize();
 	float ScalarProduct(Vector3D prod);
+	Vector3D Product(Vector3D prod);
 	Vector3D VectorialProduct(Vector3D prod);
 	std::string ToString();
 	Vector3D Inverse();

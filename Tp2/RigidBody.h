@@ -10,10 +10,13 @@ class RigidBody
 private:
 
 	float inverseMasse;
+
+	//Linear Values
 	float linearDamping;
 	Vector3D position;
 	Vector3D velocity;
 
+	//Rotation Values
 	Quaternion orientation;
 	Vector3D rotation;
 	Matrix4 transformMatrix;
@@ -30,6 +33,8 @@ private:
 	Vector3D m_torqueAccum;
 
 	void CalculateDerivedData();
+
+	Vector3D getPointInWorldSpace(const Vector3D& point);
 
 public:
 	void Integrate(float duration);
@@ -60,6 +65,8 @@ public:
 	//Add force at a point in world coordinate.
 	//Generate force and torque
 	void AddForceAtPoint(const Vector3D& force, const Vector3D& LocalPoint);
+
+	void AddForceAtBodyPoint(const Vector3D& force, const Vector3D& point);
 
 	//called each frame to reset m_forceAccum and m_torqueAccum
 	void ClearAccumulator();

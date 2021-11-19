@@ -36,6 +36,27 @@ Quaternion Quaternion::operator*(const Quaternion& other)
 	return Quaternion(value[0], value[1], value[2], value[3]);
 }
 
+Vector3D Quaternion::operator*(const Vector3D& vec)
+{
+	float num = getI() * 2.f;
+	float num2 = getJ() * 2.f;
+	float num3 = getK() * 2.f;
+	float num4 = getI() * num;
+	float num5 = getJ() * num2;
+	float num6 = getK() * num3;
+	float num7 = getI() * num2;
+	float num8 = getI() * num3;
+	float num9 = getJ() * num3;
+	float num10 = getW() * num;
+	float num11 = getW() * num2;
+	float num12 = getW() * num3;
+	Vector3D result;
+	result.x = (1.f - (num5 + num6)) * vec.x + (num7 - num12) * vec.y + (num8 + num11) * vec.z;
+	result.y = (num7 + num12) * vec.x + (1.f - (num4 + num6)) * vec.y + (num9 - num10) * vec.z;
+	result.z = (num8 - num11) * vec.x + (num9 + num10) * vec.y + (1.f - (num4 + num5)) * vec.z;
+	return result;
+}
+
 void Quaternion::RotateByVector(const Vector3D& vector, float duration)
 {
 	Quaternion q(0, vector.x * duration, vector.y * duration, vector.z * duration);
