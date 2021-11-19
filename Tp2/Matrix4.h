@@ -44,4 +44,3 @@ public:
 	Vector3D TransformDirection(const Vector3D& vector);
 
 };
-

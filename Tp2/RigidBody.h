@@ -3,6 +3,11 @@
 #include "Quaternion.h"
 #include "Matrix4.h"
 #include "Matrix3.h"
+#include<SFML\Graphics.hpp>
+#include<SFML\Window.hpp>
+#include<SFML\System.hpp>
+
+using namespace sf;
 
 class RigidBody
 {
@@ -17,6 +22,7 @@ private:
 	Vector3D acceleration;
 	Vector3D position;
 	Vector3D velocity;
+	float maxSpeed = 320.f;
 
 	//Rotation Values
 	Quaternion orientation;
@@ -41,7 +47,13 @@ private:
 	void CalculateDerivedData();
 
 public:
+
+	CircleShape shape;
+	float damping = 0.2f;
+	bool test = false;
+
 	RigidBody(float masse);
+	RigidBody(Color color, float radius);
 
 	void Integrate(float duration);
 
@@ -52,6 +64,32 @@ public:
 		if (inverseMasse == 0) 
 			return true; 
 		return false; 
+	};
+
+	void SetMaxSpeed(float speed)
+	{
+		this->maxSpeed = speed;
+	};
+
+	void SetPosition(Vector3D pos)
+	{
+		this->position = pos;
+	};
+
+	Vector3D GetPosition()
+	{
+		return this->position;
+	};
+
+	float GetRadius()
+	{
+		return shape.getRadius();
+	};
+
+	void SetRadius(float radius)
+	{
+		shape.setRadius(radius);
+		this->shape.setOrigin(radius, radius);
 	};
 
 	float getMass() 

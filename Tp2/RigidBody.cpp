@@ -1,5 +1,21 @@
 #include "RigidBody.h"
 
+RigidBody::RigidBody(float masse)
+{
+	this->shape.setRadius(5);
+	this->shape.setFillColor(Color::White);
+	this->shape.setOrigin(2.5f, 2.5f);
+	setMass(masse);
+}
+
+RigidBody::RigidBody(Color color, float radius)
+{
+	this->shape.setRadius(radius);
+	this->shape.setFillColor(color);
+	this->shape.setOrigin(radius, radius);
+	setMass(1);
+}
+
 void RigidBody::CalculateDerivedData()
 {
 	transformMatrix.setValue(0, 1 - 2 * orientation.getJ() * orientation.getJ() - 2 * orientation.getK() * orientation.getK());
@@ -79,7 +95,7 @@ Vector3D RigidBody::getPointInWorldSpace(const Vector3D& point)
 
 void RigidBody::Integrate(float duration)
 {
-	if (hasInfiniteMass)
+	if (hasInfiniteMass())
 	{
 		ClearAccumulator();
 		return;
@@ -103,8 +119,8 @@ void RigidBody::Integrate(float duration)
 	velocity += m_lastFrameAcceleration * duration;
 
 	// MAJ vélocité angulaire
-	//rotation += angularAcceleration * duration;  //Obsolete
-	orientation.addScaledVector(rotation, duration);
+	rotation += angularAcceleration * duration;  //Obsolete
+	//orientation.addScaledVector(rotation, duration);
 
 	// Ajout du drag aux vélocités
 	velocity *= powf(linearDamping, duration);
@@ -114,7 +130,7 @@ void RigidBody::Integrate(float duration)
 	position += velocity * duration;
 
 	//MAJ rotation
-	//orientation.UpdateByAngularVelocity(rotation, duration); //????????
+	orientation.UpdateByAngularVelocity(rotation, duration); //????????
 	//position += velocity * duration;
 
 	CalculateDerivedData();

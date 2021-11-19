@@ -1,203 +1,67 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
+    <ClCompile Include="CircleParticleContactGenerator.cpp" />
+    <ClCompile Include="Contact.cpp" />
+    <ClCompile Include="ForceGeneratorBody.cpp" />
+    <ClCompile Include="Friction.cpp" />
+    <ClCompile Include="GravityForceGeneratorBody.cpp" />
+    <ClCompile Include="Laser.cpp" />
+    <ClCompile Include="Matrix3.cpp" />
+    <ClCompile Include="Matrix4.cpp" />
+    <ClCompile Include="ParticleCable.cpp" />
+    <ClCompile Include="ParticleContact.cpp" />
+    <ClCompile Include="ParticleContactGenerator.cpp" />
+    <ClCompile Include="ParticleContactResolver.cpp" />
+    <ClCompile Include="ParticleForceRegistry.cpp" />
+    <ClCompile Include="ParticleGravity.cpp" />
+    <ClCompile Include="ParticleLink.cpp" />
+    <ClCompile Include="ParticleRod.cpp" />
+    <ClCompile Include="Particule.cpp" />
+    <ClCompile Include="Physics.cpp" />
+    <ClCompile Include="PhysicWorld.cpp" />
+    <ClCompile Include="Quaternion.cpp" />
+    <ClCompile Include="RigidBody.cpp" />
+    <ClCompile Include="SpringBungee.cpp" />
+    <ClCompile Include="SpringFixed.cpp" />
+    <ClCompile Include="SpringFloating.cpp" />
+    <ClCompile Include="SpringForceGenerator.cpp" />
+    <ClCompile Include="SpringParticles.cpp" />
     <ClCompile Include="Tp2.cpp" />
-    <ClCompile Include="Vector3D.cpp" />
-    <ClCompile Include="Laser.cpp">
-      <Filter>Tp1</Filter>
-    </ClCompile>
-    <ClCompile Include="Particule.cpp">
-      <Filter>Tp1</Filter>
-    </ClCompile>
-    <ClCompile Include="CircleParticleContactGenerator.cpp">
-      <Filter>ContactGenerator</Filter>
-    </ClCompile>
-    <ClCompile Include="ParticleCable.cpp">
-      <Filter>ContactGenerator</Filter>
-    </ClCompile>
-    <ClCompile Include="ParticleLink.cpp">
-      <Filter>ContactGenerator</Filter>
-    </ClCompile>
-    <ClCompile Include="ParticleRod.cpp">
-      <Filter>ContactGenerator</Filter>
-    </ClCompile>
-    <ClCompile Include="Friction.cpp">
-      <Filter>Forces/Springs</Filter>
-    </ClCompile>
-    <ClCompile Include="ParticleGravity.cpp">
-      <Filter>Forces/Springs</Filter>
-    </ClCompile>
-    <ClCompile Include="SpringBungee.cpp">
-      <Filter>Forces/Springs</Filter>
-    </ClCompile>
-    <ClCompile Include="SpringFixed.cpp">
-      <Filter>Forces/Springs</Filter>
-    </ClCompile>
-    <ClCompile Include="SpringFloating.cpp">
-      <Filter>Forces/Springs</Filter>
-    </ClCompile>
-    <ClCompile Include="SpringParticles.cpp">
-      <Filter>Forces/Springs</Filter>
-    </ClCompile>
-    <ClCompile Include="ParticleContact.cpp">
-      <Filter>ContactResolver/World</Filter>
-    </ClCompile>
-    <ClCompile Include="ParticleContactGenerator.cpp">
-      <Filter>ContactResolver/World</Filter>
-    </ClCompile>
-    <ClCompile Include="ParticleContactResolver.cpp">
-      <Filter>ContactResolver/World</Filter>
-    </ClCompile>
-    <ClCompile Include="ParticleForceRegistry.cpp">
-      <Filter>ContactResolver/World</Filter>
-    </ClCompile>
-    <ClCompile Include="PhysicWorld.cpp">
-      <Filter>ContactResolver/World</Filter>
-    </ClCompile>
-    <ClCompile Include="Contact.cpp">
-      <Filter>Collisions</Filter>
-    </ClCompile>
-    <ClCompile Include="Physics.cpp">
-      <Filter>Collisions</Filter>
-    </ClCompile>
-<<<<<<< HEAD
     <ClCompile Include="Tp2Old.cpp" />
-=======
-    <ClCompile Include="ForceGeneratorBody.cpp">
-      <Filter>RIgidbody</Filter>
-    </ClCompile>
-    <ClCompile Include="GravityForceGeneratorBody.cpp">
-      <Filter>RIgidbody</Filter>
-    </ClCompile>
-    <ClCompile Include="Matrix3.cpp">
-      <Filter>RIgidbody</Filter>
-    </ClCompile>
-    <ClCompile Include="Matrix4.cpp">
-      <Filter>RIgidbody</Filter>
-    </ClCompile>
-    <ClCompile Include="Quaternion.cpp">
-      <Filter>RIgidbody</Filter>
-    </ClCompile>
-    <ClCompile Include="RigidBody.cpp">
-      <Filter>RIgidbody</Filter>
-    </ClCompile>
-    <ClCompile Include="SpringForceGenerator.cpp">
-      <Filter>RIgidbody</Filter>
-    </ClCompile>
->>>>>>> origin/MikeTP3
+    <ClCompile Include="Vector3D.cpp" />
+    <ClCompile Include="RigidForceReistry.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="CircleParticleContactGenerator.h" />
+    <ClInclude Include="Contact.h" />
+    <ClInclude Include="ForceGeneratorBody.h" />
+    <ClInclude Include="Friction.h" />
+    <ClInclude Include="GravityForceGeneratorBody.h" />
+    <ClInclude Include="Laser.h" />
+    <ClInclude Include="olcConsoleGameEngine.h" />
+    <ClInclude Include="Matrix3.h" />
+    <ClInclude Include="Matrix4.h" />
+    <ClInclude Include="ParticleCable.h" />
+    <ClInclude Include="ParticleContact.h" />
+    <ClInclude Include="ParticleContactGenerator.h" />
+    <ClInclude Include="ParticleContactResolver.h" />
+    <ClInclude Include="ParticleForceGenerator.h" />
+    <ClInclude Include="ParticleForceRegistry.h" />
+    <ClInclude Include="ParticleGravity.h" />
+    <ClInclude Include="ParticleLink.h" />
+    <ClInclude Include="ParticleRod.h" />
+    <ClInclude Include="Particule.h" />
+    <ClInclude Include="Physics.h" />
+    <ClInclude Include="PhysicWorld.h" />
+    <ClInclude Include="Quaternion.h" />
+    <ClInclude Include="RigidBody.h" />
+    <ClInclude Include="SpringBungee.h" />
+    <ClInclude Include="SpringFixed.h" />
+    <ClInclude Include="SpringFloating.h" />
+    <ClInclude Include="SpringForceGenerator.h" />
+    <ClInclude Include="SpringParticles.h" />
     <ClInclude Include="Vector3D.h" />
-    <ClInclude Include="Laser.h">
-      <Filter>Tp1</Filter>
-    </ClInclude>
-    <ClInclude Include="Particule.h">
-      <Filter>Tp1</Filter>
-    </ClInclude>
-    <ClInclude Include="CircleParticleContactGenerator.h">
-      <Filter>ContactGenerator</Filter>
-    </ClInclude>
-    <ClInclude Include="ParticleCable.h">
-      <Filter>ContactGenerator</Filter>
-    </ClInclude>
-    <ClInclude Include="ParticleLink.h">
-      <Filter>ContactGenerator</Filter>
-    </ClInclude>
-    <ClInclude Include="ParticleRod.h">
-      <Filter>ContactGenerator</Filter>
-    </ClInclude>
-    <ClInclude Include="Friction.h">
-      <Filter>Forces/Springs</Filter>
-    </ClInclude>
-    <ClInclude Include="ParticleGravity.h">
-      <Filter>Forces/Springs</Filter>
-    </ClInclude>
-    <ClInclude Include="SpringBungee.h">
-      <Filter>Forces/Springs</Filter>
-    </ClInclude>
-    <ClInclude Include="SpringFixed.h">
-      <Filter>Forces/Springs</Filter>
-    </ClInclude>
-    <ClInclude Include="SpringFloating.h">
-      <Filter>Forces/Springs</Filter>
-    </ClInclude>
-    <ClInclude Include="SpringParticles.h">
-      <Filter>Forces/Springs</Filter>
-    </ClInclude>
-    <ClInclude Include="ParticleContact.h">
-      <Filter>ContactResolver/World</Filter>
-    </ClInclude>
-    <ClInclude Include="ParticleContactGenerator.h">
-      <Filter>ContactResolver/World</Filter>
-    </ClInclude>
-    <ClInclude Include="ParticleContactResolver.h">
-      <Filter>ContactResolver/World</Filter>
-    </ClInclude>
-    <ClInclude Include="ParticleForceGenerator.h">
-      <Filter>ContactResolver/World</Filter>
-    </ClInclude>
-    <ClInclude Include="ParticleForceRegistry.h">
-      <Filter>ContactResolver/World</Filter>
-    </ClInclude>
-    <ClInclude Include="PhysicWorld.h">
-      <Filter>ContactResolver/World</Filter>
-    </ClInclude>
-    <ClInclude Include="Contact.h">
-      <Filter>Collisions</Filter>
-    </ClInclude>
-    <ClInclude Include="Physics.h">
-      <Filter>Collisions</Filter>
-    </ClInclude>
-<<<<<<< HEAD
-    <ClInclude Include="olcConsoleGameEngine.h">
-      <Filter>TP3Gab</Filter>
-=======
-    <ClInclude Include="ForceGeneratorBody.h">
-      <Filter>RIgidbody</Filter>
-    </ClInclude>
-    <ClInclude Include="GravityForceGeneratorBody.h">
-      <Filter>RIgidbody</Filter>
-    </ClInclude>
-    <ClInclude Include="Matrix3.h">
-      <Filter>RIgidbody</Filter>
-    </ClInclude>
-    <ClInclude Include="Matrix4.h">
-      <Filter>RIgidbody</Filter>
-    </ClInclude>
-    <ClInclude Include="Quaternion.h">
-      <Filter>RIgidbody</Filter>
-    </ClInclude>
-    <ClInclude Include="RigidBody.h">
-      <Filter>RIgidbody</Filter>
-    </ClInclude>
-    <ClInclude Include="SpringForceGenerator.h">
-      <Filter>RIgidbody</Filter>
->>>>>>> origin/MikeTP3
-    </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <Filter Include="Tp1">
-      <UniqueIdentifier>{748f7d48-bdd8-4eed-8e57-f599bdc1a550}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ContactGenerator">
-      <UniqueIdentifier>{2a7e4c4f-fa86-46a6-b6a8-e8fc49f5a9f2}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Forces/Springs">
-      <UniqueIdentifier>{74c1774f-2f08-4e19-a1a8-38954b4cf2a4}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ContactResolver/World">
-      <UniqueIdentifier>{e1e60679-26b2-456a-b9f2-33156ac20d17}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Collisions">
-      <UniqueIdentifier>{1dfc6966-68c2-4b08-9732-47e141578c99}</UniqueIdentifier>
-    </Filter>
-<<<<<<< HEAD
-    <Filter Include="TP3Gab">
-      <UniqueIdentifier>{e130f3d7-17ae-4ceb-bb28-9395bfccceab}</UniqueIdentifier>
-=======
-    <Filter Include="RIgidbody">
-      <UniqueIdentifier>{7e114e63-8d20-4027-9359-538cb138f7cd}</UniqueIdentifier>
->>>>>>> origin/MikeTP3
-    </Filter>
+    <ClInclude Include="RigidForceReistry.h" />
   </ItemGroup>
 </Project>

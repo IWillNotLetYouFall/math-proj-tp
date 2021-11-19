@@ -20,6 +20,7 @@
 #include "SpringBungee.h"
 #include "SpringFixed.h"
 #include "SpringParticles.h"
+#include "RigidBody.h"
 
 using namespace sf;
 
@@ -28,15 +29,15 @@ int main()
 	//Regroupe les forces pour forloop l'addEntry
 	class BodyPart {
 	public:
-		BodyPart(ParticleForceGenerator* forceGen, Particule* particule) {
+		BodyPart(ParticleForceGenerator* forceGen, RigidBody* particule) {
 			this->forceGen = forceGen;
 			this->particule = particule;
 		}
 		ParticleForceGenerator* forceGen;
-		Particule* particule;
+		RigidBody* particule;
 	};
 	vector<BodyPart*> bodyParts;
-	vector<Particule*> fuseParticles;
+	vector<RigidBody*> fuseParticles;
 
 	//TP2 Tests
 	PhysicWorld physicW = PhysicWorld(2);
@@ -44,36 +45,36 @@ int main()
 	bool peutFuse = true;
 
 	//Particule Corps du blob
-	Particule body = Particule(Color::Blue, 25);
-	body.position = Vector3D(100.0f, 100.0f);
-	body.SetMasse(50);
+	RigidBody body = RigidBody(Color::Blue, 25);
+	body.SetPosition(Vector3D(100.0f, 100.0f));
+	body.setMass(50);
 	body.SetMaxSpeed(3000);
 	body.damping = 0.01f;
 	physicW.AddParticle(&body);
 
 	//Reticules qui suit la souris
-	Particule reticle = Particule(Color::Red, 10);
-	body.SetMasse(500000);
+	RigidBody reticle = RigidBody(Color::Red, 10);
+	body.setMass(500000);
 	CircleShape reticleIn(4.f);
 	reticleIn.setFillColor(Color::White);
 	reticleIn.setPointCount(30);
 	reticleIn.setOrigin(4.f, 4.f);
 
 	//Particules du blob
-	Particule head = Particule(Color::White, 18);
-	head.position = Vector3D(100.0f, 80.0f);
+	RigidBody head = RigidBody(Color::White, 18);
+	head.SetPosition(Vector3D(100.0f, 80.0f));
 	physicW.AddParticle(&head);
-	Particule legR = Particule(Color::White, 16);
-	legR.position = Vector3D(110.0f, 120.0f);
+	RigidBody legR = RigidBody(Color::White, 16);
+	legR.SetPosition(Vector3D(110.0f, 120.0f));
 	physicW.AddParticle(&legR);
-	Particule legL = Particule(Color::White, 16);
-	legL.position = Vector3D(90.0f, 120.0f);
+	RigidBody legL = RigidBody(Color::White, 16);
+	legL.SetPosition(Vector3D(90.0f, 120.0f));
 	physicW.AddParticle(&legL);
-	Particule armR = Particule(Color::Red, 15);
-	armR.position = Vector3D(120.0f, 100.0f);
+	RigidBody armR = RigidBody(Color::Red, 15);
+	armR.SetPosition(Vector3D(120.0f, 100.0f));
 	physicW.AddParticle(&armR);
-	Particule armL = Particule(Color::Red, 15);
-	armL.position = Vector3D(80.0f, 100.0f);
+	RigidBody armL = RigidBody(Color::Red, 15);
+	armL.SetPosition(Vector3D(80.0f, 100.0f));
 	physicW.AddParticle(&armL);
 
 	//Ajout de la gravité
@@ -93,9 +94,9 @@ int main()
 	bodyParts.push_back(new BodyPart(new SpringParticles(&reticle, 40.4f, 1), &body)); //Corps suit souris (Particles Spring)
 
 	//Spring Fixed
-	Particule fixedPart = Particule(Color::Yellow, 30);
-	fixedPart.position = Vector3D(300.0f, 200.0f);
-	Vector3D sFixedPos = fixedPart.position + Vector3D(0, -80.0f);
+	RigidBody fixedPart = RigidBody(Color::Yellow, 30);
+	fixedPart.SetPosition(Vector3D(300.0f, 200.0f));
+	Vector3D sFixedPos = fixedPart.GetPosition() + Vector3D(0, -80.0f);
 	bodyParts.push_back(new BodyPart(new ParticleGravity(Vector3D(0, -100.f)), &fixedPart)); //Gravite
 	bodyParts.push_back(new BodyPart(new SpringFixed(sFixedPos, 3.f, 100.f), &fixedPart)); //Fixed Particles (Fixed Spring)
 	physicW.AddParticle(&fixedPart);
@@ -136,7 +137,7 @@ int main()
 	//TP1 Part
 	srand(time(NULL));
 
-	RenderWindow window(VideoMode(800, 600), "TP2", Style::Default);
+	RenderWindow window(VideoMode(800, 600), "TP3", Style::Default);
 	window.setFramerateLimit(60);
 	window.setMouseCursorVisible(false);
 
@@ -158,16 +159,16 @@ int main()
 		//Split Blob jaune
 		if (Keyboard::isKeyPressed(Keyboard::O))
 		{
-			Particule* lastPart = fuseParticles[fuseParticles.size() - 1];
+			RigidBody* lastPart = fuseParticles[fuseParticles.size() - 1];
 			float lastRadius = lastPart->GetRadius();
 
 			//Ne pas split lorsque dimensions trop petites
 			if (lastRadius > 1 && peutSplit) {
-				Particule* newBlob = new Particule(Color::Yellow, lastRadius / 2);
-				newBlob->position = Vector3D(lastPart->position);
+				RigidBody* newBlob = new RigidBody(Color::Yellow, lastRadius / 2);
+				newBlob->SetPosition(Vector3D(lastPart->GetPosition()));
 				newBlob->test = true;
 
-				Vector3D sFixedPos = newBlob->position;
+				Vector3D sFixedPos = newBlob->GetPosition();
 				ParticleGravity* partiGravity = new ParticleGravity(Vector3D(0, 300.f)); //Gravite
 				SpringBungee* partiSpring = new SpringBungee(lastPart, 10.f, 5.f); //Fixed Particles (Fixed Spring)
 				physicW.AddEntry(newBlob, partiGravity);
@@ -186,8 +187,8 @@ int main()
 		//Fuse Blob Jaunes
 		if (Keyboard::isKeyPressed(Keyboard::P) && fuseParticles.size() > 1)
 		{
-			Particule* lastPart = fuseParticles[fuseParticles.size() - 1];
-			Particule* prevPart = fuseParticles[fuseParticles.size() - 2];
+			RigidBody* lastPart = fuseParticles[fuseParticles.size() - 1];
+			RigidBody* prevPart = fuseParticles[fuseParticles.size() - 2];
 			float lastRadius = lastPart->GetRadius();
 
 			if (peutFuse) {
@@ -206,7 +207,7 @@ int main()
 
 		mousePosWindow = Vector2f(Mouse::getPosition(window));
 
-		reticle.position = Vector3D(mousePosWindow.x, mousePosWindow.y);
+		reticle.SetPosition(Vector3D(mousePosWindow.x, mousePosWindow.y));
 		reticle.Integrate(0);
 		reticleIn.setPosition(mousePosWindow);
 
@@ -234,7 +235,7 @@ int main()
 			float a = 0.1f;
 		}
 
-		for (Particule* part : fuseParticles) {
+		for (RigidBody* part : fuseParticles) {
 			window.draw(part->shape);
 		}
 
