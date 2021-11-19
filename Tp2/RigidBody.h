@@ -48,7 +48,7 @@ private:
 
 public:
 
-	CircleShape shape;
+	RectangleShape shape;
 	float damping = 0.2f;
 	bool test = false;
 
@@ -82,15 +82,16 @@ public:
 		return this->position;
 	};
 
-	float GetRadius()
+	Vector3D GetScale()
 	{
-		return shape.getRadius();
+		Vector2f scale = shape.getSize();
+		return Vector3D(scale.x, scale.y, 1);
 	};
 
-	void SetRadius(float radius)
+	void SetScale(Vector3D scale)
 	{
-		shape.setRadius(radius);
-		this->shape.setOrigin(radius, radius);
+		shape.setSize(Vector2f(scale.x, scale.y));
+		this->shape.setOrigin(scale.x / 2, scale.y / 2);
 	};
 
 	float getMass() 

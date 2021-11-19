@@ -2,17 +2,18 @@
 
 RigidBody::RigidBody(float masse)
 {
-	this->shape.setRadius(5);
+	//this->shape.setScale(5, 5);
+	SetScale(Vector3D(5, 5, 5));
 	this->shape.setFillColor(Color::White);
-	this->shape.setOrigin(2.5f, 2.5f);
+	//this->shape.setOrigin(2.5f, 2.5f);
 	setMass(masse);
 }
 
-RigidBody::RigidBody(Color color, float radius)
+RigidBody::RigidBody(Color color, float size)
 {
-	this->shape.setRadius(radius);
+	SetScale(Vector3D(size, size, size));
 	this->shape.setFillColor(color);
-	this->shape.setOrigin(radius, radius);
+	//this->shape.setOrigin(radius / 2, radius / 2);
 	setMass(1);
 }
 
