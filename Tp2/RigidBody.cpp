@@ -18,7 +18,8 @@ void RigidBody::CalculateDerivedData()
 
 Vector3D RigidBody::getPointInWorldSpace(const Vector3D& point)
 {
-	return orientation * ((Vector3D)point + position);
+	Vector3D p = point;
+	return orientation * p + position;
 }
 
 void RigidBody::Integrate(float duration)

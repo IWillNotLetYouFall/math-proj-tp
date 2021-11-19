@@ -10,10 +10,13 @@ class RigidBody
 private:
 
 	float inverseMasse;
+
+	//Linear Values
 	float linearDamping;
 	Vector3D position;
 	Vector3D velocity;
 
+	//Rotation Values
 	Quaternion orientation;
 	Vector3D rotation;
 	Matrix4 transformMatrix;
