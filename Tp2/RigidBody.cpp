@@ -2,17 +2,18 @@
 
 RigidBody::RigidBody(float masse)
 {
-	this->shape.setRadius(5);
+	//this->shape.setScale(5, 5);
+	SetScale(Vector3D(5, 5, 5));
 	this->shape.setFillColor(Color::White);
-	this->shape.setOrigin(2.5f, 2.5f);
+	//this->shape.setOrigin(2.5f, 2.5f);
 	setMass(masse);
 }
 
-RigidBody::RigidBody(Color color, float radius)
+RigidBody::RigidBody(Color color, float size)
 {
-	this->shape.setRadius(radius);
+	SetScale(Vector3D(size, size, size));
 	this->shape.setFillColor(color);
-	this->shape.setOrigin(radius, radius);
+	//this->shape.setOrigin(radius / 2, radius / 2);
 	setMass(1);
 }
 
@@ -111,10 +112,6 @@ void RigidBody::Integrate(float duration)
 	//Calcul Acc. angulaire
 	auto angularAcceleration = inverseInertiaTensorWorld * m_torqueAccum;
 
-	//Ancien Acc.
-	//inverseInertiaTensorWorld = inverseInertiaTensor * position;
-	//Vector3D angularAcceleration = invInertiaTensorWorld.VectorialProduct(m_torqueAccum); //Si bug, revoir Si VectProduct est la bonne solution
-
 	// / MAJ vélocité linéaire
 	velocity += m_lastFrameAcceleration * duration;
 
@@ -127,11 +124,10 @@ void RigidBody::Integrate(float duration)
 	rotation *= powf(m_angularDamping, duration);
 
 	//MAJ position
-	position += velocity * duration;
+	SetPosition(position + (velocity * duration));
 
 	//MAJ rotation
 	orientation.UpdateByAngularVelocity(rotation, duration); //????????
-	//position += velocity * duration;
 
 	CalculateDerivedData();
 
