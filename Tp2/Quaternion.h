@@ -45,5 +45,7 @@ public:
 
 	//Apply the quaternion update by the angular velocity
 	void UpdateByAngularVelocity(const Vector3D& rotation, float duration);
+
+	Vector3D GetEulerAngles();
 };
 

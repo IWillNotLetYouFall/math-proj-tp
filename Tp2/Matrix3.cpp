@@ -30,13 +30,11 @@ Matrix3 Matrix3::operator*(const Matrix3& other) const
 
 Vector3D Matrix3::operator*(const Vector3D& v) const
 {
-    Vector3D res;
-
-    res.setX(values[0] * v.x + values[1] * v.y + values[2] * v.z);
-    res.setY(values[3] * v.x + values[4] * v.y + values[5] * v.z);
-    res.setZ(values[6] * v.x + values[7] * v.y + values[8] * v.z);
-
-    return res;
+    return Vector3D(
+        values[0] * v.x + values[1] * v.y + values[2] * v.z, 
+        values[3] * v.x + values[4] * v.y + values[5] * v.z, 
+        values[6] * v.x + values[7] * v.y + values[8] * v.z
+    );
 }
 
 Matrix3 Matrix3::Inverse()

@@ -85,3 +85,25 @@ void Quaternion::UpdateByAngularVelocity(const Vector3D& rotation, float duratio
 	value[2] += q.getJ() * (0.5f);
 	value[3] += q.getK() * (0.5f);
 }
+
+Vector3D Quaternion::GetEulerAngles()
+{
+	float w, x, y, z;
+
+	w = value[0];
+	x = value[1];
+	y = value[2];
+	z = value[3];
+
+	float sqw = w * w;
+	float sqx = x * x;
+	float sqy = y * y;
+	float sqz = z * z;
+
+	Vector3D dirEuler;
+	dirEuler.z = (float)(atan2(2.0 * (x * y + z * w), (sqx - sqy - sqz + sqw)) * (180.0f / 3.1415926f));
+	dirEuler.x = (float)(atan2(2.0 * (y * z + x * w), (-sqx - sqy + sqz + sqw)) * (180.0f / 3.1415926f));
+	dirEuler.y = (float)(asin(-2.0 * (x * z - y * w)) * (180.0f / 3.1415926f));
+
+	return dirEuler;
+}

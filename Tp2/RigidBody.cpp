@@ -1,4 +1,5 @@
 #include "RigidBody.h"
+#include <iostream>
 
 RigidBody::RigidBody(float masse)
 {
@@ -59,10 +60,10 @@ void RigidBody::CalculateDerivedData()
 	float t62 = transformMatrix.values[8] * inverseInertiaTensor.values[2] +
 		transformMatrix.values[9] * inverseInertiaTensor.values[5] +
 		transformMatrix.values[10] * inverseInertiaTensor.values[8];
-		inverseInertiaTensorWorld.values[0] = t4 * transformMatrix.values[0] +
+	inverseInertiaTensorWorld.values[0] = t4 * transformMatrix.values[0] +
 		t9 * transformMatrix.values[1] +
 		t14 * transformMatrix.values[2];
-		inverseInertiaTensorWorld.values[1] = t4 * transformMatrix.values[4] +
+	inverseInertiaTensorWorld.values[1] = t4 * transformMatrix.values[4] +
 		t9 * transformMatrix.values[5] +
 		t14 * transformMatrix.values[6];
 	inverseInertiaTensorWorld.values[2] = t4 * transformMatrix.values[8] +
@@ -107,7 +108,12 @@ void RigidBody::Integrate(float duration)
 	//Calcul Acc. linéaire
 	//Vector3D m_lastFrameAcceleration = acceleration;
 	//m_lastFrameAcceleration += inverseMasse * m_forceAccum;
+
+	m_forceAccum = Vector3D(100, 0, 0);
+	m_torqueAccum = Vector3D(10, 0, 0);
+
 	Vector3D m_lastFrameAcceleration = m_forceAccum * inverseMasse;
+
 
 	//Calcul Acc. angulaire
 	auto angularAcceleration = inverseInertiaTensorWorld * m_torqueAccum;
@@ -117,7 +123,6 @@ void RigidBody::Integrate(float duration)
 
 	// MAJ vélocité angulaire
 	rotation += angularAcceleration * duration;  //Obsolete
-	//orientation.addScaledVector(rotation, duration);
 
 	// Ajout du drag aux vélocités
 	velocity *= powf(linearDamping, duration);
@@ -128,6 +133,16 @@ void RigidBody::Integrate(float duration)
 
 	//MAJ rotation
 	orientation.UpdateByAngularVelocity(rotation, duration); //????????
+	orientation.Normalized();
+
+	shape.setRotation(orientation.GetEulerAngles().x);
+
+	std::cout << orientation.GetEulerAngles().ToString() << std::endl;
+	/*for (int i = 0; i < 9; i++)
+	{
+		std::cout << "Matrix value " << i << " : " << inverseInertiaTensorWorld.values[i] << std::endl;
+	}*/
+	//std::cout << "Quat I: " << orientation.getI() << " Quat J: " << orientation.getJ() << " Quat K: " << orientation.getK() << " Quat W: " << orientation.getW() << std::endl;
 
 	CalculateDerivedData();
 

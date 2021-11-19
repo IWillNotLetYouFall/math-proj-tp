@@ -49,21 +49,21 @@ int main()
 	//Particule Corps du blob
 	RigidBody body = RigidBody(Color::Blue, 45);
 	body.SetPosition(Vector3D(100.0f, 100.0f));
-	body.setMass(50);
+	body.setMass(5);
 	body.SetMaxSpeed(3000);
 	body.damping = 0.01f;
+	body.setInertiaTensor(Matrix3(1,0,0,0,1,0,0,0,1));
 	physicW.AddRigidBody(&body);
 
 	//Reticules qui suit la souris
 	RigidBody reticle = RigidBody(Color::Red, 10);
-	body.setMass(500000);
 	CircleShape reticleIn(4.f);
 	reticleIn.setFillColor(Color::White);
 	reticleIn.setPointCount(30);
 	reticleIn.setOrigin(4.f, 4.f);
 
 	//Particules du blob
-	RigidBody head = RigidBody(Color::White, 36);
+	/*RigidBody head = RigidBody(Color::White, 36);
 	head.SetPosition(Vector3D(100.0f, 80.0f));
 	physicW.AddRigidBody(&head);
 	RigidBody legR = RigidBody(Color::White, 32);
@@ -77,14 +77,14 @@ int main()
 	physicW.AddRigidBody(&armR);
 	RigidBody armL = RigidBody(Color::Red, 30);
 	armL.SetPosition(Vector3D(80.0f, 100.0f));
-	physicW.AddRigidBody(&armL);
+	physicW.AddRigidBody(&armL);*/
 
 	//Ajout de la gravité
-	bodyParts.push_back(new BodyPart(new GravityForceGeneratorBody(Vector3D(0, -200.f)), &head)); //Body
-	bodyParts.push_back(new BodyPart(new GravityForceGeneratorBody(Vector3D(200, 200.f)), &legR)); //Right Leg (side-gravity)
-	bodyParts.push_back(new BodyPart(new GravityForceGeneratorBody(Vector3D(-200, 200.f)), &legL)); //Left Leg (side-gravity)
-	bodyParts.push_back(new BodyPart(new GravityForceGeneratorBody(Vector3D(200, -15.f)), &armR)); //Right Arm (side-gravity)
-	bodyParts.push_back(new BodyPart(new GravityForceGeneratorBody(Vector3D(-200, -15.f)), &armL)); //Left Arm (side-gravity)
+	//bodyParts.push_back(new BodyPart(new GravityForceGeneratorBody(Vector3D(0, -200.f)), &head)); //Body
+	//bodyParts.push_back(new BodyPart(new GravityForceGeneratorBody(Vector3D(200, 200.f)), &legR)); //Right Leg (side-gravity)
+	//bodyParts.push_back(new BodyPart(new GravityForceGeneratorBody(Vector3D(-200, 200.f)), &legL)); //Left Leg (side-gravity)
+	//bodyParts.push_back(new BodyPart(new GravityForceGeneratorBody(Vector3D(200, -15.f)), &armR)); //Right Arm (side-gravity)
+	//bodyParts.push_back(new BodyPart(new GravityForceGeneratorBody(Vector3D(-200, -15.f)), &armL)); //Left Arm (side-gravity)
 
 	//Springs
 	//bodyParts.push_back(new BodyPart(new SpringForceGenerator(body.GetPosition(), &body, armL.GetPosition(), 5.f, -10.f), &armL)); //Left Arm (Particles Spring)
@@ -227,11 +227,11 @@ int main()
 		//for (BodyPart* part : bodyParts)
 			//window.draw(part->particule->shape);
 		window.draw(body.shape);
-		window.draw(head.shape);
+		/*window.draw(head.shape);
 		window.draw(armL.shape);
 		window.draw(armR.shape);
 		window.draw(legL.shape);
-		window.draw(legR.shape);
+		window.draw(legR.shape);*/
 
 		//Draw Lignes Fusion
 		if (fuseParticles.size() >= 2) {
