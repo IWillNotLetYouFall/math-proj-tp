@@ -29,11 +29,11 @@ int main()
 	//Regroupe les forces pour forloop l'addEntry
 	class BodyPart {
 	public:
-		BodyPart(ParticleForceGenerator* forceGen, RigidBody* particule) {
+		BodyPart(ForceGeneratorBody* forceGen, RigidBody* particule) {
 			this->forceGen = forceGen;
 			this->particule = particule;
 		}
-		ParticleForceGenerator* forceGen;
+		ForceGeneratorBody* forceGen;
 		RigidBody* particule;
 	};
 	vector<BodyPart*> bodyParts;
@@ -50,7 +50,7 @@ int main()
 	body.setMass(50);
 	body.SetMaxSpeed(3000);
 	body.damping = 0.01f;
-	physicW.AddParticle(&body);
+	physicW.AddRigidBody(&body);
 
 	//Reticules qui suit la souris
 	RigidBody reticle = RigidBody(Color::Red, 10);
@@ -63,19 +63,19 @@ int main()
 	//Particules du blob
 	RigidBody head = RigidBody(Color::White, 18);
 	head.SetPosition(Vector3D(100.0f, 80.0f));
-	physicW.AddParticle(&head);
+	physicW.AddRigidBody(&head);
 	RigidBody legR = RigidBody(Color::White, 16);
 	legR.SetPosition(Vector3D(110.0f, 120.0f));
-	physicW.AddParticle(&legR);
+	physicW.AddRigidBody(&legR);
 	RigidBody legL = RigidBody(Color::White, 16);
 	legL.SetPosition(Vector3D(90.0f, 120.0f));
-	physicW.AddParticle(&legL);
+	physicW.AddRigidBody(&legL);
 	RigidBody armR = RigidBody(Color::Red, 15);
 	armR.SetPosition(Vector3D(120.0f, 100.0f));
-	physicW.AddParticle(&armR);
+	physicW.AddRigidBody(&armR);
 	RigidBody armL = RigidBody(Color::Red, 15);
 	armL.SetPosition(Vector3D(80.0f, 100.0f));
-	physicW.AddParticle(&armL);
+	physicW.AddRigidBody(&armL);
 
 	//Ajout de la gravité
 	bodyParts.push_back(new BodyPart(new ParticleGravity(Vector3D(0, -200.f)), &head)); //Body
@@ -99,35 +99,35 @@ int main()
 	Vector3D sFixedPos = fixedPart.GetPosition() + Vector3D(0, -80.0f);
 	bodyParts.push_back(new BodyPart(new ParticleGravity(Vector3D(0, -100.f)), &fixedPart)); //Gravite
 	bodyParts.push_back(new BodyPart(new SpringFixed(sFixedPos, 3.f, 100.f), &fixedPart)); //Fixed Particles (Fixed Spring)
-	physicW.AddParticle(&fixedPart);
+	physicW.AddRigidBody(&fixedPart);
 	fuseParticles.push_back(&fixedPart);
 
-	//Rod Collision
-	ParticleRod* cableHead = new ParticleRod(35);
-	cableHead->setParticle1(&head);
-	cableHead->setParticle2(&body);
-	physicW.AddContactGenerator(cableHead);
+	////Rod Collision
+	//ParticleRod* cableHead = new ParticleRod(35);
+	//cableHead->setParticle1(&head);
+	//cableHead->setParticle2(&body);
+	//physicW.AddContactGenerator(cableHead);
 
-	//Cable Collision
-	ParticleCable* cableArmL = new ParticleCable(55, 0.6f);
-	cableArmL->setParticle1(&armL);
-	cableArmL->setParticle2(&body);
-	physicW.AddContactGenerator(cableArmL);
+	////Cable Collision
+	//ParticleCable* cableArmL = new ParticleCable(55, 0.6f);
+	//cableArmL->setParticle1(&armL);
+	//cableArmL->setParticle2(&body);
+	//physicW.AddContactGenerator(cableArmL);
 
-	ParticleCable* cableArmR = new ParticleCable(55, 0.6f);
-	cableArmR->setParticle1(&armR);
-	cableArmR->setParticle2(&body);
-	physicW.AddContactGenerator(cableArmR);
+	//ParticleCable* cableArmR = new ParticleCable(55, 0.6f);
+	//cableArmR->setParticle1(&armR);
+	//cableArmR->setParticle2(&body);
+	//physicW.AddContactGenerator(cableArmR);
 
-	ParticleCable* cableLegL = new ParticleCable(65, 0.6f);
-	cableLegL->setParticle1(&legL);
-	cableLegL->setParticle2(&body);
-	physicW.AddContactGenerator(cableLegL);
+	//ParticleCable* cableLegL = new ParticleCable(65, 0.6f);
+	//cableLegL->setParticle1(&legL);
+	//cableLegL->setParticle2(&body);
+	//physicW.AddContactGenerator(cableLegL);
 
-	ParticleCable* cableLegR = new ParticleCable(65, 0.3f);
-	cableLegR->setParticle1(&legR);
-	cableLegR->setParticle2(&body);
-	physicW.AddContactGenerator(cableLegR);
+	//ParticleCable* cableLegR = new ParticleCable(65, 0.3f);
+	//cableLegR->setParticle1(&legR);
+	//cableLegR->setParticle2(&body);
+	//physicW.AddContactGenerator(cableLegR);
 
 	//Ajout des forces dans le gestionnaire de physiques
 	for (BodyPart* part : bodyParts)
@@ -173,7 +173,7 @@ int main()
 				SpringBungee* partiSpring = new SpringBungee(lastPart, 10.f, 5.f); //Fixed Particles (Fixed Spring)
 				physicW.AddEntry(newBlob, partiGravity);
 				physicW.AddEntry(newBlob, partiSpring);
-				physicW.AddParticle(newBlob);
+				physicW.AddRigidBody(newBlob);
 				fuseParticles.push_back(newBlob);
 
 				lastPart->SetRadius(lastRadius / 2);

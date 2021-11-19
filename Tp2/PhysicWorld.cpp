@@ -1,31 +1,31 @@
-#include "PhysicWorld.h"
+ï»¿#include "PhysicWorld.h"
 
 PhysicWorld::PhysicWorld(int iterations)
 {
 	contactResolver = ParticleContactResolver(iterations);
 }
 
-void PhysicWorld::AddEntry(Particule* particleA, ParticleForceGenerator* force)
+void PhysicWorld::AddEntry(RigidBody* rigid, ForceGeneratorBody* force)
 {
-	registre.addEntry(particleA, force); //Main : Initialiser SpringParticle et fetch PA comme param constr
+	registre.addEntry(rigid, force); //Main : Initialiser SpringParticle et fetch PA comme param constr
 }
 
-void PhysicWorld::RemoveEntries(Particule* particle)
+void PhysicWorld::RemoveEntries(RigidBody* rigid)
 {
-	registre.removeEntries(particle);
+	registre.removeEntries(rigid);
 }
 
-void PhysicWorld::AddParticle(Particule* particle)
+void PhysicWorld::AddRigidBody(RigidBody* rigid)
 {
-	particuleReg.push_back(particle);
+	rigidReg.push_back(rigid);
 }
 
-void PhysicWorld::RemoveParticle(Particule* particle)
+void PhysicWorld::RemoveRigidBody(RigidBody* rigid)
 {
-	for (int i = 0; i < particuleReg.size(); i++)
+	for (int i = 0; i < rigidReg.size(); i++)
 	{
-		if (particuleReg[i] == particle) {
-			particuleReg.erase(particuleReg.begin() + i);
+		if (rigidReg[i] == rigid) {
+			rigidReg.erase(rigidReg.begin() + i);
 			return;
 		}
 	}
@@ -39,10 +39,8 @@ void PhysicWorld::AddContactGenerator(ParticleContactGenerator* contactGen)
 
 void PhysicWorld::StartFrame()
 {
-	//for (ParticleForceRegistry::ParticleForceEntry reg : registre.m_registry)
-	//	reg.particle->clearForceAcc();
-	for (Particule* part : particuleReg)
-		part->clearForceAcc();
+	for (RigidBody* rigid : rigidReg)
+		rigid->ClearAccumulator();
 	//registre.clearRegistry();
 }
 
@@ -62,19 +60,19 @@ vector<ParticleContact*> PhysicWorld::GenerateContacts()
 
 void PhysicWorld::RunPhysics(float duration)
 {
-	contacts.clear();
+	//contacts.clear();
 
-	//TODO: Générer forces sur les particules
+	//TODO: Gï¿½nï¿½rer forces sur les particules
 	registre.UpdateForce(duration);
 
-	//Intégration sur chacune des particules
-	for (Particule* part : particuleReg)
-		part->Integrate(duration);
+	//Intï¿½gration sur chacune des particules
+	for (RigidBody* rigid : rigidReg)
+		rigid->Integrate(duration);
 
 	//Gestion des collisions
-	//Génération des Contacts
-	contacts = GenerateContacts();
+	//Gï¿½nï¿½ration des Contacts
+	//contacts = GenerateContacts();
 
-	//Résolution des contacts
-	contactResolver.ResolveContacts(contacts, contacts.size(), duration);
+	//Rï¿½solution des contacts
+	//contactResolver.ResolveContacts(contacts, contacts.size(), duration);
 }
