@@ -3,7 +3,7 @@
 #include "Quaternion.h"
 class Matrix3
 {
-private:
+public:
 	//values of the matrix3
 	float values[9];
 

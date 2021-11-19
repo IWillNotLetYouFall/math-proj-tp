@@ -63,6 +63,19 @@ void Quaternion::RotateByVector(const Vector3D& vector, float duration)
 	*this = (*this) * q;
 }
 
+void Quaternion::addScaledVector(const Vector3D& vector, float scale)
+{
+	Quaternion q(0,
+		vector.x * scale,
+		vector.y * scale,
+		vector.z * scale);
+	q = q * *this;
+	value[0] += q.getW();
+	value[1] += q.getI();
+	value[2] += q.getJ();
+	value[3] += q.getK();
+}
+
 void Quaternion::UpdateByAngularVelocity(const Vector3D& rotation, float duration)
 {
 	Quaternion q(0, rotation.x * duration, rotation.y * duration, rotation.z * duration);

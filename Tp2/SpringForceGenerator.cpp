@@ -3,8 +3,8 @@
 void SpringForceGenerator::UpdateForce(RigidBody* rigidBody)
 {
 	// Calculate the two ends in world space.
-	Vector3D lws = rigidBody->TransformPoint(m_bodyAnchor);
-	Vector3D ows = m_otherRigidBody->TransformPoint(m_otherBodyAnchor);
+	Vector3D lws = rigidBody->getPointInWorldSpace(m_bodyAnchor);
+	Vector3D ows = m_otherRigidBody->getPointInWorldSpace(m_otherBodyAnchor);
 
 	// Calculate the vector of the spring.
 	Vector3D force = lws - ows;
