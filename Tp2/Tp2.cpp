@@ -49,7 +49,7 @@ int main()
 	body.SetMasse(50);
 	body.SetMaxSpeed(3000);
 	body.damping = 0.01f;
-	physicW.AddParticle(&body);
+	physicW.AddRigidBody(&body);
 
 	//Reticules qui suit la souris
 	Particule reticle = Particule(Color::Red, 10);
@@ -62,19 +62,19 @@ int main()
 	//Particules du blob
 	Particule head = Particule(Color::White, 18);
 	head.position = Vector3D(100.0f, 80.0f);
-	physicW.AddParticle(&head);
+	physicW.AddRigidBody(&head);
 	Particule legR = Particule(Color::White, 16);
 	legR.position = Vector3D(110.0f, 120.0f);
-	physicW.AddParticle(&legR);
+	physicW.AddRigidBody(&legR);
 	Particule legL = Particule(Color::White, 16);
 	legL.position = Vector3D(90.0f, 120.0f);
-	physicW.AddParticle(&legL);
+	physicW.AddRigidBody(&legL);
 	Particule armR = Particule(Color::Red, 15);
 	armR.position = Vector3D(120.0f, 100.0f);
-	physicW.AddParticle(&armR);
+	physicW.AddRigidBody(&armR);
 	Particule armL = Particule(Color::Red, 15);
 	armL.position = Vector3D(80.0f, 100.0f);
-	physicW.AddParticle(&armL);
+	physicW.AddRigidBody(&armL);
 
 	//Ajout de la gravité
 	bodyParts.push_back(new BodyPart(new ParticleGravity(Vector3D(0, -200.f)), &head)); //Body
@@ -98,7 +98,7 @@ int main()
 	Vector3D sFixedPos = fixedPart.position + Vector3D(0, -80.0f);
 	bodyParts.push_back(new BodyPart(new ParticleGravity(Vector3D(0, -100.f)), &fixedPart)); //Gravite
 	bodyParts.push_back(new BodyPart(new SpringFixed(sFixedPos, 3.f, 100.f), &fixedPart)); //Fixed Particles (Fixed Spring)
-	physicW.AddParticle(&fixedPart);
+	physicW.AddRigidBody(&fixedPart);
 	fuseParticles.push_back(&fixedPart);
 
 	//Rod Collision
@@ -172,7 +172,7 @@ int main()
 				SpringBungee* partiSpring = new SpringBungee(lastPart, 10.f, 5.f); //Fixed Particles (Fixed Spring)
 				physicW.AddEntry(newBlob, partiGravity);
 				physicW.AddEntry(newBlob, partiSpring);
-				physicW.AddParticle(newBlob);
+				physicW.AddRigidBody(newBlob);
 				fuseParticles.push_back(newBlob);
 
 				lastPart->SetRadius(lastRadius / 2);

@@ -3,20 +3,22 @@
 #include "Quaternion.h"
 #include "Matrix4.h"
 #include "Matrix3.h"
+#include <SFML\Graphics.hpp>
+#include <SFML\Window.hpp>
+#include <SFML\System.hpp>
+
+using namespace sf;
 
 class RigidBody
 {
 	//Other knowned RigidBody members
 
 private:
-
 	float inverseMasse = 1;
 
 	//Linear Values
 	float linearDamping;
 	Vector3D acceleration;
-	Vector3D position;
-	Vector3D velocity;
 
 	//Rotation Values
 	Quaternion orientation;
@@ -41,7 +43,11 @@ private:
 	void CalculateDerivedData();
 
 public:
-	RigidBody(float masse);
+	Vector3D position;
+	Vector3D velocity;
+
+public:
+	RigidBody(Color color, float radius, float masse);
 
 	void Integrate(float duration);
 

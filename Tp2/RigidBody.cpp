@@ -79,7 +79,7 @@ Vector3D RigidBody::getPointInWorldSpace(const Vector3D& point)
 
 void RigidBody::Integrate(float duration)
 {
-	if (hasInfiniteMass)
+	if (hasInfiniteMass())
 	{
 		ClearAccumulator();
 		return;
@@ -88,23 +88,17 @@ void RigidBody::Integrate(float duration)
 	CalculateDerivedData();
 
 	//Calcul Acc. linéaire
-	//Vector3D m_lastFrameAcceleration = acceleration;
-	//m_lastFrameAcceleration += inverseMasse * m_forceAccum;
 	Vector3D m_lastFrameAcceleration = m_forceAccum * inverseMasse;
 
 	//Calcul Acc. angulaire
 	auto angularAcceleration = inverseInertiaTensorWorld * m_torqueAccum;
 
-	//Ancien Acc.
-	//inverseInertiaTensorWorld = inverseInertiaTensor * position;
-	//Vector3D angularAcceleration = invInertiaTensorWorld.VectorialProduct(m_torqueAccum); //Si bug, revoir Si VectProduct est la bonne solution
-
 	// / MAJ vélocité linéaire
 	velocity += m_lastFrameAcceleration * duration;
 
 	// MAJ vélocité angulaire
-	//rotation += angularAcceleration * duration;  //Obsolete
-	orientation.addScaledVector(rotation, duration);
+	rotation += angularAcceleration * duration;  //Obsolete
+	//orientation.addScaledVector(rotation, duration);
 
 	// Ajout du drag aux vélocités
 	velocity *= powf(linearDamping, duration);
@@ -114,7 +108,7 @@ void RigidBody::Integrate(float duration)
 	position += velocity * duration;
 
 	//MAJ rotation
-	//orientation.UpdateByAngularVelocity(rotation, duration); //????????
+	orientation.UpdateByAngularVelocity(rotation, duration); //????????
 	//position += velocity * duration;
 
 	CalculateDerivedData();
