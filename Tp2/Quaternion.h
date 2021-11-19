@@ -38,6 +38,8 @@ public:
 
 	Vector3D operator*(const Vector3D& vec);
 
+	void addScaledVector(const Vector3D& vector, float scale);
+
 	//Rotate the quaternion by a vector - multiply this by q = (0, dx, dy, dz)
 	void RotateByVector(const Vector3D& vector, float duration = 2);
 

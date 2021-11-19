@@ -2,6 +2,7 @@
 #include "Vector3D.h"
 #include "Quaternion.h"
 #include "Matrix4.h"
+#include "Matrix3.h"
 
 class RigidBody
 {
@@ -9,10 +10,11 @@ class RigidBody
 
 private:
 
-	float inverseMasse;
+	float inverseMasse = 1;
 
 	//Linear Values
 	float linearDamping;
+	Vector3D acceleration;
 	Vector3D position;
 	Vector3D velocity;
 
@@ -20,6 +22,10 @@ private:
 	Quaternion orientation;
 	Vector3D rotation;
 	Matrix4 transformMatrix;
+	Vector3D angularAcceleration;
+
+	Matrix3 inverseInertiaTensor;
+	Matrix3 inverseInertiaTensorWorld;
 	//same as linear damping
 	//but for rotation
 	float m_angularDamping;
@@ -34,10 +40,12 @@ private:
 
 	void CalculateDerivedData();
 
-	Vector3D getPointInWorldSpace(const Vector3D& point);
-
 public:
+	RigidBody(float masse);
+
 	void Integrate(float duration);
+
+	Vector3D getPointInWorldSpace(const Vector3D& point);
 
 	bool hasInfiniteMass() 
 	{ 
@@ -53,6 +61,15 @@ public:
 		return 1 / inverseMasse; 
 	};
 
+	void setMass(float mass) {
+		if (mass >= 1000000) // infinite
+		{
+			inverseMasse = 0;
+			return;
+		}
+		inverseMasse = 1 / mass;
+	}
+
 	Vector3D TransformPoint(Vector3D pos)
 	{
 		return pos.Inverse();
@@ -61,6 +78,7 @@ public:
 	//Add force on the Center of mass (no torque generated)
 	void AddForce(const Vector3D& force);
 	void AddTorque(const Vector3D& torque);
+	void setInertiaTensor(const Matrix3& inertiaTensor);
 
 	//Add force at a point in world coordinate.
 	//Generate force and torque

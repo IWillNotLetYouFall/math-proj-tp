@@ -4,12 +4,12 @@
 class Matrix4
 {
 private:
-	//values of the matrix3
-	float values[12];
 
 	float GetDeterminant() const;
 
 public:
+	//values of the matrix3
+	float values[12];
 
 	Matrix4()
 	{
