@@ -46,13 +46,17 @@ int main()
 	bool peutSplit = true;
 	bool peutFuse = true;
 
+	//TP3 Tests
+	bool spacePressed = false;
+	//Checks TP3
+	bool hasCollided = false;
+
 	//Particule Corps du blob
 	RigidBody body = RigidBody(Color::Blue, 45);
 	body.SetPosition(Vector3D(100.0f, 100.0f));
 	body.setMass(5);
 	body.SetMaxSpeed(3000);
 	body.damping = 0.01f;
-	body.setInertiaTensor(Matrix3(1,0,0,0,1,0,0,0,1));
 	physicW.AddRigidBody(&body);
 
 	//Reticules qui suit la souris
@@ -77,6 +81,7 @@ int main()
 	physicW.AddRigidBody(&armR);*/
 	RigidBody armL = RigidBody(Color::Red, 30);
 	armL.SetPosition(Vector3D(80.0f, 100.0f));
+
 	physicW.AddRigidBody(&armL);
 
 	//Ajout de la gravité
@@ -85,10 +90,10 @@ int main()
 	//bodyParts.push_back(new BodyPart(new GravityForceGeneratorBody(Vector3D(200, 200.f)), &legR)); //Right Leg (side-gravity)
 	//bodyParts.push_back(new BodyPart(new GravityForceGeneratorBody(Vector3D(-200, 200.f)), &legL)); //Left Leg (side-gravity)
 	//bodyParts.push_back(new BodyPart(new GravityForceGeneratorBody(Vector3D(200, -15.f)), &armR)); //Right Arm (side-gravity)
-	bodyParts.push_back(new BodyPart(new GravityForceGeneratorBody(Vector3D(-200, -15.f)), &armL)); //Left Arm (side-gravity)
+	//bodyParts.push_back(new BodyPart(new GravityForceGeneratorBody(Vector3D(-200, -15.f)), &armL)); //Left Arm (side-gravity)
 
 	//Springs
-	bodyParts.push_back(new BodyPart(new SpringForceGenerator(body.GetPosition(), &body, armL.GetPosition(), 5.f, -10.f), &armL)); //Left Arm (Particles Spring)
+	//bodyParts.push_back(new BodyPart(new SpringForceGenerator(body.GetPosition(), &body, armL.GetPosition(), 5.f, -10.f), &armL)); //Left Arm (Particles Spring)
 	//bodyParts.push_back(new BodyPart(new SpringForceGenerator(body.GetPosition(), &armR, armR.GetPosition(), 5.f, -10.f), &armR)); //Right Arm (Particles Spring)
 	//bodyParts.push_back(new BodyPart(new SpringForceGenerator(body.GetPosition(), &legL, legL.GetPosition(), 10.f, 20.f), &legL)); //Left Leg (Particles Bungee)
 	//bodyParts.push_back(new BodyPart(new SpringForceGenerator(body.GetPosition(), &legR, legR.GetPosition(), 10.f, 20.f), &legR)); //Right Leg (Particles Bungee)
@@ -209,11 +214,6 @@ int main()
 		else
 			peutFuse = true;*/
 
-		//TP3
-		if (Keyboard::isKeyPressed(Keyboard::Space)) {
-
-		}
-
 		mousePosWindow = Vector2f(Mouse::getPosition(window));
 
 		reticle.SetPosition(Vector3D(mousePosWindow.x, mousePosWindow.y));
@@ -222,6 +222,47 @@ int main()
 
 		//TP2
 		physicW.StartFrame();
+
+
+		//TP3
+		if (Keyboard::isKeyPressed(Keyboard::Space) && !spacePressed) {
+			//Apply force départ
+			armL.SetPosition(Vector3D(100, 100));
+			armL.AddForce(Vector3D(10000, 0, 0));
+			armL.AddTorque(Vector3D(1000, 0, 0));
+			spacePressed = true;
+		}
+		else
+			spacePressed = false;
+
+		//if (hasCollided)
+		//{
+
+		//}
+		//else
+		//{
+		//	float distance = sqrtf(powf(body.GetPosition().x - armL.GetPosition().x, 2) + powf(body.GetPosition().y - armL.GetPosition().y, 2));
+
+		//	cout << distance << endl;
+
+		//	if (distance <= 30.f)
+		//	{
+		//		for (BodyPart* part : bodyParts)
+		//		{
+		//			physicW.RemoveEntries(part->particule);
+		//		}
+		//		hasCollided = true;
+
+
+		//		bodyParts.push_back(new BodyPart(new GravityForceGeneratorBody(Vector3D(-1000.f, 0.f)), &body)); //Body
+		//		bodyParts.push_back(new BodyPart(new GravityForceGeneratorBody(Vector3D(1000.f, 0.f)), &armL)); //Left Arm (side-gravity)
+
+
+		//		for (BodyPart* part : bodyParts)
+		//			physicW.AddEntry(part->particule, part->forceGen);
+		//	}
+		//}
+
 
 		physicW.RunPhysics(deltaTime.asSeconds());
 
