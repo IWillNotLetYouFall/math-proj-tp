@@ -74,20 +74,21 @@ int main()
 	physicW.AddRigidBody(&legL);
 	RigidBody armR = RigidBody(Color::Red, 30);
 	armR.SetPosition(Vector3D(120.0f, 100.0f));
-	physicW.AddRigidBody(&armR);
+	physicW.AddRigidBody(&armR);*/
 	RigidBody armL = RigidBody(Color::Red, 30);
 	armL.SetPosition(Vector3D(80.0f, 100.0f));
-	physicW.AddRigidBody(&armL);*/
+	physicW.AddRigidBody(&armL);
 
 	//Ajout de la gravité
+	//bodyParts.push_back(new BodyPart(new GravityForceGeneratorBody(Vector3D(0, 100.f)), &body)); //Body
 	//bodyParts.push_back(new BodyPart(new GravityForceGeneratorBody(Vector3D(0, -200.f)), &head)); //Body
 	//bodyParts.push_back(new BodyPart(new GravityForceGeneratorBody(Vector3D(200, 200.f)), &legR)); //Right Leg (side-gravity)
 	//bodyParts.push_back(new BodyPart(new GravityForceGeneratorBody(Vector3D(-200, 200.f)), &legL)); //Left Leg (side-gravity)
 	//bodyParts.push_back(new BodyPart(new GravityForceGeneratorBody(Vector3D(200, -15.f)), &armR)); //Right Arm (side-gravity)
-	//bodyParts.push_back(new BodyPart(new GravityForceGeneratorBody(Vector3D(-200, -15.f)), &armL)); //Left Arm (side-gravity)
+	bodyParts.push_back(new BodyPart(new GravityForceGeneratorBody(Vector3D(-200, -15.f)), &armL)); //Left Arm (side-gravity)
 
 	//Springs
-	//bodyParts.push_back(new BodyPart(new SpringForceGenerator(body.GetPosition(), &body, armL.GetPosition(), 5.f, -10.f), &armL)); //Left Arm (Particles Spring)
+	bodyParts.push_back(new BodyPart(new SpringForceGenerator(body.GetPosition(), &body, armL.GetPosition(), 5.f, -10.f), &armL)); //Left Arm (Particles Spring)
 	//bodyParts.push_back(new BodyPart(new SpringForceGenerator(body.GetPosition(), &armR, armR.GetPosition(), 5.f, -10.f), &armR)); //Right Arm (Particles Spring)
 	//bodyParts.push_back(new BodyPart(new SpringForceGenerator(body.GetPosition(), &legL, legL.GetPosition(), 10.f, 20.f), &legL)); //Left Leg (Particles Bungee)
 	//bodyParts.push_back(new BodyPart(new SpringForceGenerator(body.GetPosition(), &legR, legR.GetPosition(), 10.f, 20.f), &legR)); //Right Leg (Particles Bungee)
@@ -208,6 +209,10 @@ int main()
 		else
 			peutFuse = true;*/
 
+		//TP3
+		if (Keyboard::isKeyPressed(Keyboard::Space)) {
+
+		}
 
 		mousePosWindow = Vector2f(Mouse::getPosition(window));
 
@@ -227,11 +232,11 @@ int main()
 		//for (BodyPart* part : bodyParts)
 			//window.draw(part->particule->shape);
 		window.draw(body.shape);
-		/*window.draw(head.shape);
+		//window.draw(head.shape);
 		window.draw(armL.shape);
-		window.draw(armR.shape);
-		window.draw(legL.shape);
-		window.draw(legR.shape);*/
+		//window.draw(armR.shape);
+		//window.draw(legL.shape);
+		//window.draw(legR.shape);
 
 		//Draw Lignes Fusion
 		if (fuseParticles.size() >= 2) {
