@@ -7,6 +7,7 @@ RigidBody::RigidBody(float masse)
 	SetScale(Vector3D(5, 5, 5));
 	this->shape.setFillColor(Color::White);
 	//this->shape.setOrigin(2.5f, 2.5f);
+	setInertiaTensor(Matrix3(1, 0, 0, 0, 1, 0, 0, 0, 1));
 	setMass(masse);
 }
 
@@ -15,6 +16,7 @@ RigidBody::RigidBody(Color color, float size)
 	SetScale(Vector3D(size, size, size));
 	this->shape.setFillColor(color);
 	//this->shape.setOrigin(radius / 2, radius / 2);
+	setInertiaTensor(Matrix3(1, 0, 0, 0, 1, 0, 0, 0, 1));
 	setMass(1);
 }
 
@@ -136,15 +138,10 @@ void RigidBody::Integrate(float duration)
 	orientation.Normalized();
 
 	Vector3D orienEuler = orientation.GetEulerAngles();
-	shape.setRotation(orienEuler.z);
+	shape.setRotation(orienEuler.x);
 	//shape.setSize(Vector2f(orienEuler.x / 10, orienEuler.z / 10));
 
-	//std::cout << orienEuler.ToString() << std::endl;
-	/*for (int i = 0; i < 9; i++)
-	{
-		std::cout << "Matrix value " << i << " : " << inverseInertiaTensorWorld.values[i] << std::endl;
-	}*/
-	//std::cout << "Quat I: " << orientation.getI() << " Quat J: " << orientation.getJ() << " Quat K: " << orientation.getK() << " Quat W: " << orientation.getW() << std::endl;
+	std::cout << orienEuler.ToString() << std::endl;
 
 	CalculateDerivedData();
 }

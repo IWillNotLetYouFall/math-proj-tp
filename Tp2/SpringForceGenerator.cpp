@@ -22,5 +22,5 @@ void SpringForceGenerator::UpdateForce(RigidBody* rigidBody)
 	force *= -magnitude;
 
 	//std::cout << "Spring Force : " + force.ToString() + " | Spring Point : " + lws.ToString() << std::endl;
-	rigidBody->AddForceAtPoint(force, Vector3D(0,0));
+	rigidBody->AddForceAtPoint(force, lws);
 }
