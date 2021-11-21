@@ -122,7 +122,7 @@ public:
 
 	//Add force at a point in world coordinate.
 	//Generate force and torque
-	void AddForceAtPoint(const Vector3D& force, const Vector3D& LocalPoint);
+	void AddForceAtPoint(const Vector3D& force, const Vector3D& point);
 
 	void AddForceAtBodyPoint(const Vector3D& force, const Vector3D& point);
 

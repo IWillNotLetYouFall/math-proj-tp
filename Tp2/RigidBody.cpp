@@ -8,7 +8,6 @@ RigidBody::RigidBody(float masse)
 	this->shape.setFillColor(Color::White);
 	//this->shape.setOrigin(2.5f, 2.5f);
 	setMass(masse);
-	setInertiaTensor(Matrix3(1, 0, 0, 0, 1, 0, 0, 0, 1));
 }
 
 RigidBody::RigidBody(Color color, float size)
@@ -17,7 +16,6 @@ RigidBody::RigidBody(Color color, float size)
 	this->shape.setFillColor(color);
 	//this->shape.setOrigin(radius / 2, radius / 2);
 	setMass(1);
-	setInertiaTensor(Matrix3(1, 0, 0, 0, 1, 0, 0, 0, 1));
 }
 
 void RigidBody::CalculateDerivedData()
@@ -138,7 +136,7 @@ void RigidBody::Integrate(float duration)
 	orientation.Normalized();
 
 	Vector3D orienEuler = orientation.GetEulerAngles();
-	shape.setRotation(orienEuler.x);
+	shape.setRotation(orienEuler.z);
 	//shape.setSize(Vector2f(orienEuler.x / 10, orienEuler.z / 10));
 
 	//std::cout << orienEuler.ToString() << std::endl;
@@ -168,12 +166,13 @@ void RigidBody::setInertiaTensor(const Matrix3& inertiaTensor)
 	inverseInertiaTensor = inverse;
 }
 
-void RigidBody::AddForceAtPoint(const Vector3D& force, const Vector3D& LocalPoint)
+void RigidBody::AddForceAtPoint(const Vector3D& force, const Vector3D& point)
 {
+	Vector3D pointLocal = (Vector3D)point - GetPosition();
 	m_forceAccum += force;
 
-	Vector3D f = force;
-	m_torqueAccum += f.VectorialProduct(LocalPoint);
+	m_torqueAccum += pointLocal.VectorialProduct(force);
+	//std::cout << "Force Accum : " + m_torqueAccum.ToString() << std::endl;
 }
 
 void RigidBody::AddForceAtBodyPoint(const Vector3D& force, const Vector3D& point)
