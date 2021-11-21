@@ -138,7 +138,7 @@ void RigidBody::Integrate(float duration)
 	orientation.Normalized();
 
 	Vector3D orienEuler = orientation.GetEulerAngles();
-	shape.setRotation(orienEuler.z);
+	shape.setRotation(orienEuler.x);
 	//shape.setSize(Vector2f(orienEuler.x / 10, orienEuler.z / 10));
 
 	//std::cout << orienEuler.ToString() << std::endl;
@@ -180,7 +180,7 @@ void RigidBody::AddForceAtPoint(const Vector3D& force, const Vector3D& point)
 void RigidBody::AddForceAtBodyPoint(const Vector3D& force, const Vector3D& point)
 {
 	Vector3D worldP = getPointInWorldSpace(point);
-	AddForceAtPoint(force, point);
+	AddForceAtPoint(force, worldP);
 }
 
 void RigidBody::ClearAccumulator()

@@ -50,6 +50,7 @@ int main()
 	bool spacePressed = false;
 	//Checks TP3
 	bool hasCollided = false;
+	bool pushed = false;
 
 	//Particule Corps du blob
 	RigidBody body = RigidBody(Color::Blue, 45);
@@ -84,6 +85,16 @@ int main()
 	armL.SetPosition(Vector3D(680.0f, 100.0f));
 	//armL.setInertiaTensor(Matrix3(1, 0, 0, 0, 1, 0, 0, 0, 1));
 	physicW.AddRigidBody(&armL);
+
+
+	RigidBody ball = RigidBody(Color::Yellow, 45);
+	ball.SetPosition(Vector3D(50.0f, 550.0f));
+	ball.setMass(.2);
+	ball.SetMaxSpeed(3000);
+	ball.damping = 0.01f;
+	//bodyParts.push_back(new BodyPart(new GravityForceGeneratorBody(Vector3D(0, 100.f)), &ball)); //Left Arm (side-gravity)
+	//ball.AddForceAtBodyPoint(Vector3D(6000, 0, 0), Vector3D(0, 100, 0));
+	physicW.AddRigidBody(&ball);
 
 
 	RigidBody car1 = RigidBody(Color::Cyan, 45);
@@ -244,8 +255,15 @@ int main()
 				//armL.AddForce(Vector3D(10000, 0, 0));
 				//armL.AddTorque(Vector3D(0.001f, 0, 0));
 
-				armL.AddForceAtBodyPoint(Vector3D(10000, 0, 0), Vector3D(0, 10, 0));
+				armL.AddForceAtBodyPoint(Vector3D(6000, 0, 0), Vector3D(0, 100, 0));
 				spacePressed = true;
+
+				if (!pushed)
+				{
+					ball.AddForceAtBodyPoint(Vector3D(6000, -6000, 0), Vector3D(0, -1, 0));
+					physicW.AddEntry(&ball, new GravityForceGeneratorBody(Vector3D(0, 100.f)));
+					pushed = true;
+				}
 			}
 		}
 		else
@@ -253,8 +271,8 @@ int main()
 
 		if (!hasCollided)
 		{
-			car1.AddForce(Vector3D(-500, 0, 0));
-			car2.AddForce(Vector3D(500, 0, 0));
+			car1.AddForceAtBodyPoint(Vector3D(-500, 0, 0), Vector3D(0, 0, 0));
+			car2.AddForceAtBodyPoint(Vector3D(500, 0, 0), Vector3D(0, 0, 0));
 
 			float distance = sqrtf(powf(car1.GetPosition().x - car2.GetPosition().x, 2) + powf(car1.GetPosition().y - car2.GetPosition().y, 2));
 
@@ -263,8 +281,8 @@ int main()
 				hasCollided = true;
 				car1.AddForceAtBodyPoint(Vector3D(1, 0, 0), Vector3D(0, 100, 0));
 				car2.AddForceAtBodyPoint(Vector3D(-1, 0, 0), Vector3D(0, -100, 0));
-				car1.AddForce(Vector3D(10000, 0, 0));
-				car2.AddForce(Vector3D(-10000, 0, 0));
+				car1.AddForceAtBodyPoint(Vector3D(10000, 0, 0), Vector3D(0, 0, 0));
+				car2.AddForceAtBodyPoint(Vector3D(-10000, 0, 0), Vector3D(0, 0, 0));
 			}
 		}
 
@@ -280,6 +298,7 @@ int main()
 		window.draw(body.shape);
 		//window.draw(head.shape);
 		window.draw(armL.shape);
+		window.draw(ball.shape);
 		window.draw(car1.shape);
 		window.draw(car2.shape);
 		//window.draw(armR.shape);
