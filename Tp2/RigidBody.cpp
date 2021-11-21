@@ -8,6 +8,7 @@ RigidBody::RigidBody(float masse)
 	this->shape.setFillColor(Color::White);
 	//this->shape.setOrigin(2.5f, 2.5f);
 	setMass(masse);
+	setInertiaTensor(Matrix3(1, 0, 0, 0, 1, 0, 0, 0, 1));
 }
 
 RigidBody::RigidBody(Color color, float size)
@@ -16,6 +17,7 @@ RigidBody::RigidBody(Color color, float size)
 	this->shape.setFillColor(color);
 	//this->shape.setOrigin(radius / 2, radius / 2);
 	setMass(1);
+	setInertiaTensor(Matrix3(1, 0, 0, 0, 1, 0, 0, 0, 1));
 }
 
 void RigidBody::CalculateDerivedData()
@@ -110,7 +112,7 @@ void RigidBody::Integrate(float duration)
 	//m_lastFrameAcceleration += inverseMasse * m_forceAccum;
 
 	//m_forceAccum = Vector3D(100, 0, 0);
-	//m_torqueAccum = Vector3D(10, 10, 10);
+	//m_torqueAccum = Vector3D(10, 0, 0);
 
 	Vector3D m_lastFrameAcceleration = m_forceAccum * inverseMasse;
 
@@ -135,8 +137,8 @@ void RigidBody::Integrate(float duration)
 	orientation.UpdateByAngularVelocity(rotation, duration); //????????
 	orientation.Normalized();
 
-	//Vector3D orienEuler = orientation.GetEulerAngles();
-	//shape.setRotation(orienEuler.x);
+	Vector3D orienEuler = orientation.GetEulerAngles();
+	shape.setRotation(orienEuler.x);
 	//shape.setSize(Vector2f(orienEuler.x / 10, orienEuler.z / 10));
 
 	//std::cout << orienEuler.ToString() << std::endl;
@@ -147,8 +149,6 @@ void RigidBody::Integrate(float duration)
 	//std::cout << "Quat I: " << orientation.getI() << " Quat J: " << orientation.getJ() << " Quat K: " << orientation.getK() << " Quat W: " << orientation.getW() << std::endl;
 
 	CalculateDerivedData();
-
-	ClearAccumulator();
 }
 
 void RigidBody::AddForce(const Vector3D& force)
