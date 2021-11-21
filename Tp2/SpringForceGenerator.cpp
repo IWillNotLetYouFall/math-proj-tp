@@ -6,17 +6,21 @@ void SpringForceGenerator::UpdateForce(RigidBody* rigidBody)
 	Vector3D lws = rigidBody->getPointInWorldSpace(m_bodyAnchor);
 	Vector3D ows = m_otherRigidBody->getPointInWorldSpace(m_otherBodyAnchor);
 
+	//std::cout << "Body Anchor : " + lws.ToString() + " | Other Anchor : " + ows.ToString() << std::endl;
+
 	// Calculate the vector of the spring.
 	Vector3D force = lws - ows;
 
 	// Calculate the magnitude of the force.
 	//Norm^2 = magnitude
-	float magnitude = pow(force.GetNorm(),2);
+	float magnitude = force.GetNorm();
 	magnitude = abs(magnitude - m_restLength);
 	magnitude *= m_k;
 
 	// Calculate the final force and apply it.
 	force.Normalize();
 	force *= -magnitude;
-	rigidBody->AddForceAtPoint(force, lws);
+
+	//std::cout << "Spring Force : " + force.ToString() + " | Spring Point : " + lws.ToString() << std::endl;
+	rigidBody->AddForceAtPoint(force, Vector3D(0,0));
 }

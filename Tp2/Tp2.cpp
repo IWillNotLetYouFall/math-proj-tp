@@ -53,10 +53,11 @@ int main()
 
 	//Particule Corps du blob
 	RigidBody body = RigidBody(Color::Blue, 45);
-	body.SetPosition(Vector3D(100.0f, 100.0f));
+	body.SetPosition(Vector3D(300.0f, 300.0f));
 	body.setMass(5);
 	body.SetMaxSpeed(3000);
 	body.damping = 0.01f;
+	body.setInertiaTensor(Matrix3(1, 0, 0, 0, 1, 0, 0, 0, 1));
 	physicW.AddRigidBody(&body);
 
 	//Reticules qui suit la souris
@@ -80,8 +81,8 @@ int main()
 	armR.SetPosition(Vector3D(120.0f, 100.0f));
 	physicW.AddRigidBody(&armR);*/
 	RigidBody armL = RigidBody(Color::Red, 30);
-	armL.SetPosition(Vector3D(80.0f, 100.0f));
-
+	armL.SetPosition(Vector3D(280.0f, 300.0f));
+	//armL.setInertiaTensor(Matrix3(1, 0, 0, 0, 1, 0, 0, 0, 1));
 	physicW.AddRigidBody(&armL);
 
 	//Ajout de la gravité
@@ -90,10 +91,10 @@ int main()
 	//bodyParts.push_back(new BodyPart(new GravityForceGeneratorBody(Vector3D(200, 200.f)), &legR)); //Right Leg (side-gravity)
 	//bodyParts.push_back(new BodyPart(new GravityForceGeneratorBody(Vector3D(-200, 200.f)), &legL)); //Left Leg (side-gravity)
 	//bodyParts.push_back(new BodyPart(new GravityForceGeneratorBody(Vector3D(200, -15.f)), &armR)); //Right Arm (side-gravity)
-	//bodyParts.push_back(new BodyPart(new GravityForceGeneratorBody(Vector3D(-200, -15.f)), &armL)); //Left Arm (side-gravity)
+	bodyParts.push_back(new BodyPart(new GravityForceGeneratorBody(Vector3D(0, 100.f)), &armL)); //Left Arm (side-gravity)
 
 	//Springs
-	//bodyParts.push_back(new BodyPart(new SpringForceGenerator(body.GetPosition(), &body, armL.GetPosition(), 5.f, -10.f), &armL)); //Left Arm (Particles Spring)
+	bodyParts.push_back(new BodyPart(new SpringForceGenerator(body.GetPosition(), &body, armL.GetPosition(), 5.f, -10.f), &armL)); //Left Arm (Particles Spring)
 	//bodyParts.push_back(new BodyPart(new SpringForceGenerator(body.GetPosition(), &armR, armR.GetPosition(), 5.f, -10.f), &armR)); //Right Arm (Particles Spring)
 	//bodyParts.push_back(new BodyPart(new SpringForceGenerator(body.GetPosition(), &legL, legL.GetPosition(), 10.f, 20.f), &legL)); //Left Leg (Particles Bungee)
 	//bodyParts.push_back(new BodyPart(new SpringForceGenerator(body.GetPosition(), &legR, legR.GetPosition(), 10.f, 20.f), &legR)); //Right Leg (Particles Bungee)
@@ -224,13 +225,17 @@ int main()
 		physicW.StartFrame();
 
 
-		//TP3
-		if (Keyboard::isKeyPressed(Keyboard::Space) && !spacePressed) {
-			//Apply force départ
-			armL.SetPosition(Vector3D(100, 100));
-			armL.AddForce(Vector3D(10000, 0, 0));
-			armL.AddTorque(Vector3D(1000, 0, 0));
-			spacePressed = true;
+		//TP3 : Demo 1 - Propulsion angulaire Cube
+		if (Keyboard::isKeyPressed(Keyboard::Space)) {
+			if (!spacePressed) {
+				//Apply force départ
+				//armL.SetPosition(Vector3D(300, 300));
+				//armL.AddForce(Vector3D(10000, 0, 0));
+				//armL.AddTorque(Vector3D(0.001f, 0, 0));
+
+				armL.AddForceAtBodyPoint(Vector3D(10000, 0, 0), Vector3D(0, 10, 0));
+				spacePressed = true;
+			}
 		}
 		else
 			spacePressed = false;

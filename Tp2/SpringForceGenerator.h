@@ -1,5 +1,6 @@
 #pragma once
 #include "ForceGeneratorBody.h"
+#include <iostream>
 
 class SpringForceGenerator : public ForceGeneratorBody
 {
