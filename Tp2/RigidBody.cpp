@@ -109,8 +109,8 @@ void RigidBody::Integrate(float duration)
 	//Vector3D m_lastFrameAcceleration = acceleration;
 	//m_lastFrameAcceleration += inverseMasse * m_forceAccum;
 
-	m_forceAccum = Vector3D(100, 0, 0);
-	m_torqueAccum = Vector3D(10, 0, 0);
+	//m_forceAccum = Vector3D(100, 0, 0);
+	//m_torqueAccum = Vector3D(10, 10, 10);
 
 	Vector3D m_lastFrameAcceleration = m_forceAccum * inverseMasse;
 
@@ -135,9 +135,11 @@ void RigidBody::Integrate(float duration)
 	orientation.UpdateByAngularVelocity(rotation, duration); //????????
 	orientation.Normalized();
 
-	shape.setRotation(orientation.GetEulerAngles().x);
+	//Vector3D orienEuler = orientation.GetEulerAngles();
+	//shape.setRotation(orienEuler.x);
+	//shape.setSize(Vector2f(orienEuler.x / 10, orienEuler.z / 10));
 
-	std::cout << orientation.GetEulerAngles().ToString() << std::endl;
+	//std::cout << orienEuler.ToString() << std::endl;
 	/*for (int i = 0; i < 9; i++)
 	{
 		std::cout << "Matrix value " << i << " : " << inverseInertiaTensorWorld.values[i] << std::endl;
