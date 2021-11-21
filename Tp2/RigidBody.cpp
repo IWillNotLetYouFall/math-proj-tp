@@ -9,6 +9,7 @@ RigidBody::RigidBody(float masse)
 	//this->shape.setOrigin(2.5f, 2.5f);
 	setInertiaTensor(Matrix3(1, 0, 0, 0, 1, 0, 0, 0, 1));
 	setMass(masse);
+	setInertiaTensor(Matrix3(1, 0, 0, 0, 1, 0, 0, 0, 1));
 }
 
 RigidBody::RigidBody(Color color, float size)
@@ -18,6 +19,7 @@ RigidBody::RigidBody(Color color, float size)
 	//this->shape.setOrigin(radius / 2, radius / 2);
 	setInertiaTensor(Matrix3(1, 0, 0, 0, 1, 0, 0, 0, 1));
 	setMass(1);
+	setInertiaTensor(Matrix3(1, 0, 0, 0, 1, 0, 0, 0, 1));
 }
 
 void RigidBody::CalculateDerivedData()
