@@ -53,7 +53,7 @@ int main()
 
 	//Particule Corps du blob
 	RigidBody body = RigidBody(Color::Blue, 45);
-	body.SetPosition(Vector3D(300.0f, 300.0f));
+	body.SetPosition(Vector3D(700.0f, 100.0f));
 	body.setMass(5);
 	body.SetMaxSpeed(3000);
 	body.damping = 0.01f;
@@ -81,9 +81,21 @@ int main()
 	armR.SetPosition(Vector3D(120.0f, 100.0f));
 	physicW.AddRigidBody(&armR);*/
 	RigidBody armL = RigidBody(Color::Red, 30);
-	armL.SetPosition(Vector3D(280.0f, 300.0f));
+	armL.SetPosition(Vector3D(680.0f, 100.0f));
 	//armL.setInertiaTensor(Matrix3(1, 0, 0, 0, 1, 0, 0, 0, 1));
 	physicW.AddRigidBody(&armL);
+
+
+	RigidBody car1 = RigidBody(Color::Cyan, 45);
+	car1.SetPosition(Vector3D(600.0f, 500.0f));
+	car1.setMass(5);
+	car1.SetMaxSpeed(3000);
+	car1.damping = 0.01f;
+	physicW.AddRigidBody(&car1);
+
+	RigidBody car2 = RigidBody(Color::Magenta, 30);
+	car2.SetPosition(Vector3D(300.0f, 530.0f));
+	physicW.AddRigidBody(&car2);
 
 	//Ajout de la gravité
 	//bodyParts.push_back(new BodyPart(new GravityForceGeneratorBody(Vector3D(0, 100.f)), &body)); //Body
@@ -94,7 +106,7 @@ int main()
 	bodyParts.push_back(new BodyPart(new GravityForceGeneratorBody(Vector3D(0, 100.f)), &armL)); //Left Arm (side-gravity)
 
 	//Springs
-	bodyParts.push_back(new BodyPart(new SpringForceGenerator(body.GetPosition(), &body, armL.GetPosition(), 5.f, -10.f), &armL)); //Left Arm (Particles Spring)
+	bodyParts.push_back(new BodyPart(new SpringForceGenerator(Vector3D(0, 0), &body, Vector3D(0,0), 5.f, 10.f), &armL)); //Left Arm (Particles Spring)
 	//bodyParts.push_back(new BodyPart(new SpringForceGenerator(body.GetPosition(), &armR, armR.GetPosition(), 5.f, -10.f), &armR)); //Right Arm (Particles Spring)
 	//bodyParts.push_back(new BodyPart(new SpringForceGenerator(body.GetPosition(), &legL, legL.GetPosition(), 10.f, 20.f), &legL)); //Left Leg (Particles Bungee)
 	//bodyParts.push_back(new BodyPart(new SpringForceGenerator(body.GetPosition(), &legR, legR.GetPosition(), 10.f, 20.f), &legR)); //Right Leg (Particles Bungee)
@@ -152,7 +164,6 @@ int main()
 
 	//Vectors
 	Vector2f mousePosWindow;
-
 
 
 	Clock deltaClock;
@@ -240,33 +251,22 @@ int main()
 		else
 			spacePressed = false;
 
-		//if (hasCollided)
-		//{
+		if (!hasCollided)
+		{
+			car1.AddForce(Vector3D(-500, 0, 0));
+			car2.AddForce(Vector3D(500, 0, 0));
 
-		//}
-		//else
-		//{
-		//	float distance = sqrtf(powf(body.GetPosition().x - armL.GetPosition().x, 2) + powf(body.GetPosition().y - armL.GetPosition().y, 2));
+			float distance = sqrtf(powf(car1.GetPosition().x - car2.GetPosition().x, 2) + powf(car1.GetPosition().y - car2.GetPosition().y, 2));
 
-		//	cout << distance << endl;
-
-		//	if (distance <= 30.f)
-		//	{
-		//		for (BodyPart* part : bodyParts)
-		//		{
-		//			physicW.RemoveEntries(part->particule);
-		//		}
-		//		hasCollided = true;
-
-
-		//		bodyParts.push_back(new BodyPart(new GravityForceGeneratorBody(Vector3D(-1000.f, 0.f)), &body)); //Body
-		//		bodyParts.push_back(new BodyPart(new GravityForceGeneratorBody(Vector3D(1000.f, 0.f)), &armL)); //Left Arm (side-gravity)
-
-
-		//		for (BodyPart* part : bodyParts)
-		//			physicW.AddEntry(part->particule, part->forceGen);
-		//	}
-		//}
+			if (distance <= 50.f)
+			{
+				hasCollided = true;
+				car1.AddForceAtBodyPoint(Vector3D(1, 0, 0), Vector3D(0, 100, 0));
+				car2.AddForceAtBodyPoint(Vector3D(-1, 0, 0), Vector3D(0, -100, 0));
+				car1.AddForce(Vector3D(10000, 0, 0));
+				car2.AddForce(Vector3D(-10000, 0, 0));
+			}
+		}
 
 
 		physicW.RunPhysics(deltaTime.asSeconds());
@@ -280,6 +280,8 @@ int main()
 		window.draw(body.shape);
 		//window.draw(head.shape);
 		window.draw(armL.shape);
+		window.draw(car1.shape);
+		window.draw(car2.shape);
 		//window.draw(armR.shape);
 		//window.draw(legL.shape);
 		//window.draw(legR.shape);
