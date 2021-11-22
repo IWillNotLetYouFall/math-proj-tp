@@ -10,5 +10,7 @@ Toutes les forces sont utilisées dans l'exécutable
 (Gravity, Spring)
 La collision des "deux autos" en bas à droite est hardcodée
 
+Nous mettons des logs dans la console pour montrer qu'il y a bien une rotation sur les 3 axes des rigibodies
+
 Pour utiliser notre programme, soit le partir dans Visual Studio par le .sln OU
 double-cliquer le raccourci tp2.exe à la racine.
