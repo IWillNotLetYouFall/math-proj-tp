@@ -257,16 +257,19 @@ int main()
 				armL.AddForceAtBodyPoint(Vector3D(1000, 100, 100), Vector3D(0, 1, 0));
 				spacePressed = true;
 
-				if (!pushed)
-				{
-					ball.AddForceAtBodyPoint(Vector3D(6000, -6000, 0), Vector3D(0, -0.5f, 0));
-					physicW.AddEntry(&ball, new GravityForceGeneratorBody(Vector3D(0, 100.f)));
-					pushed = true;
-				}
 			}
 		}
 		else
 			spacePressed = false;
+
+		if (Keyboard::isKeyPressed(Keyboard::P)) {
+			if (!pushed)
+			{
+				ball.AddForceAtBodyPoint(Vector3D(6000, -6000, 0), Vector3D(0, -0.5f, 0));
+				physicW.AddEntry(&ball, new GravityForceGeneratorBody(Vector3D(0, 100.f)));
+				pushed = true;
+			}
+		}
 
 		if (!hasCollided)
 		{
