@@ -101,8 +101,8 @@ Vector3D Quaternion::GetEulerAngles()
 	float sqz = z * z;
 
 	Vector3D dirEuler;
-	dirEuler.z = (float)(atan2(2.0 * (x * y + z * w), (sqx - sqy - sqz + sqw)) * (180.0f / 3.1415926f));
-	dirEuler.x = (float)(atan2(2.0 * (y * z + x * w), (-sqx - sqy + sqz + sqw)) * (180.0f / 3.1415926f));
+	dirEuler.x = (float)(atan2(2.0 * (x * y + z * w), (sqx - sqy - sqz + sqw)) * (180.0f / 3.1415926f));
+	dirEuler.z = (float)(atan2(2.0 * (y * z + x * w), (-sqx - sqy + sqz + sqw)) * (180.0f / 3.1415926f));
 	dirEuler.y = (float)(asin(-2.0 * (x * z - y * w)) * (180.0f / 3.1415926f));
 
 	return dirEuler;
