@@ -57,6 +57,18 @@ vector<ParticleContact*> PhysicWorld::GenerateContacts()
 	return usedContacts;
 }
 
+vector<ParticleContact*> PhysicWorld::GetBroadCollisions()
+{
+	vector<ParticleContact*> usedContacts;
+	return usedContacts;
+}
+
+vector<ParticleContact*> PhysicWorld::GetNarrowCollisions()
+{
+	vector<ParticleContact*> usedContacts;
+	return usedContacts;
+}
+
 
 void PhysicWorld::RunPhysics(float duration)
 {

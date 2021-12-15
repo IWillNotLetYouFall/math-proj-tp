@@ -43,6 +43,8 @@ public:
 	//void RemoveEntry(Particule* particleA);
 	void StartFrame();
 	vector<ParticleContact*> GenerateContacts();
+	vector<ParticleContact*> GetBroadCollisions();
+	vector<ParticleContact*> GetNarrowCollisions();
 	void RunPhysics(float duration);
 };
 
