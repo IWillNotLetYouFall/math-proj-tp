@@ -119,7 +119,7 @@ public:
 
 	void setRotation(float x, float y, float z)
 	{
-		rotation = (x, y, z);
+		rotation = Vector3D(x, y, z);
 	}
 
 	Vector3D getRotation()
