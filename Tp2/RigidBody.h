@@ -11,7 +11,6 @@ using namespace sf;
 
 class RigidBody
 {
-	//Other knowned RigidBody members
 
 private:
 
@@ -30,11 +29,13 @@ private:
 	Matrix4 transformMatrix;
 	Vector3D angularAcceleration;
 
+	Vector3D lastFrameAcceleration;
+
 	Matrix3 inverseInertiaTensor;
 	Matrix3 inverseInertiaTensorWorld;
 	//same as linear damping
 	//but for rotation
-	float m_angularDamping = 0.2f;
+	float m_angularDamping = 0.4f;
 
 	//Accumulated force
 	//added by ForceGenerator
@@ -48,8 +49,9 @@ private:
 
 public:
 
+	bool isAwake = true;
+	float defaultsize = 90;
 	RectangleShape shape;
-	float damping = 0.2f;
 	bool test = false;
 
 	RigidBody(float masse);
@@ -113,6 +115,16 @@ public:
 	Vector3D TransformPoint(Vector3D pos)
 	{
 		return pos.Inverse();
+	}
+
+	void setRotation(float x, float y, float z)
+	{
+		rotation = (x, y, z);
+	}
+
+	Vector3D getRotation()
+	{
+		return rotation;
 	}
 
 	//Add force on the Center of mass (no torque generated)

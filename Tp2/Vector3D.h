@@ -29,5 +29,12 @@ public:
 	Vector3D VectorialProduct(Vector3D prod);
 	std::string ToString();
 	Vector3D Inverse();
+
+	void addScaledVector(const Vector3D& vector, float scale)
+	{
+		x += vector.x * scale;
+		y += vector.y * scale;
+		z += vector.z * scale;
+	}
 };
 
