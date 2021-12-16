@@ -50,13 +50,12 @@ int main()
 	bool pushed = false;
 	bool touch = false;
 
-	Box box;
 	RigidBody ball = RigidBody(Color::Yellow, 90);
 	ball.SetPosition(Vector3D(100.0f, 500.0f));
 	ball.setMass(.2);
 	ball.SetMaxSpeed(3000);
 
-	
+	Box box;
 	//THIS IS THE BOX THROWN IN THE ROOM
 	box.body = &ball;
 	box.offset = Matrix4();
@@ -68,35 +67,41 @@ int main()
 	Vector3D origin = (400, 300, 0);
 	//Room walls
 	Plane WallLeft;
-	WallLeft.body = new RigidBody(1000000);
+	WallLeft.body = new RigidBody(1000000); //infinitemass
 	WallLeft.body->isAwake = false;
 	WallLeft.body->SetPosition(Vector3D(0, 300, 0));
 	WallLeft.body->setRotation(-90, 0, 0);
+	WallLeft.normal = WallLeft.body->getRotation().Normalize();
 	Plane WallRight;
-	WallRight.body = new RigidBody(1000000);
+	WallRight.body = new RigidBody(1000000); //infinitemass
 	WallRight.body->isAwake = false;
 	WallRight.body->SetPosition(Vector3D(800, 300, 0));
 	WallRight.body->setRotation(90, 0, 0);
+	WallRight.normal = WallRight.body->getRotation().Normalize();
 	Plane WallUp;
-	WallUp.body = new RigidBody(1000000);
+	WallUp.body = new RigidBody(1000000); //infinitemass
 	WallUp.body->isAwake = false;
 	WallUp.body->SetPosition(Vector3D(400, 0, 0));
 	WallUp.body->setRotation(0, 0, 180);
+	WallUp.normal = WallUp.body->getRotation().Normalize();
 	Plane WallDown;
-	WallDown.body = new RigidBody(1000000);
+	WallDown.body = new RigidBody(1000000); //infinitemass
 	WallDown.body->isAwake = false;
 	WallDown.body->SetPosition(Vector3D(400, 600, 0));
 	WallDown.body->setRotation(0, 0, 0);
+	WallDown.normal = WallDown.body->getRotation().Normalize();
 	Plane WallFront;
-	WallFront.body = new RigidBody(1000000);
+	WallFront.body = new RigidBody(1000000); //infinitemass
 	WallFront.body->isAwake = false;
 	WallFront.body->SetPosition(Vector3D(400, 300, -80));
 	WallFront.body->setRotation(0, 0, -90);
+	WallFront.normal = WallFront.body->getRotation().Normalize();
 	Plane WallBack;
-	WallBack.body = new RigidBody(1000000);
+	WallBack.body = new RigidBody(1000000); //infinitemass
 	WallBack.body->isAwake = false;
 	WallBack.body->SetPosition(Vector3D(400, 300, 80));
 	WallBack.body->setRotation(0, 0, 90);
+	WallBack.normal = WallBack.body->getRotation().Normalize();
 
 
 	//TP1 Part
@@ -133,32 +138,32 @@ int main()
 			}
 		}
 
-		if (box.body->GetPosition().y - 77.5 <= 0) //touches top
+		if (box.body->GetPosition().y - 49 <= 0) //touches top
 		{
 			cout << "top" << endl;
 			touch = true;
 		}
-		else if (box.body->GetPosition().y + 77.5 >= 600) //touches bottom
+		else if (box.body->GetPosition().y + 49 >= 600) //touches bottom
 		{
 			cout << "bottom" << endl;
 			touch = true;
 		}
-		else if (box.body->GetPosition().x - 77.5 <= 0) //touches left
+		else if (box.body->GetPosition().x - 49 <= 0) //touches left
 		{
 			cout << "left" << endl;
 			touch = true;
 		}
-		else if (box.body->GetPosition().x + 77.5 >= 800) //touches right
+		else if (box.body->GetPosition().x + 49 >= 800) //touches right
 		{
 			cout << "right" << endl;
 			touch = true;
 		}
-		else if (box.body->GetPosition().z <= -80) //touches front
+		else if (box.body->GetPosition().z - 49 <= (-80 - 49)) //touches front
 		{
 			cout << "front" << endl;
 			touch = true;
 		}
-		else if (box.body->GetPosition().z >= 80) //touches back
+		else if (box.body->GetPosition().z + 49 >= (80 + 49)) //touches back
 		{
 			cout << "back" << endl;
 			touch = true;
@@ -172,7 +177,6 @@ int main()
 		window.clear();
 
 		window.draw(box.body->shape);
-
 
 		window.display();
 

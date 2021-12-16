@@ -130,7 +130,7 @@ void RigidBody::Integrate(float duration)
 	Vector3D orienEuler = orientation.GetEulerAngles();
 	shape.setRotation(orienEuler.x);
 
-	std::cout << "Cube : " + position.ToString() << std::endl;
+	//std::cout << "Cube : " + position.ToString() << std::endl;
 
 	CalculateDerivedData();
 
