@@ -4,7 +4,7 @@
 RigidBody::RigidBody(float masse)
 {
 	//this->shape.setScale(5, 5);
-	SetScale(Vector3D(5, 5, 5));
+	SetScale(Vector3D(defaultsize, defaultsize, defaultsize));
 	this->shape.setFillColor(Color::White);
 	//this->shape.setOrigin(2.5f, 2.5f);
 	setInertiaTensor(Matrix3(1, 0, 0, 0, 1, 0, 0, 0, 1));
@@ -14,6 +14,7 @@ RigidBody::RigidBody(float masse)
 
 RigidBody::RigidBody(Color color, float size)
 {
+	defaultsize = size;
 	SetScale(Vector3D(size, size, size));
 	this->shape.setFillColor(color);
 	//this->shape.setOrigin(radius / 2, radius / 2);
@@ -101,32 +102,19 @@ Vector3D RigidBody::getPointInWorldSpace(const Vector3D& point)
 
 void RigidBody::Integrate(float duration)
 {
-	if (hasInfiniteMass())
-	{
-		ClearAccumulator();
-		return;
-	}
 
 	CalculateDerivedData();
 
-	//Calcul Acc. linéaire
-	//Vector3D m_lastFrameAcceleration = acceleration;
-	//m_lastFrameAcceleration += inverseMasse * m_forceAccum;
-
-	//m_forceAccum = Vector3D(100, 0, 0);
-	//m_torqueAccum = Vector3D(10, 0, 0);
-
-	Vector3D m_lastFrameAcceleration = m_forceAccum * inverseMasse;
-
+	Vector3D m_FrameAcceleration = m_forceAccum * inverseMasse + lastFrameAcceleration;
 
 	//Calcul Acc. angulaire
 	auto angularAcceleration = inverseInertiaTensorWorld * m_torqueAccum;
 
 	// / MAJ vélocité linéaire
-	velocity += m_lastFrameAcceleration * duration;
+	velocity += m_FrameAcceleration * duration;
 
 	// MAJ vélocité angulaire
-	rotation += angularAcceleration * duration;  //Obsolete
+	rotation += angularAcceleration * duration; 
 
 	// Ajout du drag aux vélocités
 	velocity *= powf(linearDamping, duration);
@@ -136,16 +124,26 @@ void RigidBody::Integrate(float duration)
 	SetPosition(position + (velocity * duration));
 
 	//MAJ rotation
-	orientation.UpdateByAngularVelocity(rotation, duration); //????????
+	orientation.UpdateByAngularVelocity(rotation, duration);
 	orientation.Normalized();
 
 	Vector3D orienEuler = orientation.GetEulerAngles();
 	shape.setRotation(orienEuler.x);
-	//shape.setSize(Vector2f(orienEuler.x / 10, orienEuler.z / 10));
 
-	std::cout << "Orientation Cubes : " + orienEuler.ToString() << std::endl;
+	std::cout << "Cube : " + position.ToString() << std::endl;
 
 	CalculateDerivedData();
+
+	lastFrameAcceleration = m_FrameAcceleration;
+
+	//Simule la profondeur
+	//à mettre en commentaire pour ne pas changer la grosseur de la boite
+	float newsize = defaultsize / (1 + (position.z / 100));
+	newsize = std::fmax(newsize, defaultsize / 4);
+	newsize = std::fmin(newsize, defaultsize * 4);
+	SetScale(Vector3D(newsize, newsize, newsize));
+
+	ClearAccumulator();
 }
 
 void RigidBody::AddForce(const Vector3D& force)

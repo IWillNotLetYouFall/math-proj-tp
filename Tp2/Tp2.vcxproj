@@ -147,6 +147,7 @@
   <ItemGroup>
     <ClCompile Include="CircleParticleContactGenerator.cpp" />
     <ClCompile Include="Contact.cpp" />
+    <ClCompile Include="contacts.cpp" />
     <ClCompile Include="ForceGeneratorBody.cpp" />
     <ClCompile Include="Friction.cpp" />
     <ClCompile Include="GravityForceGeneratorBody.cpp" />
@@ -177,11 +178,16 @@
     <ClCompile Include="Vector3D.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Box.h" />
     <ClInclude Include="CircleParticleContactGenerator.h" />
     <ClInclude Include="Contact.h" />
+    <ClInclude Include="contacts.h" />
     <ClInclude Include="ForceGeneratorBody.h" />
     <ClInclude Include="Friction.h" />
     <ClInclude Include="GravityForceGeneratorBody.h" />
+    <ClInclude Include="Plane.h" />
+    <ClInclude Include="Primitive.h" />
+    <ClInclude Include="Sphere.h" />
     <ClInclude Include="Laser.h" />
     <ClInclude Include="olcConsoleGameEngine.h" />
     <ClInclude Include="Matrix3.h" />
