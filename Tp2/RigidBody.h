@@ -117,6 +117,16 @@ public:
 		return pos.Inverse();
 	}
 
+	void setRotation(float x, float y, float z)
+	{
+		rotation = (x, y, z);
+	}
+
+	Vector3D getRotation()
+	{
+		return rotation;
+	}
+
 	//Add force on the Center of mass (no torque generated)
 	void AddForce(const Vector3D& force);
 	void AddTorque(const Vector3D& torque);

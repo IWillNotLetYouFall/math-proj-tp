@@ -23,6 +23,8 @@
 #include "RigidBody.h"
 #include "GravityForceGeneratorBody.h"
 #include "SpringForceGenerator.h"
+#include "Box.h"
+#include "Plane.h"
 
 using namespace sf;
 
@@ -48,14 +50,53 @@ int main()
 	bool pushed = false;
 	bool touch = false;
 
-
+	Box box;
 	RigidBody ball = RigidBody(Color::Yellow, 90);
 	ball.SetPosition(Vector3D(100.0f, 500.0f));
 	ball.setMass(.2);
 	ball.SetMaxSpeed(3000);
-	//bodyParts.push_back(new BodyPart(new GravityForceGeneratorBody(Vector3D(0, 100.f)), &ball)); //Left Arm (side-gravity)
-	//ball.AddForceAtBodyPoint(Vector3D(6000, 0, 0), Vector3D(0, 100, 0));
-	physicW.AddRigidBody(&ball);
+
+	
+	//THIS IS THE BOX THROWN IN THE ROOM
+	box.body = &ball;
+	box.offset = Matrix4();
+	box.halfsize = Vector3D(45, 45, 60);
+	box.BoundingSphere.radius = 49;
+
+	physicW.AddRigidBody(box.body);
+
+	Vector3D origin = (400, 300, 0);
+	//Room walls
+	Plane WallLeft;
+	WallLeft.body = new RigidBody(1000000);
+	WallLeft.body->isAwake = false;
+	WallLeft.body->SetPosition(Vector3D(0, 300, 0));
+	WallLeft.body->setRotation(-90, 0, 0);
+	Plane WallRight;
+	WallRight.body = new RigidBody(1000000);
+	WallRight.body->isAwake = false;
+	WallRight.body->SetPosition(Vector3D(800, 300, 0));
+	WallRight.body->setRotation(90, 0, 0);
+	Plane WallUp;
+	WallUp.body = new RigidBody(1000000);
+	WallUp.body->isAwake = false;
+	WallUp.body->SetPosition(Vector3D(400, 0, 0));
+	WallUp.body->setRotation(0, 0, 180);
+	Plane WallDown;
+	WallDown.body = new RigidBody(1000000);
+	WallDown.body->isAwake = false;
+	WallDown.body->SetPosition(Vector3D(400, 600, 0));
+	WallDown.body->setRotation(0, 0, 0);
+	Plane WallFront;
+	WallFront.body = new RigidBody(1000000);
+	WallFront.body->isAwake = false;
+	WallFront.body->SetPosition(Vector3D(400, 300, -80));
+	WallFront.body->setRotation(0, 0, -90);
+	Plane WallBack;
+	WallBack.body = new RigidBody(1000000);
+	WallBack.body->isAwake = false;
+	WallBack.body->SetPosition(Vector3D(400, 300, 80));
+	WallBack.body->setRotation(0, 0, 90);
 
 
 	//TP1 Part
@@ -63,7 +104,6 @@ int main()
 
 	RenderWindow window(VideoMode(800, 600), "TP4", Style::Default);
 	window.setFramerateLimit(60);
-	window.setMouseCursorVisible(false);
 
 	//Vectors
 	Vector2f mousePosWindow;
@@ -86,39 +126,39 @@ int main()
 		if (Keyboard::isKeyPressed(Keyboard::P)) {
 			if (!pushed)
 			{
-				ball.AddForceAtBodyPoint(Vector3D(50, -180, -8), Vector3D(0, -20.f, 0));
+				box.body->AddForceAtBodyPoint(Vector3D(50, -180, -8), Vector3D(0, -20.f, 0));
 				//ball.AddForceAtBodyPoint(Vector3D(50, -180, -10), Vector3D(0, -20.f, 0)); //touch front
-				physicW.AddEntry(&ball, new GravityForceGeneratorBody(Vector3D(0, 10.f)));
+				physicW.AddEntry(box.body, new GravityForceGeneratorBody(Vector3D(0, 10.f)));
 				pushed = true;
 			}
 		}
 
-		if (ball.GetPosition().y - 77.5 <= 0) //touches top
+		if (box.body->GetPosition().y - 77.5 <= 0) //touches top
 		{
 			cout << "top" << endl;
 			touch = true;
 		}
-		else if (ball.GetPosition().y + 77.5 >= 600) //touches bottom
+		else if (box.body->GetPosition().y + 77.5 >= 600) //touches bottom
 		{
 			cout << "bottom" << endl;
 			touch = true;
 		}
-		else if (ball.GetPosition().x - 77.5 <= 0) //touches left
+		else if (box.body->GetPosition().x - 77.5 <= 0) //touches left
 		{
 			cout << "left" << endl;
 			touch = true;
 		}
-		else if (ball.GetPosition().x + 77.5 >= 800) //touches right
+		else if (box.body->GetPosition().x + 77.5 >= 800) //touches right
 		{
 			cout << "right" << endl;
 			touch = true;
 		}
-		else if (ball.GetPosition().z <= -80) //touches front
+		else if (box.body->GetPosition().z <= -80) //touches front
 		{
 			cout << "front" << endl;
 			touch = true;
 		}
-		else if (ball.GetPosition().z >= 80) //touches back
+		else if (box.body->GetPosition().z >= 80) //touches back
 		{
 			cout << "back" << endl;
 			touch = true;
@@ -131,7 +171,7 @@ int main()
 		//Draw
 		window.clear();
 
-		window.draw(ball.shape);
+		window.draw(box.body->shape);
 
 
 		window.display();
