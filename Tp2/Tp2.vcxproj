@@ -177,6 +177,7 @@
     <ClCompile Include="Vector3D.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Box.h" />
     <ClInclude Include="CircleParticleContactGenerator.h" />
     <ClInclude Include="Contact.h" />
     <ClInclude Include="ForceGeneratorBody.h" />
@@ -198,9 +199,12 @@
     <ClInclude Include="Particule.h" />
     <ClInclude Include="Physics.h" />
     <ClInclude Include="PhysicWorld.h" />
+    <ClInclude Include="Plane.h" />
+    <ClInclude Include="Primitive.h" />
     <ClInclude Include="Quaternion.h" />
     <ClInclude Include="RigidBody.h" />
     <ClInclude Include="RigidForceRegistry.h" />
+    <ClInclude Include="Sphere.h" />
     <ClInclude Include="SpringBungee.h" />
     <ClInclude Include="SpringFixed.h" />
     <ClInclude Include="SpringFloating.h" />
