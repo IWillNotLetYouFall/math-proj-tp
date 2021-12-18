@@ -1,23 +1,59 @@
 #pragma once
-#include <iostream>
-#include <stdlib.h>
-#include <string>
 #include "Vector3D.h"
-#include <math.h>
-#include <vector>
-#include <cstdlib>
-#include "PhysicWorld.h"
-#include "RigidBody.h"
-#include "Primitive.h"
 
 class OctTree
 {
-public:
-	Vector3D posiiton;
-	Vector3D size;
-	vector<Primitive> m_objects;
+	Vector3D position;
+	OctTree* child[8];
+	bool hasChildren = false;
+	float halfsize = -1;
+
+	int maxDepth = 3;
+	int maxElements = 2;
 
 public:
-	OctTree();
+	OctTree(float x, float y, float z)
+	{
+		position = Vector3D(x, y, z);
+	}
+
+	OctTree getChild(int index)
+	{
+		if (index >= 0 && index < 8 && hasChildren)
+			return *child[index];
+	}
+
+	Vector3D getPosition()
+	{
+		return position;
+	}
+
+	float getHalfsize()
+	{
+		return halfsize;
+	}
+
+	int getChildIndex(const Vector3D& object)
+	{
+		int index = 0;
+		if (object.x > position.x) index += 1;
+		if (object.y > position.y) index += 2;
+		if (object.z > position.z) index += 4;
+		return index;
+	}
+
+	void subdivide(float size)
+	{
+		halfsize = size;
+		hasChildren = true;
+		child[0] = new OctTree(position.x - halfsize, position.y - halfsize, position.z - halfsize);
+		child[1] = new OctTree(position.x + halfsize, position.y - halfsize, position.z - halfsize);
+		child[2] = new OctTree(position.x - halfsize, position.y + halfsize, position.z - halfsize);
+		child[3] = new OctTree(position.x + halfsize, position.y + halfsize, position.z - halfsize);
+		child[4] = new OctTree(position.x - halfsize, position.y - halfsize, position.z + halfsize);
+		child[5] = new OctTree(position.x + halfsize, position.y - halfsize, position.z + halfsize);
+		child[6] = new OctTree(position.x - halfsize, position.y + halfsize, position.z + halfsize);
+		child[7] = new OctTree(position.x + halfsize, position.y + halfsize, position.z + halfsize);
+	}
 };
 
