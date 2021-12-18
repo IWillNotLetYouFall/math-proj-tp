@@ -3,7 +3,6 @@
 
 class OctTree
 {
-	Vector3D position;
 	OctTree* child[8];
 	bool hasChildren = false;
 	float halfsize = -1;
@@ -49,10 +48,12 @@ public:
 	}
 
 public :
+	Vector3D position;
 	Vector3D size;
 public:
 	void Insert(Vector3D& point);
 	bool Find(Vector3D& point);
 	bool IsContained(Vector3D& point);
+	int ObtIndexNode(Vector3D& point);
 };
 
