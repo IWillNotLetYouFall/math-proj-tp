@@ -4,7 +4,7 @@
 RigidBody::RigidBody(float masse)
 {
 	//this->shape.setScale(5, 5);
-	SetScale(Vector3D(defaultsize, defaultsize, defaultsize));
+	SetScale(defaultsize);
 	this->shape.setFillColor(Color::White);
 	//this->shape.setOrigin(2.5f, 2.5f);
 	setInertiaTensor(Matrix3(1, 0, 0, 0, 1, 0, 0, 0, 1));
@@ -12,10 +12,10 @@ RigidBody::RigidBody(float masse)
 	setInertiaTensor(Matrix3(1, 0, 0, 0, 1, 0, 0, 0, 1));
 }
 
-RigidBody::RigidBody(Color color, float size)
+RigidBody::RigidBody(Color color, Vector3D size)
 {
 	defaultsize = size;
-	SetScale(Vector3D(size, size, size));
+	SetScale(size);
 	this->shape.setFillColor(color);
 	//this->shape.setOrigin(radius / 2, radius / 2);
 	setInertiaTensor(Matrix3(1, 0, 0, 0, 1, 0, 0, 0, 1));
@@ -138,10 +138,13 @@ void RigidBody::Integrate(float duration)
 
 	//Simule la profondeur
 	//à mettre en commentaire pour ne pas changer la grosseur de la boite
-	float newsize = defaultsize / (1 + (position.z / 100));
-	newsize = std::fmax(newsize, defaultsize / 4);
-	newsize = std::fmin(newsize, defaultsize * 4);
-	SetScale(Vector3D(newsize, newsize, newsize));
+	float dist = defaultsize.x / (1 + (position.z / 100));
+	Vector3D newsize = Vector3D(dist, dist, dist);
+	newsize.x = std::fmax(newsize.x, defaultsize.x / 4);
+	newsize.x = std::fmin(newsize.x, defaultsize.x * 4);
+	newsize.y = std::fmax(newsize.y, defaultsize.y / 4);
+	newsize.y = std::fmin(newsize.y, defaultsize.y * 4);
+	SetScale(Vector3D(defaultsize.x, defaultsize.y, defaultsize.x));
 
 	ClearAccumulator();
 }
@@ -188,3 +191,11 @@ void RigidBody::ClearAccumulator()
 	m_torqueAccum.y = 0;
 	m_torqueAccum.z = 0;
 }
+
+//void NarrowPhase(Primitive prim1, Primitive prim2) {
+//	//Pour chaque sommet de la boîte
+//	//Tester si le sommet est en-dessous du plan
+//	//Créer le contact  (point de contact <- à mi-chemin entre le sonnet et le plan)
+//	//Ajouter à collisionData
+//}
+//

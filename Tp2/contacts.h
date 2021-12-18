@@ -28,7 +28,7 @@ class ContactResolver;
  * details. To resolve a set of contacts, use the contact resolver
  * class.
  */
-class Contact
+class OldContact
 {
     // ... Other data as before ...
 
@@ -361,7 +361,7 @@ public:
      * @param duration The duration of the previous integration step.
      * This is used to compensate for forces applied.
      */
-    void resolveContacts(Contact* contactArray,
+    void resolveContacts(OldContact* contactArray,
         unsigned numContacts,
         float duration);
 
@@ -371,14 +371,14 @@ protected:
      * internal data is configured correctly and the correct set of bodies
      * is made alive.
      */
-    void prepareContacts(Contact* contactArray, unsigned numContacts,
+    void prepareContacts(OldContact* contactArray, unsigned numContacts,
         float duration);
 
     /**
      * Resolves the velocity issues with the given array of constraints,
      * using the given number of iterations.
      */
-    void adjustVelocities(Contact* contactArray,
+    void adjustVelocities(OldContact* contactArray,
         unsigned numContacts,
         float duration);
 
@@ -386,7 +386,7 @@ protected:
      * Resolves the positional issues with the given array of constraints,
      * using the given number of iterations.
      */
-    void adjustPositions(Contact* contacts,
+    void adjustPositions(OldContact* contacts,
         unsigned numContacts,
         float duration);
 };
@@ -406,5 +406,5 @@ public:
      * to. The method returns the number of contacts that have
      * been written.
      */
-    virtual unsigned addContact(Contact* contact, unsigned limit) const = 0;
+    virtual unsigned addContact(OldContact* contact, unsigned limit) const = 0;
 };

@@ -43,4 +43,5 @@ public:
 	//Transform a direction by ignoring the translation
 	Vector3D TransformDirection(const Vector3D& vector);
 
+	Vector3D GetAxisVector(int i) const;
 };

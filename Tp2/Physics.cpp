@@ -44,7 +44,7 @@ void Physics::RemoveRectangle(RectangleShape* rectangle)
 	}
 }
 
-void Physics::RemoveContact(Contact* contact)
+void Physics::RemoveContact(OldContact* contact)
 {
 	for (int i = 0; i < contacts.size(); i++)
 	{
@@ -55,9 +55,9 @@ void Physics::RemoveContact(Contact* contact)
 	}
 }
 
-Contact* Physics::CollisionDetection(Shape* shape, float weight, Vector3D vel, float delta)
+OldContact* Physics::CollisionDetection(Shape* shape, float weight, Vector3D vel, float delta)
 {
-	Contact* contact = GetCollidedContact(shape);
+	OldContact* contact = GetCollidedContact(shape);
 	if (contact == NULL) {
 		Vector2f posShape = shape->getPosition();
 		//Vector3D posSim = Vector3D(posShape.x, posShape.y) + (vel * delta);
@@ -72,10 +72,10 @@ Contact* Physics::CollisionDetection(Shape* shape, float weight, Vector3D vel, f
 	return contact;
 }
 
-Contact* Physics::GetCollidedContact(Shape* shape)
+OldContact* Physics::GetCollidedContact(Shape* shape)
 {
-	Contact* contact = NULL;
-	for (Contact* ct : contacts) {
+	OldContact* contact = NULL;
+	for (OldContact* ct : contacts) {
 		if (ct->collided->shape == shape) {
 			contact = ct;
 			break;
@@ -85,7 +85,7 @@ Contact* Physics::GetCollidedContact(Shape* shape)
 	return contact;
 }
 
-Contact* Physics::ContactBetweenCircles(Vector3D vel, float weight, CircleShape* mainCircle)
+OldContact* Physics::ContactBetweenCircles(Vector3D vel, float weight, CircleShape* mainCircle)
 {
 	//Obt attributs cercle principal
 	Vector3D posMain = Vector3D(mainCircle->getPosition().x, mainCircle->getPosition().y);
@@ -95,7 +95,7 @@ Contact* Physics::ContactBetweenCircles(Vector3D vel, float weight, CircleShape*
 
 	Vector3D posSecCircle;
 	float radiusSecCircle;
-	Contact* contact = NULL;
+	OldContact* contact = NULL;
 	for (CircleShape* circle : circles) {
 		if (circle == mainCircle)
 			continue;
@@ -115,7 +115,7 @@ Contact* Physics::ContactBetweenCircles(Vector3D vel, float weight, CircleShape*
 			//LigneDist = placer dépendant du ratio masse TODO
 			float ratioDist = weightSec / (weightSec + weight);
 			Vector3D pointContact = ligneDist.Normalize() * (radiusCircle - ratioDist * distInterpolated) + posMain;
-			Contact* newContact = new Contact(&mainCollider, &secCollider, pointContact);
+			OldContact* newContact = new OldContact(&mainCollider, &secCollider, pointContact);
 			contacts.push_back(newContact);
 			return newContact;
 		}

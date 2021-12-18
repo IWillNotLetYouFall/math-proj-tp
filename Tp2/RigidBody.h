@@ -13,7 +13,6 @@ class RigidBody
 {
 
 private:
-
 	float inverseMasse = 1;
 
 	//Linear Values
@@ -50,12 +49,12 @@ private:
 public:
 
 	bool isAwake = true;
-	float defaultsize = 90;
+	Vector3D defaultsize = Vector3D(90, 90, 90);
 	RectangleShape shape;
 	bool test = false;
 
 	RigidBody(float masse);
-	RigidBody(Color color, float radius);
+	RigidBody(Color color, Vector3D size);
 
 	void Integrate(float duration);
 
@@ -140,4 +139,7 @@ public:
 
 	//called each frame to reset m_forceAccum and m_torqueAccum
 	void ClearAccumulator();
+
+	//TP4
+	Matrix4 GetTransformMatrix() { return transformMatrix; };
 };

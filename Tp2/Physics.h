@@ -5,7 +5,7 @@
 #include <SFML\Graphics.hpp>
 #include <SFML\Window.hpp>
 #include <SFML\System.hpp>
-#include "Contact.h"
+#include "OldContact.h"
 
 using namespace sf;
 using namespace std;
@@ -14,7 +14,7 @@ class Physics
 {
 public:
 	static Physics* instance;
-	vector<Contact*> contacts;
+	vector<OldContact*> contacts;
 	vector<CircleShape*> circles; //Devient Particule
 	vector<RectangleShape*> rectangles; //Devient Mur Fixe
 
@@ -25,12 +25,12 @@ public:
 	void RemoveCircle(CircleShape* circle);
 	void AddRectangle(RectangleShape* rectangle);
 	void RemoveRectangle(RectangleShape* rectangle);
-	void RemoveContact(Contact* contact);
-	Contact* CollisionDetection(Shape* shape, float weight, Vector3D vel, float delta); //Check si déja collision, ensuite, check si vel fait collision(post-pre)
+	void RemoveContact(OldContact* contact);
+	OldContact* CollisionDetection(Shape* shape, float weight, Vector3D vel, float delta); //Check si déja collision, ensuite, check si vel fait collision(post-pre)
 	Physics(void) {}
 
 private:
-	Contact* GetCollidedContact(Shape* shape);
-	Contact* ContactBetweenCircles(Vector3D vel, float weight, CircleShape* shape); //null si aucun point de contact
+	OldContact* GetCollidedContact(Shape* shape);
+	OldContact* ContactBetweenCircles(Vector3D vel, float weight, CircleShape* shape); //null si aucun point de contact
 };
 

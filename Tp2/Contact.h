@@ -1,34 +1,23 @@
 #pragma once
 #include "Vector3D.h"
 #include <cmath>
-#include <SFML\Graphics.hpp>
-#include <SFML\Window.hpp>
-#include <SFML\System.hpp>
+#include <iostream>
+#include <string>
+#include "Rigidbody.h"
 
-using namespace sf;
-
-class Collider {
-public:
-	Shape* shape;
-	Vector3D velocity;
-	Vector3D position;
-	float weight;
-public:
-	Collider(Shape* shape, Vector3D position, Vector3D vel, float weight) {
-		this->shape = shape;
-		this->position = position;
-		this->velocity = vel;
-		this->weight = weight;
-	}
-};
 class Contact
 {
 public:
-	Collider* collider; //Check les collided avant col check pour vérifier s'il y a eu coll le tour d'avant. Après collided check, remove Contact Point.
-	Collider* collided;
-	Vector3D contactPos;
+	//Particle[0] is A, [1] is B
+	RigidBody* rigid[2];
 
-public:
-	Contact(Collider* collider, Collider* collided, Vector3D contactPos);
+	//Distance penetration contact
+	float penetration;
+
+	//direction normalisée du contact
+	Vector3D contactNormal;
+
+	//Point de contact
+	Vector3D contactPoint;
 };
 

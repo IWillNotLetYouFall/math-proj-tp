@@ -127,3 +127,8 @@ Vector3D Matrix4::TransformDirection(const Vector3D& vector)
         vector.z * values[10]
     );
 }
+
+Vector3D Matrix4::GetAxisVector(int i) const
+{
+    return Vector3D(values[i], values[i + 4], values[i + 8]);
+}
