@@ -272,6 +272,10 @@ int main()
 			touch = true;
 		if (CollisionDetector::BoxPlaneDetect(box, WallRight, &colData) != 0)
 			touch = true;
+		if (CollisionDetector::BoxPlaneDetect(box, WallFront, &colData) != 0)
+			touch = true;
+		if (CollisionDetector::BoxPlaneDetect(box, WallBack, &colData) != 0)
+			touch = true;
 		if (touch) 
 			continue;
 	}
