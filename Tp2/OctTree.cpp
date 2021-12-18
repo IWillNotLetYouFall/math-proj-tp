@@ -33,7 +33,7 @@ bool OctTree::Find(Vector3D& point)
 {
 	if (!IsContained(point)) {
 		std::cout << "Point is out of bounds(Find function)!" << std::endl;
-		return;
+		return false;
 	}
 
 	int posIndex = -1;
