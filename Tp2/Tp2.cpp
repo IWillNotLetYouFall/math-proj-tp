@@ -119,7 +119,6 @@ int main()
 	WallLeft.body = new RigidBody(Color::Green, Vector3D(2, 600, 1)); //infinitemass
 	WallLeft.body->isAwake = false;
 	WallLeft.body->SetPosition(Vector3D(0, 300, 0));
-	WallLeft.body->setRotation(0, 0, 0);
 	WallLeft.normal = Vector3D(1, 0, 0);
 	WallLeft.offset = 0;
 	physicW.AddRigidBody(WallLeft.body);
@@ -129,7 +128,6 @@ int main()
 	WallRight.body = new RigidBody(Color::Green, Vector3D(2, 600, 1)); //infinitemass
 	WallRight.body->isAwake = false;
 	WallRight.body->SetPosition(Vector3D(800, 300, 0));
-	WallRight.body->setRotation(0, 0, 0);
 	WallRight.normal = Vector3D(-1, 0, 0);
 	WallRight.offset = -800;
 	physicW.AddRigidBody(WallRight.body);
@@ -138,7 +136,6 @@ int main()
 	WallUp.body = new RigidBody(Color::Green, Vector3D(800, 3, 1)); //infinitemass
 	WallUp.body->isAwake = false;
 	WallUp.body->SetPosition(Vector3D(400, 0, 0));
-	WallUp.body->setRotation(0, 0, 0);
 	WallUp.normal = Vector3D(0, 1, 0);
 	WallUp.offset = 0;
 	physicW.AddRigidBody(WallUp.body);
@@ -147,7 +144,6 @@ int main()
 	WallDown.body = new RigidBody(Color::Green, Vector3D(800, 2, 1)); //infinitemass
 	WallDown.body->isAwake = false;
 	WallDown.body->SetPosition(Vector3D(400, 600, 0));
-	WallDown.body->setRotation(0, 0, 0);
 	WallDown.normal = Vector3D(0,-1,0);
 	WallDown.offset = -600;
 	physicW.AddRigidBody(WallDown.body);
@@ -156,18 +152,16 @@ int main()
 	WallFront.body = new RigidBody(1000000); //infinitemass
 	WallFront.body->isAwake = false;
 	WallFront.body->SetPosition(Vector3D(400, 300, -300));
-	WallFront.body->setRotation(0, 0, 0);
 	WallFront.normal = Vector3D(0, 0, -1);
-	WallFront.offset = 0;
+	WallFront.offset = -300;
 	physicW.AddRigidBody(WallFront.body);
 
 	Plane WallBack;
 	WallBack.body = new RigidBody(1000000); //infinitemass
 	WallBack.body->isAwake = false;
 	WallBack.body->SetPosition(Vector3D(400, 300, 300));
-	WallBack.body->setRotation(0, 0, 0);
 	WallBack.normal = Vector3D(0, 0, 1);
-	WallBack.offset = 0;
+	WallBack.offset = -300;
 	physicW.AddRigidBody(WallBack.body);
 
 
@@ -203,7 +197,7 @@ int main()
 		if (Keyboard::isKeyPressed(Keyboard::P)) {
 			if (!pushed)
 			{
-				box.body->AddForceAtBodyPoint(Vector3D(50, -180, -8), Vector3D(0, -20.f, 0));
+				box.body->AddForceAtBodyPoint(Vector3D(50, -180, 8), Vector3D(0, -20.f, 0));
 				//ball.AddForceAtBodyPoint(Vector3D(50, -180, -10), Vector3D(0, -20.f, 0)); //touch front
 				physicW.AddEntry(box.body, new GravityForceGeneratorBody(Vector3D(0, 10.f)));
 				pushed = true;

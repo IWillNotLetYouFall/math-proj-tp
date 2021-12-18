@@ -13,23 +13,19 @@ class OctTree
 
 public:
 	OctTree(float x, float y, float z);
-
 	OctTree getChild(int index)
 	{
 		if (index >= 0 && index < 8 && hasChildren)
 			return *child[index];
 	}
-
 	Vector3D getPosition()
 	{
 		return position;
 	}
-
 	float getHalfsize()
 	{
 		return halfsize;
 	}
-
 	int getChildIndex(const Vector3D& object)
 	{
 		int index = 0;
@@ -38,7 +34,6 @@ public:
 		if (object.z > position.z) index += 4;
 		return index;
 	}
-
 	void subdivide(float size)
 	{
 		halfsize = size;
@@ -52,5 +47,12 @@ public:
 		child[6] = new OctTree(position.x - halfsize, position.y + halfsize, position.z + halfsize);
 		child[7] = new OctTree(position.x + halfsize, position.y + halfsize, position.z + halfsize);
 	}
+
+public :
+	Vector3D size;
+public:
+	void Insert(Vector3D& point);
+	bool Find(Vector3D& point);
+	bool IsContained(Vector3D& point);
 };
 
