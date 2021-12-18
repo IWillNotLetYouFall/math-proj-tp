@@ -31,6 +31,9 @@ public:
 	vector<ParticleContactGenerator*> contactsGenerators;
 	ParticleContactResolver contactResolver;
 
+	Vector3D coordinates;
+	float halfsize;
+
 public:
 	PhysicWorld(int iterations);
 
@@ -44,5 +47,11 @@ public:
 	void StartFrame();
 	vector<ParticleContact*> GenerateContacts();
 	void RunPhysics(float duration);
+
+	void addCoordinates(float x, float y, float z)
+	{
+		halfsize = x / 2;
+		coordinates = Vector3D(x, y, z);
+	}
 };
 

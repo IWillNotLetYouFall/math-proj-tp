@@ -9,6 +9,9 @@ class Octree
 	bool hasChildren = false;
 	float halfsize = -1;
 
+	int maxDepth = 3;
+	int maxElements = 2;
+
 public:
 
 	Octree(float x, float y, float z)
@@ -48,8 +51,8 @@ public:
 		child[0] = new Octree(position.x - halfsize, position.y - halfsize, position.z - halfsize);
 		child[1] = new Octree(position.x + halfsize, position.y - halfsize, position.z - halfsize);
 		child[2] = new Octree(position.x - halfsize, position.y + halfsize, position.z - halfsize);
-		child[3] = new Octree(position.x - halfsize, position.y - halfsize, position.z + halfsize);
-		child[4] = new Octree(position.x + halfsize, position.y + halfsize, position.z - halfsize);
+		child[3] = new Octree(position.x + halfsize, position.y + halfsize, position.z - halfsize);
+		child[4] = new Octree(position.x - halfsize, position.y - halfsize, position.z + halfsize);
 		child[5] = new Octree(position.x + halfsize, position.y - halfsize, position.z + halfsize);
 		child[6] = new Octree(position.x - halfsize, position.y + halfsize, position.z + halfsize);
 		child[7] = new Octree(position.x + halfsize, position.y + halfsize, position.z + halfsize);

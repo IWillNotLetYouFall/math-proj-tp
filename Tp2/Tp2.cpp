@@ -63,8 +63,9 @@ int main()
 	box.BoundingSphere.radius = 49;
 
 	physicW.AddRigidBody(box.body);
+	physicW.addCoordinates(600,600,600);
 
-	Vector3D origin = (400, 300, 0);
+	Vector3D origin = (300, 300, 0);
 	//Room walls
 	Plane WallLeft;
 	WallLeft.body = new RigidBody(1000000); //infinitemass
@@ -75,31 +76,31 @@ int main()
 	Plane WallRight;
 	WallRight.body = new RigidBody(1000000); //infinitemass
 	WallRight.body->isAwake = false;
-	WallRight.body->SetPosition(Vector3D(800, 300, 0));
+	WallRight.body->SetPosition(Vector3D(600, 300, 0));
 	WallRight.body->setRotation(90, 0, 0);
 	WallRight.normal = WallRight.body->getRotation().Normalize();
 	Plane WallUp;
 	WallUp.body = new RigidBody(1000000); //infinitemass
 	WallUp.body->isAwake = false;
-	WallUp.body->SetPosition(Vector3D(400, 0, 0));
+	WallUp.body->SetPosition(Vector3D(300, 0, 0));
 	WallUp.body->setRotation(0, 0, 180);
 	WallUp.normal = WallUp.body->getRotation().Normalize();
 	Plane WallDown;
 	WallDown.body = new RigidBody(1000000); //infinitemass
 	WallDown.body->isAwake = false;
-	WallDown.body->SetPosition(Vector3D(400, 600, 0));
+	WallDown.body->SetPosition(Vector3D(300, 600, 0));
 	WallDown.body->setRotation(0, 0, 0);
 	WallDown.normal = WallDown.body->getRotation().Normalize();
 	Plane WallFront;
 	WallFront.body = new RigidBody(1000000); //infinitemass
 	WallFront.body->isAwake = false;
-	WallFront.body->SetPosition(Vector3D(400, 300, -80));
+	WallFront.body->SetPosition(Vector3D(300, 300, -300));
 	WallFront.body->setRotation(0, 0, -90);
 	WallFront.normal = WallFront.body->getRotation().Normalize();
 	Plane WallBack;
 	WallBack.body = new RigidBody(1000000); //infinitemass
 	WallBack.body->isAwake = false;
-	WallBack.body->SetPosition(Vector3D(400, 300, 80));
+	WallBack.body->SetPosition(Vector3D(300, 300, 300));
 	WallBack.body->setRotation(0, 0, 90);
 	WallBack.normal = WallBack.body->getRotation().Normalize();
 
@@ -138,36 +139,36 @@ int main()
 			}
 		}
 
-		if (box.body->GetPosition().y - 49 <= 0) //touches top
-		{
-			cout << "top" << endl;
-			touch = true;
-		}
-		else if (box.body->GetPosition().y + 49 >= 600) //touches bottom
-		{
-			cout << "bottom" << endl;
-			touch = true;
-		}
-		else if (box.body->GetPosition().x - 49 <= 0) //touches left
-		{
-			cout << "left" << endl;
-			touch = true;
-		}
-		else if (box.body->GetPosition().x + 49 >= 800) //touches right
-		{
-			cout << "right" << endl;
-			touch = true;
-		}
-		else if (box.body->GetPosition().z - 49 <= (-80 - 49)) //touches front
-		{
-			cout << "front" << endl;
-			touch = true;
-		}
-		else if (box.body->GetPosition().z + 49 >= (80 + 49)) //touches back
-		{
-			cout << "back" << endl;
-			touch = true;
-		}
+		//if (box.body->GetPosition().y - 49 <= 0) //touches top
+		//{
+		//	cout << "top" << endl;
+		//	touch = true;
+		//}
+		//else if (box.body->GetPosition().y + 49 >= 600) //touches bottom
+		//{
+		//	cout << "bottom" << endl;
+		//	touch = true;
+		//}
+		//else if (box.body->GetPosition().x - 49 <= 0) //touches left
+		//{
+		//	cout << "left" << endl;
+		//	touch = true;
+		//}
+		//else if (box.body->GetPosition().x + 49 >= 600) //touches right
+		//{
+		//	cout << "right" << endl;
+		//	touch = true;
+		//}
+		//else if (box.body->GetPosition().z - 49 <= -300) //touches front
+		//{
+		//	cout << "front" << endl;
+		//	touch = true;
+		//}
+		//else if (box.body->GetPosition().z + 49 >= 300) //touches back
+		//{
+		//	cout << "back" << endl;
+		//	touch = true;
+		//}
 
 		if (touch) break;
 

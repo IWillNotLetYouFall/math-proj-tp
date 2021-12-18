@@ -1,4 +1,5 @@
 ﻿#include "PhysicWorld.h"
+#include "Octree.h"
 
 PhysicWorld::PhysicWorld(int iterations)
 {
@@ -68,6 +69,40 @@ void PhysicWorld::RunPhysics(float duration)
 	//Int�gration sur chacune des particules
 	for (RigidBody* rigid : rigidReg)
 		rigid->Integrate(duration);
+
+	//BroadPhase
+	Octree tree = Octree(coordinates.x / 2, coordinates.y / 2, 0);
+	tree.subdivide(halfsize);
+	for (RigidBody* rigid : rigidReg)
+	{
+		Octree treeChild = tree.getChild(tree.getChildIndex(rigid->GetPosition()));
+		treeChild.subdivide(halfsize/2);
+		Octree treeGrandChild = treeChild.getChild(treeChild.getChildIndex(rigid->GetPosition()));
+		if (treeGrandChild.getPosition().y - 75 <= 0) //touches top
+		{
+			cout << treeGrandChild.getPosition().ToString() << endl;
+		}
+		else if (treeGrandChild.getPosition().y + 75 >= 600) //touches bottom
+		{
+			cout << treeGrandChild.getPosition().ToString() << endl;
+		}
+		else if (treeGrandChild.getPosition().x - 75 <= 0) //touches left
+		{
+			cout << treeGrandChild.getPosition().ToString() << endl;
+		}
+		else if (treeGrandChild.getPosition().x + 75 >= 600) //touches right
+		{
+			cout << treeGrandChild.getPosition().ToString() << endl;
+		}
+		else if (treeGrandChild.getPosition().z - 75 <= -300) //touches front
+		{
+			cout << treeGrandChild.getPosition().ToString() << endl;
+		}
+		else if (treeGrandChild.getPosition().z + 75 >= 300) //touches back
+		{
+			cout << treeGrandChild.getPosition().ToString() << endl;
+		}
+	}
 
 	//Gestion des collisions
 	//G�n�ration des Contacts

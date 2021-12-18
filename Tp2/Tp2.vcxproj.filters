@@ -69,5 +69,6 @@
     <ClInclude Include="Plane.h" />
     <ClInclude Include="Box.h" />
     <ClInclude Include="contacts.h" />
+    <ClInclude Include="Octree.h" />
   </ItemGroup>
 </Project>
