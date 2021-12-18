@@ -12,10 +12,7 @@ class OctTree
 	int maxElements = 2;
 
 public:
-	OctTree(float x, float y, float z)
-	{
-		position = Vector3D(x, y, z);
-	}
+	OctTree(float x, float y, float z);
 
 	OctTree getChild(int index)
 	{

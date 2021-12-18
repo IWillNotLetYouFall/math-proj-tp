@@ -12,7 +12,6 @@ unsigned CollisionDetector::BoxPlaneDetect(Box& box, Plane& plane, CollisionData
 	static float mults[8][3] = { {1,1,1},{-1,1,1},{1,-1,1},{-1,-1,1},
 						   {1,1,-1},{-1,1,-1},{1,-1,-1},{-1,-1,-1} };
 
-	Contact* contact = data->NewContact();
 	for (int i = 0; i < 8; i++) {
 
 		//Calculer position de chaque sommet
@@ -24,6 +23,7 @@ unsigned CollisionDetector::BoxPlaneDetect(Box& box, Plane& plane, CollisionData
 		float distanceVertex = posVertex.ScalarProduct(plane.normal);
 
 		if (distanceVertex <= plane.offset) {
+			Contact* contact = data->NewContact();
 			contact->contactPoint = plane.normal;
 			contact->contactPoint *= (distanceVertex-plane.offset);
 			contact->contactPoint += posVertex;
