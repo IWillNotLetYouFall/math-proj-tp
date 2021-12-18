@@ -67,8 +67,51 @@ int main()
 	box.offset = Matrix4();
 	box.halfsize = Vector3D(boxSize.x/2, boxSize.y / 2, boxSize.z / 2);
 	//box.BoundingSphere.radius = 49;
-	
+
 	physicW.AddRigidBody(box.body);
+
+	//Other boxes
+	Vector3D boxesSizes = Vector3D(24, 24, 24);
+	RigidBody balls1 = RigidBody(Color::Red, boxesSizes);
+	balls1.setMass(.2);
+	balls1.SetMaxSpeed(3000);
+	Box boxes1;
+	boxes1.offset = Matrix4();
+	boxes1.halfsize = Vector3D(boxesSizes.x / 4, boxesSizes.y / 4, boxesSizes.z / 4);
+	boxes1.body = &balls1;
+	boxes1.body->SetPosition(Vector3D(40, 200));
+
+	RigidBody balls2 = RigidBody(Color::Red, boxesSizes);
+	balls2.setMass(.2);
+	balls2.SetMaxSpeed(3000);
+	Box boxes2;
+	boxes2.offset = Matrix4();
+	boxes2.halfsize = Vector3D(boxesSizes.x / 4, boxesSizes.y / 4, boxesSizes.z / 4);
+	boxes2.body = &balls2;
+	boxes2.body->SetPosition(Vector3D(100, 20));
+
+	RigidBody balls3 = RigidBody(Color::Red, boxesSizes);
+	balls3.setMass(.2);
+	balls3.SetMaxSpeed(3000);
+	Box boxes3;
+	boxes3.offset = Matrix4();
+	boxes3.halfsize = Vector3D(boxesSizes.x / 3, boxesSizes.y / 3, boxesSizes.z / 3);
+	boxes3.body = &balls3;
+	boxes3.body->SetPosition(Vector3D(200,100));
+
+	RigidBody balls4 = RigidBody(Color::Red, boxesSizes);
+	balls4.setMass(.2);
+	balls4.SetMaxSpeed(3000);
+	Box boxes4;
+	boxes4.offset = Matrix4();
+	boxes4.halfsize = Vector3D(boxesSizes.x / 3, boxesSizes.y / 3, boxesSizes.z / 3);
+	boxes4.body = &balls4;
+	boxes4.body->SetPosition(Vector3D(700, 150));
+
+	physicW.AddRigidBody(boxes1.body);
+	physicW.AddRigidBody(boxes2.body);
+	physicW.AddRigidBody(boxes3.body);
+	physicW.AddRigidBody(boxes4.body);
 
 	Vector3D origin = (400, 300, 0);
 	//Room walls
@@ -112,15 +155,20 @@ int main()
 	Plane WallFront;
 	WallFront.body = new RigidBody(1000000); //infinitemass
 	WallFront.body->isAwake = false;
-	WallFront.body->SetPosition(Vector3D(400, 300, -80));
-	WallFront.body->setRotation(0, 0, -90);
-	WallFront.normal = WallFront.body->getRotation().Normalize();
+	WallFront.body->SetPosition(Vector3D(400, 300, -300));
+	WallFront.body->setRotation(0, 0, 0);
+	WallFront.normal = Vector3D(0, 0, -1);
+	WallFront.offset = 0;
+	physicW.AddRigidBody(WallFront.body);
+
 	Plane WallBack;
 	WallBack.body = new RigidBody(1000000); //infinitemass
 	WallBack.body->isAwake = false;
-	WallBack.body->SetPosition(Vector3D(400, 300, 80));
-	WallBack.body->setRotation(0, 0, 90);
-	WallBack.normal = WallBack.body->getRotation().Normalize();
+	WallBack.body->SetPosition(Vector3D(400, 300, 300));
+	WallBack.body->setRotation(0, 0, 0);
+	WallBack.normal = Vector3D(0, 0, 1);
+	WallBack.offset = 0;
+	physicW.AddRigidBody(WallBack.body);
 
 
 	//TP1 Part
@@ -205,6 +253,10 @@ int main()
 		window.draw(WallDown.body->shape);
 		window.draw(WallLeft.body->shape);
 		window.draw(WallRight.body->shape);
+		window.draw(boxes1.body->shape);
+		window.draw(boxes2.body->shape);
+		window.draw(boxes3.body->shape);
+		window.draw(boxes4.body->shape);
 
 		window.display();
 
