@@ -11,3 +11,12 @@ bool IntersectionTests::BoxPlaneIntersection(Box& box, const Plane& plane)
     //std::cout << " Dist Box : " << plane.offset - distanceBox << std::endl;
     return distanceBox <= plane.offset;
 }
+
+bool IntersectionTests::SpherePlaneIntersection(const Sphere& sphere, const Plane& plane)
+{
+    // Find the distance from the origin
+    float ballDistance = sphere.body->getRotation().ScalarProduct(plane.normal) - sphere.radius;
+
+    // Check for the intersection
+    return ballDistance <= plane.offset;
+}
