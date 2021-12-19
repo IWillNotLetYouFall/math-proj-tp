@@ -27,11 +27,32 @@
 #include "Plane.h"
 #include "CollisionData.h"
 #include "CollisionDetector.h"
+#include "OctTree.h"
 
 using namespace sf;
 
 int main()
 {
+	//Test OCt-Tree TP4
+	Vector3D octPos = Vector3D(400, 300, 0);
+	Vector3D octSize = Vector3D(800, 600, 600);
+	OctTree* mainNode = new OctTree(octPos, octSize);
+
+	/*Vector3D* point = new Vector3D(10, 10, 10);
+	mainNode->InsertNew(*point);
+	point = new Vector3D(12, 10, 10);
+	mainNode->InsertNew(*point);
+	point = new Vector3D(16, 10, 10);
+	mainNode->InsertNew(*point);
+	std::cout << "------------------------------------" << std::endl;
+	point = new Vector3D(600, 10, 10);
+	mainNode->InsertNew(*point);
+	point = new Vector3D(700, 10, 10);
+	mainNode->InsertNew(*point);
+	point = new Vector3D(450, 10, 10);
+	mainNode->InsertNew(*point);*/
+
+
 	//Regroupe les forces pour forloop l'addEntry
 	class BodyPart {
 	public:
@@ -68,6 +89,7 @@ int main()
 	box.halfsize = Vector3D(boxSize.x/2, boxSize.y / 2, boxSize.z / 2);
 	//box.BoundingSphere.radius = 49;
 
+	mainNode->InsertNew(&box);
 	physicW.AddRigidBody(box.body);
 
 	//Other boxes

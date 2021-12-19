@@ -171,6 +171,7 @@
     <ClCompile Include="Particule.cpp" />
     <ClCompile Include="Physics.cpp" />
     <ClCompile Include="PhysicWorld.cpp" />
+    <ClCompile Include="PlaneCheck.cpp" />
     <ClCompile Include="Quaternion.cpp" />
     <ClCompile Include="RigidBody.cpp" />
     <ClCompile Include="RigidForceRegistry.cpp" />
@@ -197,6 +198,7 @@
     <ClInclude Include="IntersectionTests.h" />
     <ClInclude Include="OctTree.h" />
     <ClInclude Include="Plane.h" />
+    <ClInclude Include="PlaneCheck.h" />
     <ClInclude Include="Primitive.h" />
     <ClInclude Include="Sphere.h" />
     <ClInclude Include="Laser.h" />

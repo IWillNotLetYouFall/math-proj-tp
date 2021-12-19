@@ -50,6 +50,9 @@
     <ClCompile Include="Box.cpp">
       <Filter>TP4</Filter>
     </ClCompile>
+    <ClCompile Include="PlaneCheck.cpp">
+      <Filter>TP4</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CircleParticleContactGenerator.h" />
@@ -122,6 +125,12 @@
     <ClInclude Include="Plane.h" />
     <ClInclude Include="Primitive.h" />
     <ClInclude Include="Sphere.h" />
+    <ClInclude Include="Plane.h" />
+    <ClInclude Include="Primitive.h" />
+    <ClInclude Include="Sphere.h" />
+    <ClInclude Include="PlaneCheck.h">
+      <Filter>TP4</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="TP4">

@@ -1,59 +1,46 @@
 #pragma once
 #include "Vector3D.h"
+#include <cmath>
+#include <iostream>
+#include <vector>
+#include <string>
+#include "Rigidbody.h"
+#include "Plane.h"
+#include "Box.h"
+#include "Sphere.h"
+
+using namespace std;
 
 class OctTree
 {
-	OctTree* child[8];
-	bool hasChildren = false;
-	float halfsize = -1;
-
-	int maxDepth = 3;
-	int maxElements = 2;
-
-public:
-	OctTree(float x, float y, float z);
-	OctTree getChild(int index)
-	{
-		if (index >= 0 && index < 8 && hasChildren)
-			return *child[index];
-	}
-	Vector3D getPosition()
-	{
-		return position;
-	}
-	float getHalfsize()
-	{
-		return halfsize;
-	}
-	int getChildIndex(const Vector3D& object)
-	{
-		int index = 0;
-		if (object.x > position.x) index += 1;
-		if (object.y > position.y) index += 2;
-		if (object.z > position.z) index += 4;
-		return index;
-	}
-	void subdivide(float size)
-	{
-		halfsize = size;
-		hasChildren = true;
-		child[0] = new OctTree(position.x - halfsize, position.y - halfsize, position.z - halfsize);
-		child[1] = new OctTree(position.x + halfsize, position.y - halfsize, position.z - halfsize);
-		child[2] = new OctTree(position.x - halfsize, position.y + halfsize, position.z - halfsize);
-		child[3] = new OctTree(position.x + halfsize, position.y + halfsize, position.z - halfsize);
-		child[4] = new OctTree(position.x - halfsize, position.y - halfsize, position.z + halfsize);
-		child[5] = new OctTree(position.x + halfsize, position.y - halfsize, position.z + halfsize);
-		child[6] = new OctTree(position.x - halfsize, position.y + halfsize, position.z + halfsize);
-		child[7] = new OctTree(position.x + halfsize, position.y + halfsize, position.z + halfsize);
-	}
+private:
+	int maxLeafs = 2;
+	int maxIterations = 3;
 
 public :
 	Vector3D position;
 	Vector3D size;
-public:
-	void Insert(Vector3D& point);
+	vector<OctTree*> child; // Length = 8 pour oct
+	vector<Vector3D*> points; //Temp, deviendra BoundingSphere ou Primitive
+
+private:
+	void InsertCall(Vector3D& point, int depth);
+	void Insert(Vector3D& point, int depth);
 	bool Find(Vector3D& point);
+	//OctTree[] FindZones(Vector3D& point);
+	//Coll[] GetCollisions(OctTree[] zones, Point& exclus);
 	bool IsContained(Vector3D& point);
 	int ObtIndexNode(Vector3D& point);
+	void SplitTree(int depth);
+	//Part2
+	vector<OctTree*> GetBoundingZones(Box* box);
+	bool CheckBroad(Box* box, Plane* plane);
+	bool CheckBroad(Box* box1, Box* box2);
+
+public:
+	OctTree(Vector3D position, Vector3D size);
+	void InsertNew(Box* box);
+	vector<Plane*> GetBroadPlanes(Box* box);
+	vector<Box*> GetBroadBoxes(Box* box);
 };
 
